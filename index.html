@@ -3,21 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nootjes SMP | Season 2</title>
+    <title>Nootjes SMP | Seizoen 2</title>
 
     <style>
         :root {
             --oak-brown: #5d4037;
             --terracotta: #d84315;
-            --overlay: rgba(255, 255, 255, 0.9);
+            --ghost-blue: #00d4ff;
+            --glass-white: rgba(255, 255, 255, 0.85);
+            --glass-dark: rgba(20, 20, 30, 0.9);
         }
 
-        /* ===== BASIS & ACHTERGROND ===== */
+        /* ===== ACHTERGROND ===== */
         body {
             margin: 0;
             padding: 0;
             font-family: 'Trebuchet MS', sans-serif;
-            background-image: url('image_73e354.jpg'); 
+            background-image: url('achtergrond.png'); 
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -26,7 +28,7 @@
         }
 
         .wrapper {
-            max-width: 950px;
+            max-width: 900px;
             margin: 0 auto;
             padding: 40px 20px;
         }
@@ -34,10 +36,9 @@
         /* ===== ANIMATIES ===== */
         .reveal {
             opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease-out;
+            transform: translateY(40px);
+            transition: all 0.9s cubic-bezier(0.2, 0.8, 0.2, 1);
         }
-
         .reveal.active {
             opacity: 1;
             transform: translateY(0);
@@ -48,12 +49,12 @@
             position: fixed;
             top: 50%;
             transform: translateY(-50%);
-            background: var(--overlay);
+            background: var(--glass-white);
             padding: 15px;
-            border-radius: 12px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-            border: 3px solid var(--oak-brown);
+            border-radius: 8px;
+            border: 2px solid var(--oak-brown);
             z-index: 100;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
         }
         .sidebar-left { left: 20px; }
         .sidebar-right { right: 20px; }
@@ -62,14 +63,14 @@
         /* ===== HEADER ===== */
         header { text-align: center; padding: 20px 0; }
         .logo {
-            max-width: 400px;
-            width: 80%;
-            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.3));
-            animation: float 4s ease-in-out infinite;
+            max-width: 420px;
+            width: 85%;
+            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.4));
+            animation: float 5s ease-in-out infinite;
         }
         @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-15px); }
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(1deg); }
         }
 
         /* ===== NAVIGATIE ===== */
@@ -77,72 +78,90 @@
             margin: 30px 0;
             display: flex;
             justify-content: center;
-            gap: 15px;
+            gap: 12px;
             flex-wrap: wrap;
         }
         .btn {
             background: #fff;
-            border: 3px solid var(--oak-brown);
-            color: var(--oak-brown);
-            padding: 12px 25px;
-            text-decoration: none;
-            border-radius: 8px;
-            font-weight: bold;
-            box-shadow: 0 5px 0 var(--oak-brown);
-            transition: all 0.2s;
-        }
-        .btn:hover { transform: translateY(-2px); box-shadow: 0 7px 0 var(--oak-brown); background: #fdf5e6; }
-
-        /* ===== ALGEMENE INFO TABEL ===== */
-        .info-table-container {
-            background: var(--overlay);
-            border-radius: 15px;
-            padding: 30px;
-            margin: 40px 0;
-            border: 3px solid var(--oak-brown);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 10px;
-        }
-        th, td {
-            padding: 15px;
-            text-align: left;
-            border-bottom: 1px solid rgba(93, 64, 55, 0.2);
-        }
-        th { color: var(--terracotta); font-size: 1.1em; width: 30%; }
-
-        /* ===== CARDS ===== */
-        .card {
-            background: var(--overlay);
-            border-radius: 15px;
-            padding: 35px;
-            margin-bottom: 30px;
             border: 2px solid var(--oak-brown);
+            color: var(--oak-brown);
+            padding: 12px 24px;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: bold;
+            box-shadow: 0 4px 0 var(--oak-brown);
+            transition: 0.2s;
         }
-        .card h2 { color: var(--terracotta); margin-top: 0; }
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 6px 0 var(--oak-brown); background: #fdf5e6; }
 
-        footer { text-align: center; padding: 40px; font-weight: bold; color: white; text-shadow: 2px 2px 4px rgba(0,0,0,0.6); }
+        /* ===== ALGEMENE INFORMATIE (VERTICALE RECHTHOEK) ===== */
+        .general-info {
+            background: var(--glass-white);
+            width: 100%;
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 40px;
+            border-left: 8px solid var(--terracotta);
+            box-shadow: 10px 10px 30px rgba(0,0,0,0.1);
+            text-align: left;
+        }
+        .general-info h2 {
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-top: 0;
+            font-size: 26px;
+        }
+
+        /* ===== UNIEKE CARDS ===== */
+        .card-container { display: grid; gap: 30px; margin-top: 50px; }
+
+        /* SMP Card: Houtlook */
+        .card-smp {
+            background: rgba(250, 240, 230, 0.9);
+            border: 4px solid var(--oak-brown);
+            border-radius: 4px;
+            padding: 30px;
+            position: relative;
+        }
+        .card-smp h2 { color: var(--terracotta); }
+
+        /* Lost Shores Card: Schuine hoeken & Glow */
+        .card-shores {
+            background: rgba(10, 25, 40, 0.85);
+            color: #e0f7ff;
+            border: 2px solid var(--ghost-blue);
+            padding: 30px;
+            clip-path: polygon(0% 0%, 95% 0%, 100% 15%, 100% 100%, 5% 100%, 0% 85%);
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.2);
+        }
+        .card-shores h2 { color: var(--ghost-blue); }
+
+        /* ===== JOIN BOX ONDERAAN ===== */
+        .join-box {
+            background: var(--glass-dark);
+            border-radius: 24px;
+            padding: 50px;
+            margin: 80px 0;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.1);
+            color: white;
+        }
+        .join-buttons { display: flex; justify-content: center; gap: 15px; margin-top: 25px; flex-wrap: wrap; }
+        .btn-discord { background: #5865f2; color: white; padding: 14px 35px; border-radius: 12px; text-decoration: none; font-weight: bold; transition: 0.3s; }
+        .btn-discord:hover { background: #4752c4; transform: scale(1.05); }
+
+        footer { text-align: center; padding: 40px; color: white; text-shadow: 1px 1px 5px #000; opacity: 0.8; }
     </style>
 </head>
 <body>
 
-    <div class="sidebar sidebar-left">
-        <h4>Server IP 🌐</h4>
-        <p>Play.ncsmp.nl</p>
-    </div>
-
-    <div class="sidebar sidebar-right">
-        <h4>Discord 💬</h4>
-        <p>discord.gg/ncsmp</p>
-    </div>
+    <div class="sidebar sidebar-left"><h4>IP 🌐</h4><p>Play.ncsmp.nl</p></div>
+    <div class="sidebar sidebar-right"><h4>Discord 💬</h4><p>discord.gg/ncsmp</p></div>
 
     <div class="wrapper">
         <header>
             <img src="logo.png" alt="Nootjes SMP" class="logo">
-            <h1 style="color: white; text-shadow: 2px 2px 10px rgba(0,0,0,0.8);">SEIZOEN 2</h1>
+            <h1 style="color: white; text-shadow: 3px 3px 15px rgba(0,0,0,0.9); margin-top: 20px;">SEIZOEN 2</h1>
         </header>
 
         <nav class="nav-container">
@@ -152,60 +171,47 @@
             <a href="lost-shores.html" class="btn">🌊 Lost Shores</a>
         </nav>
 
-        <div class="info-table-container reveal">
-            <h2 style="color: var(--terracotta); text-align: center; margin-top: 0;">📋 Server Informatie</h2>
-            <table>
-                <tr>
-                    <th>Wie zijn wij?</th>
-                    <td>Nootjes SMP is een hechte community van Minecraft-spelers die houden van een uitdaging en gezelligheid.</td>
-                </tr>
-                <tr>
-                    <th>Wat doen wij?</th>
-                    <td>Wij bieden een unieke Hardcore ervaring waar teamwork, strategie en overleven centraal staan in een custom wereld.</td>
-                </tr>
-                <tr>
-                    <th>Onze Missie</th>
-                    <td>Het creëren van een spannende en eerlijke omgeving waar elke speler zijn eigen verhaal kan schrijven (tot de dood volgt!).</td>
-                </tr>
-                <tr>
-                    <th>Server Type</th>
-                    <td>Semi-Vanilla Hardcore SMP met Seizoensgebonden resets en unieke evenementen.</td>
-                </tr>
-            </table>
+        <section class="general-info reveal">
+            <h2>**Algemene Informatie**</h2>
+            <p>Nootjes SMP is meer dan een server; het is een community. Wij zijn een groep enthousiaste spelers die samen een unieke wereld bouwen waar overleving niet gegarandeerd is. In onze server staat de "Hardcore" ervaring centraal: één fout kan je leven kosten, maar teamwork en strategie kunnen je naar de overwinning leiden.</p>
+        </section>
+
+        <div class="card-container">
+            <div class="card-smp reveal">
+                <h2>🛡️ De Hardcore Wereld</h2>
+                <p>Welkom bij de Bovenwereld van Seizoen 2. De natuur is prachtig, maar de regels zijn onverbiddelijk. Bouw je basis, handel met anderen en zorg dat je de nacht overleeft. Als je hier sterft, verlaat je de wereld van de levenden.</p>
+            </div>
+
+            <div class="card-shores reveal">
+                <h2>🌊 De Lost Shores</h2>
+                <p>Voor degenen die gevallen zijn, is er de mystieke kust van de Lost Shores. Hier verzamelen de zielen zich voor een laatste kans. Bereid je voor op de finale beproeving om je plek op de SMP terug te winnen. 👻</p>
+            </div>
         </div>
 
-        <main>
-            <div class="card reveal">
-                <h2>🛡️ De Hardcore Survival</h2>
-                <p>Welkom bij <strong>Nootjes SMP Seizoen 2</strong>. De wereld is nieuw, de gevaren zijn groter, maar de regels blijven hetzelfde: dood is dood. Werk samen, bouw dorpen en overleef in deze prachtige Minecraft wereld.</p>
+        <section class="join-box reveal">
+            <h2>Meedoen aan Seizoen 2?</h2>
+            <p>Onze Discord is het hart van de server. Hier vind je alle aankondigingen en de community.</p>
+            <div class="join-buttons">
+                <a href="https://discord.gg/ncsmp" class="btn-discord">Join Discord</a>
+                <a href="regels.html" class="btn" style="box-shadow:none; background:rgba(255,255,255,0.1); color:white; border-color:white;">Regels</a>
             </div>
+        </section>
 
-            <div class="card reveal">
-                <h2>🌊 Lost Shores: De Tweede Kans</h2>
-                <p>Dood is niet het absolute einde. Je ziel spoelt aan bij de <strong>Lost Shores</strong>. Hier kun je laten zien dat je een plekje in de finale verdient om terug te keren naar de levenden. 👻</p>
-            </div>
-        </main>
-
-        <footer>
-            © 2026 Nootjes SMP Hardcore • Gebouwd voor de community ⛏️
-        </footer>
+        <footer>© 2026 Nootjes SMP Hardcore • De strijd begint nu ⛏️</footer>
     </div>
 
     <script>
-        // Script voor de scroll-animaties
         function reveal() {
             var reveals = document.querySelectorAll(".reveal");
             for (var i = 0; i < reveals.length; i++) {
                 var windowHeight = window.innerHeight;
                 var elementTop = reveals[i].getBoundingClientRect().top;
-                var elementVisible = 150;
-                if (elementTop < windowHeight - elementVisible) {
+                if (elementTop < windowHeight - 100) {
                     reveals[i].classList.add("active");
                 }
             }
         }
         window.addEventListener("scroll", reveal);
-        // Start check
         reveal();
     </script>
 </body>
