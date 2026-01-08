@@ -4,214 +4,164 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nootjes SMP | Seizoen 2</title>
-
     <style>
         :root {
-            --grass: #55aa00;
-            --lava: #ff4400;
-            --water: #00aaff;
+            --neon-grass: #7cfc00;
+            --neon-lava: #ff4500;
+            --neon-water: #00bfff;
             --discord: #5865f2;
-            --bg-glass: rgba(255, 255, 255, 0.95);
+            --dark-panel: rgba(15, 15, 20, 0.95);
+            --text-main: #ffffff;
+            --text-dim: #b0b0b0;
         }
 
         body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-image: url('achtergrond.png'); 
+            margin: 0; padding: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background: url('achtergrond.png') no-repeat center center fixed; 
             background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            color: #1a1a1a;
+            color: var(--text-main);
         }
 
-        .wrapper {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 40px 20px;
-        }
+        .wrapper { max-width: 1000px; margin: 0 auto; padding: 40px 20px; }
 
-        /* ===== ANIMATIE ===== */
-        .reveal {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.6s ease-out;
-        }
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* ===== SIDEBARS ===== */
+        /* ===== SIDEBARS (Clean & Dark) ===== */
         .sidebar {
-            position: fixed;
-            top: 50%;
-            transform: translateY(-50%);
-            padding: 15px 25px;
-            border-radius: 12px;
-            z-index: 100;
-            cursor: pointer;
-            transition: 0.3s;
-            text-align: center;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-            background: var(--bg-glass);
+            position: fixed; top: 50%; transform: translateY(-50%);
+            padding: 15px 25px; border-radius: 15px; z-index: 100;
+            cursor: pointer; background: var(--dark-panel);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.6); text-align: center;
+            border: 1px solid rgba(255,255,255,0.1); transition: 0.3s;
         }
-        .sidebar-left { left: 30px; border-bottom: 4px solid var(--lava); }
-        .sidebar-right { right: 30px; background: var(--discord); color: white; border-bottom: 4px solid #3b448b; text-decoration: none; }
+        .sidebar-left { left: 30px; border-bottom: 4px solid var(--neon-lava); }
+        .sidebar-right { right: 30px; background: var(--discord); border-bottom: 4px solid #3b448b; text-decoration: none; color: white; }
+        .sidebar:hover { transform: translateY(-55%); border-color: rgba(255,255,255,0.3); }
         @media (max-width: 1300px) { .sidebar { display: none; } }
 
-        /* ===== HEADER & BUTTONS ===== */
-        header { text-align: center; margin-bottom: 40px; }
-        .logo { max-width: 400px; width: 85%; filter: drop-shadow(0 10px 20px rgba(0,0,0,0.2)); }
-
-        .nav-container { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; margin-bottom: 40px; }
-        .btn {
-            background: #fff;
-            border: 3px solid #000;
-            padding: 12px 24px;
-            text-decoration: none;
-            color: #000;
-            font-weight: 900;
-            border-radius: 10px;
-            box-shadow: 0 6px 0 #000;
-            transition: 0.1s;
+        /* ===== NAV BUTTONS (3D behouden) ===== */
+        .nav-container { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; margin-bottom: 50px; }
+        .btn-3d {
+            background: #fff; border: 3px solid #000; padding: 12px 28px;
+            text-decoration: none; color: #000; font-weight: 900;
+            border-radius: 12px; box-shadow: 0 6px 0 #000; transition: 0.1s;
+            text-transform: uppercase; font-size: 14px;
         }
-        .btn:hover { transform: translateY(2px); box-shadow: 0 4px 0 #000; }
+        .btn-3d:hover { transform: translateY(2px); box-shadow: 0 4px 0 #000; }
+        .btn-3d:active { transform: translateY(6px); box-shadow: 0 0 0 #000; }
 
-        /* ===== GRID LAYOUT ===== */
-        .grid-container { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; }
+        /* ===== GRID & CARDS ===== */
+        .modern-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; }
         .card {
-            background: var(--bg-glass);
-            border-radius: 20px;
-            padding: 30px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-            border-top: 5px solid transparent;
+            background: var(--dark-panel); border-radius: 20px; padding: 35px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5); border-top: 6px solid transparent;
+            transition: 0.3s;
         }
+        .card:hover { transform: scale(1.01); }
         .full-width { grid-column: span 2; }
-        
-        .info-card { border-top-color: var(--grass); }
-        .smp-card { border-top-color: var(--lava); }
-        .shores-card { border-top-color: var(--water); }
 
-        h2 { margin-top: 0; font-size: 24px; text-transform: uppercase; }
+        .info-card { border-top-color: var(--neon-grass); }
+        .smp-card { border-top-color: var(--neon-lava); }
+        .shores-card { border-top-color: var(--neon-water); }
 
-        /* ===== TIMELINE SECTIE ===== */
-        .timeline-container {
-            background: rgba(0,0,0,0.85);
-            color: white;
-            padding: 40px;
-            border-radius: 25px;
-            margin-top: 25px;
-            text-align: center;
-        }
-        .timeline-bar {
-            height: 20px;
-            background: linear-gradient(90deg, #ffcc00, #ff8800);
-            border-radius: 10px;
-            margin: 40px 0;
-            position: relative;
-            box-shadow: 0 0 20px rgba(255, 204, 0, 0.4);
-        }
-        .timeline-events {
-            display: flex;
-            justify-content: space-between;
-            position: relative;
-        }
-        .event { position: relative; width: 100px; font-size: 13px; font-weight: bold; }
-        .event::after {
-            content: '';
-            position: absolute;
-            top: -25px;
-            left: 50%;
-            width: 12px;
-            height: 12px;
-            background: white;
-            border-radius: 50%;
-            transform: translateX(-50%);
-        }
+        h2 { margin-top: 0; font-size: 28px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; }
+        .info-card h2 { color: var(--neon-grass); }
+        .smp-card h2 { color: var(--neon-lava); }
+        .shores-card h2 { color: var(--neon-water); }
 
-        /* ===== ORIGINELE JOIN BOX (BLAUW/WIT) ===== */
-        .join-box {
-            background: linear-gradient(135deg, #7289da 0%, #5865f2 100%);
-            border-radius: 20px;
-            padding: 50px;
-            margin: 40px 0;
-            text-align: center;
-            color: white;
-            box-shadow: 0 15px 35px rgba(88, 101, 242, 0.4);
-        }
-        .join-box h2 { color: white; font-size: 32px; }
+        p { line-height: 1.7; font-size: 18px; font-weight: 600; color: var(--text-dim); }
+        strong { color: #fff; }
 
-        @media (max-width: 768px) {
-            .grid-container { grid-template-columns: 1fr; }
-            .full-width { grid-column: span 1; }
-            .timeline-events { flex-direction: column; gap: 30px; }
+        /* ===== ROADMAP (TIMELINE) ===== */
+        .roadmap {
+            background: var(--dark-panel); padding: 40px; border-radius: 25px;
+            margin-top: 25px; text-align: center; border: 1px solid rgba(255,255,255,0.05);
         }
+        .timeline-bar { height: 12px; background: #333; border-radius: 10px; margin: 40px 0; position: relative; }
+        .progress { width: 45%; height: 100%; background: linear-gradient(90deg, #ffcc00, #ff8800); border-radius: 10px; box-shadow: 0 0 15px rgba(255,204,0,0.5); }
+        .events { display: flex; justify-content: space-between; position: relative; }
+        .event { font-size: 13px; font-weight: 800; color: #fff; }
+
+        /* ===== JOIN BOX (UPGRADED) ===== */
+        .join-section {
+            background: linear-gradient(135deg, #2c2f33 0%, #23272a 100%);
+            border-radius: 25px; padding: 60px; text-align: center;
+            border: 2px solid rgba(88, 101, 242, 0.3); margin-top: 40px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+        }
+        .join-section h2 { font-size: 36px; margin-bottom: 15px; color: #fff; }
+        .join-btn {
+            background: var(--discord); color: white; padding: 18px 45px;
+            border-radius: 50px; text-decoration: none; font-weight: 800;
+            font-size: 20px; display: inline-block; transition: 0.3s;
+            box-shadow: 0 10px 25px rgba(88, 101, 242, 0.4);
+        }
+        .join-btn:hover { transform: scale(1.05); box-shadow: 0 15px 35px rgba(88, 101, 242, 0.6); }
+
+        footer { text-align: center; padding: 60px; color: var(--text-dim); font-weight: bold; }
+        .reveal { opacity: 0; transform: translateY(30px); transition: 0.8s ease-out; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
     </style>
 </head>
 <body>
 
     <div class="sidebar sidebar-left" onclick="copyIP()">
-        <small style="color:#888; font-weight:bold;">SERVER IP</small>
-        <p id="ip-text" style="margin:5px 0 0 0; font-weight:900;">Play.ncsmp.nl</p>
+        <small style="color:var(--neon-lava); font-weight:900;">SERVER IP</small>
+        <p id="ip-text" style="margin-top:5px; font-size:18px; font-weight:900;">Play.ncsmp.nl</p>
     </div>
 
     <a href="https://discord.gg/XS2xAqbNxA" target="_blank" class="sidebar sidebar-right">
-        <small style="opacity:0.8; font-weight:bold;">COMMUNITY</small>
-        <p style="margin:5px 0 0 0; font-weight:900;">Discord</p>
+        <small style="font-weight:900;">JOIN DE CLUB</small>
+        <p style="margin-top:5px; font-size:18px; font-weight:900;">Discord</p>
     </a>
 
     <div class="wrapper">
-        <header>
-            <img src="logo.png" alt="Logo" class="logo">
-            <h1 style="color: white; text-shadow: 2px 2px 8px rgba(0,0,0,0.5); font-size: 45px;">SEIZOEN 2</h1>
+        <header style="text-align:center; margin-bottom:40px;">
+            <img src="logo.png" alt="Logo" style="max-width:400px; width:90%; filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5));">
+            <h1 style="font-size:60px; font-weight:900; text-shadow: 4px 4px 0px var(--neon-lava);">SEIZOEN 2</h1>
         </header>
 
         <nav class="nav-container">
-            <a href="eilanden.html" class="btn">🗺️ Eilanden</a>
-            <a href="regels.html" class="btn">📜 Regels</a>
-            <a href="deaths.html" class="btn">💀 Deaths</a>
-            <a href="lost-shores.html" class="btn">🌊 Shores</a>
+            <a href="eilanden.html" class="btn-3d">🗺️ Eilanden</a>
+            <a href="regels.html" class="btn-3d">📜 Regels</a>
+            <a href="deaths.html" class="btn-3d">💀 Deaths</a>
+            <a href="lost-shores.html" class="btn-3d">🌊 Shores</a>
         </nav>
 
-        <div class="grid-container">
+        <div class="modern-grid">
             <section class="card info-card full-width reveal">
                 <h2>Algemene Informatie</h2>
-                <p>Welkom bij Nootjes SMP Seizoen 2! Wij zijn een community waar teamwork en hardcore survival samenkomen in een unieke wereld.</p>
+                <p>Nootjes SMP is geen standaard server. Het is een <strong>Hardcore community</strong> waar elke keuze telt. Gezelligheid en spanning gaan hier hand in hand terwijl we samen bouwen aan een legendarische wereld.</p>
             </section>
 
             <section class="card smp-card reveal">
                 <h2>🛡️ Survival</h2>
-                <p>Verken de wereld, bouw je basis en overleef. Maar onthoud: dood is Lost Shores!</p>
+                <p>Verken de uitgestrekte wereld van Seizoen 2. Bouw je basis en overleef, want onthoud: <strong>dood betekent verbanning</strong> naar de Lost Shores.</p>
             </section>
 
             <section class="card shores-card reveal">
                 <h2>🌊 Lost Shores</h2>
-                <p>Je laatste kans om terug te keren naar de levenden via de finale beproeving.</p>
+                <p>Niet getreurd na je dood. De Lost Shores bieden een <strong>unieke laatste kans</strong>. Vecht jezelf terug via de finale beproeving!</p>
             </section>
 
-            <section class="timeline-container full-width reveal">
-                <small style="text-transform: uppercase; color: #ffcc00; letter-spacing: 2px;">Roadmap</small>
-                <h2>Event Tijdlijn</h2>
-                <div class="timeline-bar"></div>
-                <div class="timeline-events">
-                    <div class="event">21 dec<br>Start Seizoen 🌍</div>
-                    <div class="event">30 dec<br>Nether Open 🔥</div>
-                    <div class="event">5 jan<br>Start Shores 💀</div>
-                    <div class="event">17 jan<br>SMP Finale 🏆</div>
+            <section class="roadmap full-width reveal">
+                <h2 style="color: #ffcc00; margin-bottom:10px;">Event Tijdlijn</h2>
+                <div class="timeline-bar"><div class="progress"></div></div>
+                <div class="events">
+                    <div class="event">21 DEC<br>START 🌍</div>
+                    <div class="event">30 DEC<br>NETHER 🔥</div>
+                    <div class="event">5 JAN<br>SHORES 💀</div>
+                    <div class="event">17 JAN<br>FINALE 🏆</div>
                 </div>
             </section>
 
-            <section class="join-box full-width reveal">
-                <h2>Meedoen aan Seizoen 2?</h2>
-                <p>Join onze Discord voor updates, whitelist en gezelligheid.</p>
-                <div style="margin-top: 25px;">
-                    <a href="https://discord.gg/XS2xAqbNxA" class="btn" style="box-shadow: 0 6px 0 #3b448b;">💬 Join de Discord</a>
-                </div>
+            <section class="join-section full-width reveal">
+                <h2>Klaar voor het avontuur?</h2>
+                <p style="margin-bottom:30px;">Sluit je aan bij honderden andere spelers. De Discord is de plek voor <strong>updates, whitelist en gezelligheid</strong>.</p>
+                <a href="https://discord.gg/XS2xAqbNxA" class="join-btn">🚀 JOIN DE DISCORD</a>
             </section>
         </div>
 
-        <footer style="text-align: center; padding: 40px; color: white;">© 2026 Nootjes SMP</footer>
+        <footer>© 2026 Nootjes SMP • Seizoen 2 is gestart!</footer>
     </div>
 
     <script>
@@ -219,7 +169,7 @@
             const ip = "Play.ncsmp.nl";
             navigator.clipboard.writeText(ip).then(() => {
                 const el = document.getElementById("ip-text");
-                el.innerText = "Gekopieerd! ✅";
+                el.innerText = "GEKOPIEERD! ✅";
                 setTimeout(() => { el.innerText = "Play.ncsmp.nl"; }, 2000);
             });
         }
