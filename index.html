@@ -7,188 +7,175 @@
 
     <style>
         :root {
-            --oak: #7a5a3a;
             --grass: #55aa00;
             --lava: #ff4400;
             --water: #00aaff;
-            --gold: #ffcc00;
             --discord: #5865f2;
             --bg-glass: rgba(255, 255, 255, 0.95);
         }
 
-        /* ===== BASIS ===== */
         body {
             margin: 0;
             padding: 0;
-            font-family: 'Arial Black', 'Trebuchet MS', sans-serif; /* Dikker font voor de vibes */
-            background-image: url('achtergrond.png'); /* Gebruik makend van achtergrond.png */
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-image: url('achtergrond.png'); 
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
-            color: #2e1a12;
+            color: #1a1a1a;
         }
 
         .wrapper {
-            max-width: 900px;
+            max-width: 1000px;
             margin: 0 auto;
             padding: 40px 20px;
         }
 
-        /* ===== ANIMATIE VOOR BLOKKEN ===== */
+        /* ===== ANIMATIE ===== */
         .reveal {
             opacity: 0;
-            transform: scale(0.9) translateY(40px);
-            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transform: translateY(20px);
+            transition: all 0.6s ease-out;
         }
         .reveal.active {
             opacity: 1;
-            transform: scale(1) translateY(0);
+            transform: translateY(0);
         }
 
-        /* ===== EXTRA DIKKE 3D SIDEBARS ===== */
+        /* ===== CLEAN SIDEBARS (Zonder zwarte randen) ===== */
         .sidebar {
             position: fixed;
             top: 50%;
             transform: translateY(-50%);
-            padding: 20px;
-            border-radius: 15px;
-            border: 5px solid #000;
+            padding: 15px 25px;
+            border-radius: 12px;
             z-index: 100;
             cursor: pointer;
-            transition: 0.1s;
+            transition: 0.3s;
             text-align: center;
-            min-width: 160px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            background: var(--bg-glass);
         }
 
-        .sidebar-left { 
-            left: 20px; 
-            background: #fff; 
-            box-shadow: 0 10px 0 var(--lava); 
-            color: var(--lava);
-        }
-        .sidebar-right { 
-            right: 20px; 
-            background: var(--discord); 
-            box-shadow: 0 10px 0 #3b448b; 
-            color: white;
-            text-decoration: none;
-        }
+        .sidebar-left { left: 30px; border-bottom: 4px solid var(--lava); }
+        .sidebar-right { right: 30px; background: var(--discord); color: white; border-bottom: 4px solid #3b448b; text-decoration: none; }
+        
+        .sidebar:hover { transform: translateY(-55%); box-shadow: 0 15px 35px rgba(0,0,0,0.2); }
 
-        .sidebar:hover { transform: translateY(-55%); }
-        .sidebar:active { transform: translateY(-45%); box-shadow: 0 2px 0 #000; }
+        @media (max-width: 1300px) { .sidebar { display: none; } }
 
         /* ===== HEADER ===== */
-        header { text-align: center; margin-bottom: 50px; }
+        header { text-align: center; margin-bottom: 40px; }
         .logo {
-            max-width: 450px;
-            width: 90%;
-            filter: drop-shadow(0 15px 0px rgba(0,0,0,0.2));
-            animation: float 3s ease-in-out infinite;
+            max-width: 400px;
+            width: 85%;
+            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.2));
         }
-        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
 
-        /* ===== DIKKE BUTTONS ===== */
-        .nav-container { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-bottom: 50px; }
+        /* ===== 3D BUTTONS (Alleen hier behouden) ===== */
+        .nav-container { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; margin-bottom: 40px; }
         .btn {
             background: #fff;
-            border: 5px solid #000;
-            padding: 15px 30px;
+            border: 3px solid #000;
+            padding: 12px 24px;
             text-decoration: none;
             color: #000;
             font-weight: 900;
-            border-radius: 12px;
-            box-shadow: 0 8px 0 #000;
+            border-radius: 10px;
+            box-shadow: 0 6px 0 #000;
             transition: 0.1s;
         }
-        .btn:hover { transform: translateY(2px); box-shadow: 0 6px 0 #000; }
-        .btn:active { transform: translateY(8px); box-shadow: 0 0 0 #000; }
+        .btn:hover { transform: translateY(2px); box-shadow: 0 4px 0 #000; }
+        .btn:active { transform: translateY(6px); box-shadow: 0 0 0 #000; }
 
-        /* ===== SPEELSE 3D KAARTEN ===== */
-        .card {
-            background: var(--bg-glass);
-            border: 6px solid #000;
-            border-radius: 25px;
-            padding: 40px;
-            margin-bottom: 40px;
-            text-align: left;
+        /* ===== MODERNE GRID LAYOUT ===== */
+        .grid-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
         }
 
-        .info-card { box-shadow: 0 15px 0 var(--grass); }
-        .smp-card { box-shadow: 0 15px 0 var(--lava); }
-        .shores-card { box-shadow: 0 15px 0 var(--water); }
+        .card {
+            background: var(--bg-glass);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            border-top: 5px solid transparent;
+        }
 
-        h2 { font-size: 32px; margin-top: 0; text-transform: uppercase; }
+        .full-width { grid-column: span 2; }
+
+        /* Kleuraccenten (geen zwarte randen meer) */
+        .info-card { border-top-color: var(--grass); }
+        .smp-card { border-top-color: var(--lava); }
+        .shores-card { border-top-color: var(--water); }
+        .join-card { background: #1a1a1a; color: white; text-align: center; border-top-color: #ffcc00; }
+
+        h2 { margin-top: 0; font-size: 24px; text-transform: uppercase; letter-spacing: 1px; }
         .info-card h2 { color: var(--grass); }
         .smp-card h2 { color: var(--lava); }
         .shores-card h2 { color: var(--water); }
 
-        p { font-size: 19px; line-height: 1.6; font-weight: bold; }
+        p { line-height: 1.6; opacity: 0.9; font-size: 17px; }
 
-        /* ===== JOIN BOX (GEBASEERD OP VOORBEELD) ===== */
-        .join-box {
-            background: #1a1a1a;
-            border: 6px solid var(--gold);
-            border-radius: 30px;
-            padding: 50px;
-            color: #fff;
-            text-align: center;
-            box-shadow: 0 15px 0 #b38f00;
+        footer { text-align: center; padding: 40px; color: white; text-shadow: 1px 1px 3px rgba(0,0,0,0.5); font-weight: bold; }
+
+        /* Mobiel fix */
+        @media (max-width: 768px) {
+            .grid-container { grid-template-columns: 1fr; }
+            .full-width { grid-column: span 1; }
         }
-        .join-box h2 { color: var(--gold); font-size: 40px; }
-
-        footer { text-align: center; padding: 40px; color: #fff; text-shadow: 3px 3px 0 #000; font-size: 20px; }
-
-        @media (max-width: 1200px) { .sidebar { display: none; } }
     </style>
 </head>
 <body>
 
     <div class="sidebar sidebar-left" onclick="copyIP()">
-        <h4>COPY IP! 📋</h4>
-        <p id="ip-text">Play.ncsmp.nl</p>
+        <small style="color:#888; font-weight:bold;">SERVER IP</small>
+        <p id="ip-text" style="margin:5px 0 0 0; font-weight:900;">Play.ncsmp.nl</p>
     </div>
 
     <a href="https://discord.gg/XS2xAqbNxA" target="_blank" class="sidebar sidebar-right">
-        <h4>JOIN US! 💬</h4>
-        <p>Discord</p>
+        <small style="opacity:0.8; font-weight:bold;">COMMUNITY</small>
+        <p style="margin:5px 0 0 0; font-weight:900;">Discord</p>
     </a>
 
     <div class="wrapper">
         <header>
-            <img src="logo.png" alt="Logo" class="logo">
-            <h1 style="color: #fff; text-shadow: 6px 6px 0 var(--lava); font-size: 60px; margin-top: 10px;">SEIZOEN 2</h1>
+            <img src="logo.png" alt="Nootjes Logo" class="logo">
+            <h1 style="color: white; text-shadow: 2px 2px 8px rgba(0,0,0,0.5); font-size: 45px;">SEIZOEN 2</h1>
         </header>
 
         <nav class="nav-container">
-            <a href="eilanden.html" class="btn">🗺️ EILANDEN</a>
-            <a href="regels.html" class="btn">📜 REGELS</a>
-            <a href="deaths.html" class="btn">💀 DEATHS</a>
-            <a href="lost-shores.html" class="btn">🌊 SHORES</a>
+            <a href="eilanden.html" class="btn">🗺️ Eilanden</a>
+            <a href="regels.html" class="btn">📜 Regels</a>
+            <a href="deaths.html" class="btn">💀 Deaths</a>
+            <a href="lost-shores.html" class="btn">🌊 Shores</a>
         </nav>
 
-        <section class="card info-card reveal">
-            <h2>Algemene Informatie</h2>
-            <p>Nootjes SMP is een keiharde Hardcore community waar gezelligheid en gevaar hand in hand gaan! Samen bouwen we aan een legendarische wereld.</p>
-        </section>
+        <div class="grid-container">
+            <section class="card info-card full-width reveal">
+                <h2>Algemene Informatie</h2>
+                <p>Welkom bij Nootjes SMP Seizoen 2! Wij zijn een gepassioneerde community waar overleving centraal staat. Onze server draait op een uniek Hardcore-systeem: teamwork is essentieel en elke actie telt. Bouw mee aan een legendarische wereld!</p>
+            </section>
 
-        <section class="card smp-card reveal">
-            <h2>🛡️ De Survival</h2>
-            <p>Seizoen 2 is hier! Verken een gloednieuwe wereld, bouw gigantische bases en overleef de nacht. Maar pas op: één foutje en het is "game over" in de bovenwereld!</p>
-        </section>
+            <section class="card smp-card reveal">
+                <h2>🛡️ Survival</h2>
+                <p>Verken de gloednieuwe wereld van Seizoen 2. Bouw bases, handel met vrienden en overleef de nacht. Maar pas op: één fout en je verliest je leven in de bovenwereld!</p>
+            </section>
 
-        <section class="card shores-card reveal">
-            <h2>🌊 Lost Shores</h2>
-            <p>Ben je dood? Geen paniek! De Lost Shores wachten op je. Train hard en vecht jezelf terug naar de levenden in de grote finale beproeving! 👻</p>
-        </section>
+            <section class="card shores-card reveal">
+                <h2>🌊 Lost Shores</h2>
+                <p>Dood is niet het einde. Op de Lost Shores krijg je de kans om jezelf te bewijzen. Vecht in de finale beproeving om je plek op de SMP terug te verdienen!</p>
+            </section>
 
-        <section class="join-box reveal">
-            <h2>MEEDOEN?</h2>
-            <p>De Discord is dé plek voor alle actie, updates en gezelligheid!</p>
-            <br>
-            <a href="https://discord.gg/XS2xAqbNxA" class="btn" style="background: var(--discord); color: #fff; border-color: #000; box-shadow: 0 8px 0 #3b448b;">🔥 JOIN DISCORD!</a>
-        </section>
+            <section class="card join-card full-width reveal">
+                <h2 style="color: #ffcc00;">Wil je meedoen?</h2>
+                <p>Sluit je aan bij onze Discord voor alle updates, whitelist-aanvragen en om de community te leren kennen.</p>
+                <a href="https://discord.gg/XS2xAqbNxA" class="btn" style="margin-top:15px; display:inline-block;">🔥 JOIN DE DISCORD</a>
+            </section>
+        </div>
 
-        <footer>© 2026 Nootjes SMP • HAKKEN EN BOUWEN! ⛏️</footer>
+        <footer>© 2026 Nootjes SMP • Seizoen 2 is live!</footer>
     </div>
 
     <script>
@@ -196,9 +183,8 @@
             const ip = "Play.ncsmp.nl";
             navigator.clipboard.writeText(ip).then(() => {
                 const el = document.getElementById("ip-text");
-                const old = el.innerText;
-                el.innerText = "GEKOPIEERD! ✅";
-                setTimeout(() => { el.innerText = old; }, 2000);
+                el.innerText = "Gekopieerd! ✅";
+                setTimeout(() => { el.innerText = "Play.ncsmp.nl"; }, 2000);
             });
         }
 
