@@ -16,13 +16,14 @@
             min-height: 100vh;
         }
 
-        /* ===== HEADER / HERO ===== */
+        /* ===== HEADER SECTIE ===== */
         header {
             padding: 70px 20px 50px;
             position: relative;
+            overflow: hidden;
         }
 
-        /* Minecraft pixel detail achtergrond */
+        /* Minecraft pixel detail overlay */
         header::before {
             content: "";
             position: absolute;
@@ -38,7 +39,7 @@
             z-index: 0;
         }
 
-        /* Zorg dat de inhoud boven de achtergrond-overlay komt */
+        /* Zorg dat alles in de header boven de overlay staat */
         header > * {
             position: relative;
             z-index: 1;
@@ -48,10 +49,9 @@
             max-width: 520px;
             width: 90%;
             height: auto;
-            margin-bottom: 25px;
-            filter: drop-shadow(0 12px 30px rgba(0,0,0,1)) 
-                    saturate(0.9) 
-                    brightness(0.95);
+            margin: 0 auto 25px auto;
+            display: block; /* Voorkomt rare witruimtes */
+            filter: drop-shadow(0 12px 30px rgba(0,0,0,1)) saturate(0.9) brightness(0.95);
         }
 
         .subtitle {
@@ -63,7 +63,7 @@
             opacity: 0.85;
         }
 
-        /* ===== BUTTONS ===== */
+        /* ===== KNOPPEN ===== */
         .buttons {
             display: flex;
             justify-content: center;
@@ -78,18 +78,16 @@
             color: #f5f5f5;
             border-radius: 12px;
             background: linear-gradient(145deg, #7a140e, #b36b1c);
-            box-shadow: inset 0 2px 0 rgba(255,255,255,0.15), 
-                        0 8px 20px rgba(0,0,0,0.9);
+            box-shadow: inset 0 2px 0 rgba(255,255,255,0.15), 0 8px 20px rgba(0,0,0,0.9);
             transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
 
         .btn:hover {
             transform: translateY(-4px);
-            box-shadow: inset 0 2px 0 rgba(255,255,255,0.2), 
-                        0 14px 30px rgba(0,0,0,1);
+            box-shadow: inset 0 2px 0 rgba(255,255,255,0.2), 0 14px 30px rgba(0,0,0,1);
         }
 
-        /* ===== INFO SECTIE ===== */
+        /* ===== INFO BLOK ===== */
         .info {
             max-width: 900px;
             margin: 40px auto 60px;
@@ -117,64 +115,58 @@
             font-size: 17px;
         }
 
-        /* ===== FOOTER ===== */
         footer {
-            margin-top: 40px;
-            padding: 25px;
+            padding: 40px 25px;
             font-size: 14px;
             color: #888;
-            opacity: 0.8;
+            opacity: 0.7;
         }
 
-        /* ===== RESPONSIVE ===== */
         @media (max-width: 600px) {
-            .btn {
-                width: 85%;
-                font-size: 18px;
-            }
+            .btn { width: 85%; font-size: 18px; }
         }
     </style>
 </head>
 <body>
 
-<header>
-    <img src="logo.png" alt="Nootjes SMP Hardcore" class="logo">
+    <header>
+        <img src="logo.png" alt="Nootjes SMP Hardcore" class="logo">
 
-    <div class="subtitle">
-        Hardcore Survival
-    </div>
-
-    <div class="buttons">
-        <a href="eilanden.html" class="btn">🗺️ Eilandverdeling</a>
-        <a href="regels.html" class="btn">📜 Regels</a>
-        <a href="deaths.html" class="btn">💀 Deaths</a>
-    </div>
-</header>
-
-<main>
-    <section class="info">
-        <div class="info-box">
-            <h3>Algemene informatie</h3>
-            <p>
-                Nootjes SMP Hardcore is een gesloten Minecraft Hardcore SMP
-                waar elke death definitief is. Eén leven. Geen resets.
-                Alles draait om strategie, samenwerking en overleven.
-            </p>
-            <p>
-                Spelers worden verdeeld over eilanden, bouwen hun eigen
-                economie en bepalen samen het verloop van het seizoen.
-                Wie sterft, ligt eruit — voorgoed.
-            </p>
-            <p>
-                <strong>⚠️ Hardcore modus actief — dood = permanent.</strong>
-            </p>
+        <div class="subtitle">
+            Hardcore Survival
         </div>
-    </section>
-</main>
 
-<footer>
-    © Nootjes SMP Hardcore — Powered by Nootjescraft.
-</footer>
+        <div class="buttons">
+            <a href="eilanden.html" class="btn">🗺️ Eilandverdeling</a>
+            <a href="regels.html" class="btn">📜 Regels</a>
+            <a href="deaths.html" class="btn">💀 Deaths</a>
+        </div>
+    </header>
+
+    <main>
+        <section class="info">
+            <div class="info-box">
+                <h3>Algemene informatie</h3>
+                <p>
+                    Nootjes SMP Hardcore is een gesloten Minecraft Hardcore SMP
+                    waar elke death definitief is. Eén leven. Geen resets.
+                    Alles draait om strategie, samenwerking en overleven.
+                </p>
+                <p>
+                    Spelers worden verdeeld over eilanden, bouwen hun eigen
+                    economie en bepalen samen het verloop van het seizoen.
+                    Wie sterft, ligt eruit — voorgoed.
+                </p>
+                <p>
+                    <strong>⚠️ Hardcore modus actief — dood = permanent.</strong>
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        © Nootjes SMP Hardcore — Powered by Nootjescraft.
+    </footer>
 
 </body>
 </html>
