@@ -9,29 +9,41 @@
         :root {
             --oak-brown: #5d4037;
             --terracotta: #d84315;
-            --overlay: rgba(255, 255, 255, 0.85); /* Maakt de tekst leesbaar over de foto */
+            --overlay: rgba(255, 255, 255, 0.9);
         }
 
-        /* ===== ACHTERGROND INSTELLINGEN ===== */
+        /* ===== BASIS & ACHTERGROND ===== */
         body {
             margin: 0;
             padding: 0;
             font-family: 'Trebuchet MS', sans-serif;
-            /* VERVANG HIERONDER 'background.jpg' DOOR JOUW BESTANDSNAAM */
-            background-image: url('achtergrond.png'); 
+            background-image: url('image_73e354.jpg'); 
             background-size: cover;
             background-position: center;
-            background-attachment: fixed; /* Zorgt dat de foto blijft staan tijdens scrollen */
+            background-attachment: fixed;
             color: #2e1a12;
+            overflow-x: hidden;
         }
 
         .wrapper {
-            max-width: 900px;
+            max-width: 950px;
             margin: 0 auto;
             padding: 40px 20px;
         }
 
-        /* ===== SIDEBARS (IP & DISCORD) ===== */
+        /* ===== ANIMATIES ===== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ===== SIDEBARS ===== */
         .sidebar {
             position: fixed;
             top: 50%;
@@ -43,15 +55,11 @@
             border: 3px solid var(--oak-brown);
             z-index: 100;
         }
-
         .sidebar-left { left: 20px; }
         .sidebar-right { right: 20px; }
-        .sidebar h4 { margin: 0 0 5px 0; font-size: 12px; color: var(--terracotta); text-transform: uppercase; }
-        .sidebar p { margin: 0; font-weight: bold; font-size: 14px; }
+        @media (max-width: 1250px) { .sidebar { display: none; } }
 
-        @media (max-width: 1200px) { .sidebar { display: none; } }
-
-        /* ===== LOGO ANIMATIE ===== */
+        /* ===== HEADER ===== */
         header { text-align: center; padding: 20px 0; }
         .logo {
             max-width: 400px;
@@ -59,13 +67,12 @@
             filter: drop-shadow(0 10px 15px rgba(0,0,0,0.3));
             animation: float 4s ease-in-out infinite;
         }
-
         @keyframes float {
             0%, 100% { transform: translateY(0px); }
             50% { transform: translateY(-15px); }
         }
 
-        /* ===== NAVIGATION ===== */
+        /* ===== NAVIGATIE ===== */
         .nav-container {
             margin: 30px 0;
             display: flex;
@@ -73,7 +80,6 @@
             gap: 15px;
             flex-wrap: wrap;
         }
-
         .btn {
             background: #fff;
             border: 3px solid var(--oak-brown);
@@ -85,28 +91,40 @@
             box-shadow: 0 5px 0 var(--oak-brown);
             transition: all 0.2s;
         }
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 7px 0 var(--oak-brown); background: #fdf5e6; }
 
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 7px 0 var(--oak-brown);
-            background: #fdf5e6;
-        }
-
-        /* ===== CONTENT CARDS ===== */
-        .card {
+        /* ===== ALGEMENE INFO TABEL ===== */
+        .info-table-container {
             background: var(--overlay);
-            backdrop-filter: blur(5px); /* Maakt de achtergrond achter het kaartje wazig */
             border-radius: 15px;
             padding: 30px;
+            margin: 40px 0;
+            border: 3px solid var(--oak-brown);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid rgba(93, 64, 55, 0.2);
+        }
+        th { color: var(--terracotta); font-size: 1.1em; width: 30%; }
+
+        /* ===== CARDS ===== */
+        .card {
+            background: var(--overlay);
+            border-radius: 15px;
+            padding: 35px;
             margin-bottom: 30px;
             border: 2px solid var(--oak-brown);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
         }
-
         .card h2 { color: var(--terracotta); margin-top: 0; }
-        .card p { line-height: 1.6; font-size: 17px; }
 
-        footer { text-align: center; padding: 40px; font-weight: bold; color: white; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
+        footer { text-align: center; padding: 40px; font-weight: bold; color: white; text-shadow: 2px 2px 4px rgba(0,0,0,0.6); }
     </style>
 </head>
 <body>
@@ -134,15 +152,37 @@
             <a href="lost-shores.html" class="btn">🌊 Lost Shores</a>
         </nav>
 
+        <div class="info-table-container reveal">
+            <h2 style="color: var(--terracotta); text-align: center; margin-top: 0;">📋 Server Informatie</h2>
+            <table>
+                <tr>
+                    <th>Wie zijn wij?</th>
+                    <td>Nootjes SMP is een hechte community van Minecraft-spelers die houden van een uitdaging en gezelligheid.</td>
+                </tr>
+                <tr>
+                    <th>Wat doen wij?</th>
+                    <td>Wij bieden een unieke Hardcore ervaring waar teamwork, strategie en overleven centraal staan in een custom wereld.</td>
+                </tr>
+                <tr>
+                    <th>Onze Missie</th>
+                    <td>Het creëren van een spannende en eerlijke omgeving waar elke speler zijn eigen verhaal kan schrijven (tot de dood volgt!).</td>
+                </tr>
+                <tr>
+                    <th>Server Type</th>
+                    <td>Semi-Vanilla Hardcore SMP met Seizoensgebonden resets en unieke evenementen.</td>
+                </tr>
+            </table>
+        </div>
+
         <main>
-            <div class="card">
+            <div class="card reveal">
                 <h2>🛡️ De Hardcore Survival</h2>
                 <p>Welkom bij <strong>Nootjes SMP Seizoen 2</strong>. De wereld is nieuw, de gevaren zijn groter, maar de regels blijven hetzelfde: dood is dood. Werk samen, bouw dorpen en overleef in deze prachtige Minecraft wereld.</p>
             </div>
 
-            <div class="card">
+            <div class="card reveal">
                 <h2>🌊 Lost Shores: De Tweede Kans</h2>
-                <p>Niet getreurd als je sterft! Je reis gaat verder op de <strong>Lost Shores</strong>. Hier kun je laten zien dat je een plekje in de finale verdient om terug te keren naar de levenden. 👻</p>
+                <p>Dood is niet het absolute einde. Je ziel spoelt aan bij de <strong>Lost Shores</strong>. Hier kun je laten zien dat je een plekje in de finale verdient om terug te keren naar de levenden. 👻</p>
             </div>
         </main>
 
@@ -151,5 +191,22 @@
         </footer>
     </div>
 
+    <script>
+        // Script voor de scroll-animaties
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 150;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+        window.addEventListener("scroll", reveal);
+        // Start check
+        reveal();
+    </script>
 </body>
 </html>
