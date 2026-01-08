@@ -17,7 +17,7 @@
         body {
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-image: url('achtergrond.png'); 
             background-size: cover;
             background-position: center;
@@ -42,7 +42,7 @@
             transform: translateY(0);
         }
 
-        /* ===== CLEAN SIDEBARS (Zonder zwarte randen) ===== */
+        /* ===== SIDEBARS ===== */
         .sidebar {
             position: fixed;
             top: 50%;
@@ -56,23 +56,14 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.15);
             background: var(--bg-glass);
         }
-
         .sidebar-left { left: 30px; border-bottom: 4px solid var(--lava); }
         .sidebar-right { right: 30px; background: var(--discord); color: white; border-bottom: 4px solid #3b448b; text-decoration: none; }
-        
-        .sidebar:hover { transform: translateY(-55%); box-shadow: 0 15px 35px rgba(0,0,0,0.2); }
-
         @media (max-width: 1300px) { .sidebar { display: none; } }
 
-        /* ===== HEADER ===== */
+        /* ===== HEADER & BUTTONS ===== */
         header { text-align: center; margin-bottom: 40px; }
-        .logo {
-            max-width: 400px;
-            width: 85%;
-            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.2));
-        }
+        .logo { max-width: 400px; width: 85%; filter: drop-shadow(0 10px 20px rgba(0,0,0,0.2)); }
 
-        /* ===== 3D BUTTONS (Alleen hier behouden) ===== */
         .nav-container { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; margin-bottom: 40px; }
         .btn {
             background: #fff;
@@ -86,15 +77,9 @@
             transition: 0.1s;
         }
         .btn:hover { transform: translateY(2px); box-shadow: 0 4px 0 #000; }
-        .btn:active { transform: translateY(6px); box-shadow: 0 0 0 #000; }
 
-        /* ===== MODERNE GRID LAYOUT ===== */
-        .grid-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 25px;
-        }
-
+        /* ===== GRID LAYOUT ===== */
+        .grid-container { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; }
         .card {
             background: var(--bg-glass);
             border-radius: 20px;
@@ -102,28 +87,65 @@
             box-shadow: 0 4px 20px rgba(0,0,0,0.08);
             border-top: 5px solid transparent;
         }
-
         .full-width { grid-column: span 2; }
-
-        /* Kleuraccenten (geen zwarte randen meer) */
+        
         .info-card { border-top-color: var(--grass); }
         .smp-card { border-top-color: var(--lava); }
         .shores-card { border-top-color: var(--water); }
-        .join-card { background: #1a1a1a; color: white; text-align: center; border-top-color: #ffcc00; }
 
-        h2 { margin-top: 0; font-size: 24px; text-transform: uppercase; letter-spacing: 1px; }
-        .info-card h2 { color: var(--grass); }
-        .smp-card h2 { color: var(--lava); }
-        .shores-card h2 { color: var(--water); }
+        h2 { margin-top: 0; font-size: 24px; text-transform: uppercase; }
 
-        p { line-height: 1.6; opacity: 0.9; font-size: 17px; }
+        /* ===== TIMELINE SECTIE ===== */
+        .timeline-container {
+            background: rgba(0,0,0,0.85);
+            color: white;
+            padding: 40px;
+            border-radius: 25px;
+            margin-top: 25px;
+            text-align: center;
+        }
+        .timeline-bar {
+            height: 20px;
+            background: linear-gradient(90deg, #ffcc00, #ff8800);
+            border-radius: 10px;
+            margin: 40px 0;
+            position: relative;
+            box-shadow: 0 0 20px rgba(255, 204, 0, 0.4);
+        }
+        .timeline-events {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+        }
+        .event { position: relative; width: 100px; font-size: 13px; font-weight: bold; }
+        .event::after {
+            content: '';
+            position: absolute;
+            top: -25px;
+            left: 50%;
+            width: 12px;
+            height: 12px;
+            background: white;
+            border-radius: 50%;
+            transform: translateX(-50%);
+        }
 
-        footer { text-align: center; padding: 40px; color: white; text-shadow: 1px 1px 3px rgba(0,0,0,0.5); font-weight: bold; }
+        /* ===== ORIGINELE JOIN BOX (BLAUW/WIT) ===== */
+        .join-box {
+            background: linear-gradient(135deg, #7289da 0%, #5865f2 100%);
+            border-radius: 20px;
+            padding: 50px;
+            margin: 40px 0;
+            text-align: center;
+            color: white;
+            box-shadow: 0 15px 35px rgba(88, 101, 242, 0.4);
+        }
+        .join-box h2 { color: white; font-size: 32px; }
 
-        /* Mobiel fix */
         @media (max-width: 768px) {
             .grid-container { grid-template-columns: 1fr; }
             .full-width { grid-column: span 1; }
+            .timeline-events { flex-direction: column; gap: 30px; }
         }
     </style>
 </head>
@@ -141,7 +163,7 @@
 
     <div class="wrapper">
         <header>
-            <img src="logo.png" alt="Nootjes Logo" class="logo">
+            <img src="logo.png" alt="Logo" class="logo">
             <h1 style="color: white; text-shadow: 2px 2px 8px rgba(0,0,0,0.5); font-size: 45px;">SEIZOEN 2</h1>
         </header>
 
@@ -155,27 +177,41 @@
         <div class="grid-container">
             <section class="card info-card full-width reveal">
                 <h2>Algemene Informatie</h2>
-                <p>Welkom bij Nootjes SMP Seizoen 2! Wij zijn een gepassioneerde community waar overleving centraal staat. Onze server draait op een uniek Hardcore-systeem: teamwork is essentieel en elke actie telt. Bouw mee aan een legendarische wereld!</p>
+                <p>Welkom bij Nootjes SMP Seizoen 2! Wij zijn een community waar teamwork en hardcore survival samenkomen in een unieke wereld.</p>
             </section>
 
             <section class="card smp-card reveal">
                 <h2>🛡️ Survival</h2>
-                <p>Verken de gloednieuwe wereld van Seizoen 2. Bouw bases, handel met vrienden en overleef de nacht. Maar pas op: één fout en je verliest je leven in de bovenwereld!</p>
+                <p>Verken de wereld, bouw je basis en overleef. Maar onthoud: dood is Lost Shores!</p>
             </section>
 
             <section class="card shores-card reveal">
                 <h2>🌊 Lost Shores</h2>
-                <p>Dood is niet het einde. Op de Lost Shores krijg je de kans om jezelf te bewijzen. Vecht in de finale beproeving om je plek op de SMP terug te verdienen!</p>
+                <p>Je laatste kans om terug te keren naar de levenden via de finale beproeving.</p>
             </section>
 
-            <section class="card join-card full-width reveal">
-                <h2 style="color: #ffcc00;">Wil je meedoen?</h2>
-                <p>Sluit je aan bij onze Discord voor alle updates, whitelist-aanvragen en om de community te leren kennen.</p>
-                <a href="https://discord.gg/XS2xAqbNxA" class="btn" style="margin-top:15px; display:inline-block;">🔥 JOIN DE DISCORD</a>
+            <section class="timeline-container full-width reveal">
+                <small style="text-transform: uppercase; color: #ffcc00; letter-spacing: 2px;">Roadmap</small>
+                <h2>Event Tijdlijn</h2>
+                <div class="timeline-bar"></div>
+                <div class="timeline-events">
+                    <div class="event">21 dec<br>Start Seizoen 🌍</div>
+                    <div class="event">30 dec<br>Nether Open 🔥</div>
+                    <div class="event">5 jan<br>Start Shores 💀</div>
+                    <div class="event">17 jan<br>SMP Finale 🏆</div>
+                </div>
+            </section>
+
+            <section class="join-box full-width reveal">
+                <h2>Meedoen aan Seizoen 2?</h2>
+                <p>Join onze Discord voor updates, whitelist en gezelligheid.</p>
+                <div style="margin-top: 25px;">
+                    <a href="https://discord.gg/XS2xAqbNxA" class="btn" style="box-shadow: 0 6px 0 #3b448b;">💬 Join de Discord</a>
+                </div>
             </section>
         </div>
 
-        <footer>© 2026 Nootjes SMP • Seizoen 2 is live!</footer>
+        <footer style="text-align: center; padding: 40px; color: white;">© 2026 Nootjes SMP</footer>
     </div>
 
     <script>
@@ -187,7 +223,6 @@
                 setTimeout(() => { el.innerText = "Play.ncsmp.nl"; }, 2000);
             });
         }
-
         function reveal() {
             var reveals = document.querySelectorAll(".reveal");
             for (var i = 0; i < reveals.length; i++) {
