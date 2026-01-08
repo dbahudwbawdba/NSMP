@@ -3,170 +3,182 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nootjes SMP Hardcore</title>
+    <title>Nootjes SMP | Hardcore</title>
 
     <style>
-        /* ===== BASIS ===== */
-        body {
-            margin: 0;
-            font-family: 'Trebuchet MS', sans-serif;
-            background: radial-gradient(circle at top, #1a0000, #050505);
-            color: #eaeaea;
-            text-align: center;
-            min-height: 100vh;
+        :root {
+            --primary-red: #d43a2f;
+            --accent-gold: #c9a24d;
+            --ghost-blue: #4da6c9; /* Kleur voor Lost Shores */
+            --dark-bg: #0a0a0a;
+            --card-bg: rgba(20, 10, 10, 0.8);
         }
 
-        /* ===== HEADER SECTIE ===== */
-        header {
-            padding: 70px 20px 50px;
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--dark-bg);
+            background-image: 
+                radial-gradient(circle at 50% -20%, #4a0000 0%, transparent 50%),
+                radial-gradient(circle at 0% 100%, #081a24 0%, transparent 30%); /* Blauwe gloed linksonder */
+            background-attachment: fixed;
+            color: #f0f0f0;
+            text-align: center;
+        }
+
+        .wrapper {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* ===== HEADER ===== */
+        header { padding: 40px 0; }
+        .logo {
+            max-width: 450px;
+            width: 85%;
+            filter: drop-shadow(0 0 20px rgba(212, 58, 47, 0.2));
+            transition: transform 0.3s ease;
+        }
+        .logo:hover { transform: scale(1.02); }
+        .subtitle {
+            color: var(--accent-gold);
+            font-weight: bold;
+            letter-spacing: 5px;
+            font-size: 14px;
+            text-transform: uppercase;
+            margin-top: 20px;
+        }
+
+        /* ===== NAVIGATION ===== */
+        .nav-container {
+            margin: 40px 0;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        .btn {
+            background: linear-gradient(135deg, #1a1a1a 0%, #000 100%);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: #fff;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+        }
+        .btn:hover {
+            background: var(--primary-red);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(212, 58, 47, 0.4);
+        }
+
+        /* ===== CONTENT CARDS ===== */
+        .content-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(212, 58, 47, 0.15);
+            border-radius: 20px;
+            padding: 40px;
+            margin-top: 30px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+            text-align: left;
+        }
+
+        /* Speciale stijl voor Lost Shores kaart */
+        .lost-shores-card {
+            border: 1px solid rgba(77, 166, 201, 0.3);
+            background: rgba(10, 15, 20, 0.85);
             position: relative;
             overflow: hidden;
         }
 
-        /* Minecraft pixel detail overlay */
-        header::before {
-            content: "";
+        .lost-shores-card::after {
+            content: "👻";
             position: absolute;
-            inset: 0;
-            background-image: repeating-linear-gradient(
-                45deg,
-                rgba(255,255,255,0.03) 0,
-                rgba(255,255,255,0.03) 1px,
-                transparent 1px,
-                transparent 12px
-            );
-            pointer-events: none;
-            z-index: 0;
+            right: -20px;
+            bottom: -20px;
+            font-size: 150px;
+            opacity: 0.05;
+            transform: rotate(-15deg);
         }
 
-        /* Zorg dat alles in de header boven de overlay staat */
-        header > * {
-            position: relative;
-            z-index: 1;
-        }
-
-        .logo {
-            max-width: 520px;
-            width: 90%;
-            height: auto;
-            margin: 0 auto 25px auto;
-            display: block; /* Voorkomt rare witruimtes */
-            filter: drop-shadow(0 12px 30px rgba(0,0,0,1)) saturate(0.9) brightness(0.95);
-        }
-
-        .subtitle {
-            color: #c9a24d;
-            letter-spacing: 4px;
-            font-size: 18px;
-            margin-bottom: 50px;
-            text-transform: uppercase;
-            opacity: 0.85;
-        }
-
-        /* ===== KNOPPEN ===== */
-        .buttons {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
-
-        .btn {
-            padding: 18px 42px;
-            font-size: 20px;
-            text-decoration: none;
-            color: #f5f5f5;
-            border-radius: 12px;
-            background: linear-gradient(145deg, #7a140e, #b36b1c);
-            box-shadow: inset 0 2px 0 rgba(255,255,255,0.15), 0 8px 20px rgba(0,0,0,0.9);
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
-
-        .btn:hover {
-            transform: translateY(-4px);
-            box-shadow: inset 0 2px 0 rgba(255,255,255,0.2), 0 14px 30px rgba(0,0,0,1);
-        }
-
-        /* ===== INFO BLOK ===== */
-        .info {
-            max-width: 900px;
-            margin: 40px auto 60px;
-            padding: 0 20px;
-        }
-
-        .info-box {
-            background: linear-gradient(180deg, #120000, #0a0a0a);
-            border-radius: 16px;
-            padding: 40px 30px;
-            box-shadow: 0 12px 35px rgba(0,0,0,0.9);
-            border: 1px solid #2a0000;
-        }
-
-        .info h3 {
+        h2 {
+            font-size: 24px;
             margin-top: 0;
-            font-size: 28px;
-            color: #d43a2f;
-            letter-spacing: 2px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
+        .red-title { color: var(--primary-red); }
+        .blue-title { color: var(--ghost-blue); }
 
-        .info p {
-            line-height: 1.7;
-            color: #d0d0d0;
-            font-size: 17px;
-        }
+        p { line-height: 1.8; color: #ccc; font-size: 17px; }
 
-        footer {
-            padding: 40px 25px;
-            font-size: 14px;
-            color: #888;
-            opacity: 0.7;
+        .status-badge {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 50px;
+            font-size: 13px;
+            font-weight: bold;
+            margin-top: 20px;
         }
+        .badge-red { border: 1px solid var(--primary-red); color: var(--primary-red); background: rgba(212, 58, 47, 0.1); }
+        .badge-blue { border: 1px solid var(--ghost-blue); color: var(--ghost-blue); background: rgba(77, 166, 201, 0.1); }
+
+        footer { margin-top: 60px; padding-bottom: 40px; font-size: 13px; color: #555; }
 
         @media (max-width: 600px) {
-            .btn { width: 85%; font-size: 18px; }
+            .btn { width: 100%; justify-content: center; }
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <img src="logo.png" alt="Nootjes SMP Hardcore" class="logo">
+    <div class="wrapper">
+        <header>
+            <img src="logo.png" alt="Nootjes SMP" class="logo">
+            <div class="subtitle">✨ Hardcore Seizoen 1 ✨</div>
+        </header>
 
-        <div class="subtitle">
-            Hardcore Survival
-        </div>
-
-        <div class="buttons">
-            <a href="eilanden.html" class="btn">🗺️ Eilandverdeling</a>
+        <nav class="nav-container">
+            <a href="eilanden.html" class="btn">🗺️ Eilanden</a>
             <a href="regels.html" class="btn">📜 Regels</a>
-            <a href="deaths.html" class="btn">💀 Deaths</a>
-        </div>
-    </header>
+            <a href="deaths.html" class="btn">💀 Deathmatch</a>
+            <a href="lost-shores.html" class="btn">🌊 Lost Shores</a>
+        </nav>
 
-    <main>
-        <section class="info">
-            <div class="info-box">
-                <h3>Algemene informatie</h3>
+        <main>
+            <div class="content-card">
+                <h2 class="red-title">🛡️ De Hardcore Wereld</h2>
                 <p>
-                    Nootjes SMP Hardcore is een gesloten Minecraft Hardcore SMP
-                    waar elke death definitief is. Eén leven. Geen resets.
-                    Alles draait om strategie, samenwerking en overleven.
+                    In <strong>Nootjes SMP Hardcore</strong> is elke actie definitief. Bouw je basis, vorm bondgenootschappen en overleef de gevaren van de wereld. Maar onthoud: één fout kan het einde betekenen van jouw reis in de bovenwereld.
                 </p>
-                <p>
-                    Spelers worden verdeeld over eilanden, bouwen hun eigen
-                    economie en bepalen samen het verloop van het seizoen.
-                    Wie sterft, ligt eruit — voorgoed.
-                </p>
-                <p>
-                    <strong>⚠️ Hardcore modus actief — dood = permanent.</strong>
-                </p>
+                <div class="status-badge badge-red">🔴 STATUS: LIVE</div>
             </div>
-        </section>
-    </main>
 
-    <footer>
-        © Nootjes SMP Hardcore — Powered by Nootjescraft.
-    </footer>
+            <div class="content-card lost-shores-card">
+                <h2 class="blue-title">🌊 De Lost Shores</h2>
+                <p>
+                    Dood is niet het absolute einde... maar het begin van een nieuwe strijd. Spelers die sterven op de SMP verbannen we naar de <strong>Lost Shores</strong>. Dit is een mysterieuze plek waar de 'gevallen' spelers verder leven.
+                </p>
+                <p>
+                    Tijdens de grote <strong>Finale</strong> krijgen de overlevers van de Lost Shores één kans om hun eer te herstellen. Win de beproevingen en keer terug naar de levenden om je wraak te nemen of de SMP alsnog te domineren.
+                </p>
+                <div class="status-badge badge-blue">👻 TWEEDE KANS MOGELIJK</div>
+            </div>
+        </main>
+
+        <footer>
+            © 2026 Nootjes SMP Hardcore • De strijd stopt nooit ⛏️
+        </footer>
+    </div>
 
 </body>
 </html>
