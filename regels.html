@@ -25,59 +25,33 @@
             overflow-x: hidden;
         }
 
-        /* ===== TOP BALK MET COPY IP ===== */
         .top-bar {
-            width: 100%;
-            background: #000;
-            border-bottom: 4px solid var(--neon-lava);
-            padding: 15px 0;
-            text-align: center;
-            position: fixed;
-            top: 0; left: 0;
-            z-index: 1000;
-            text-transform: uppercase;
-            font-weight: 900;
-            letter-spacing: 2px;
+            width: 100%; background: #000; border-bottom: 4px solid var(--neon-lava);
+            padding: 15px 0; text-align: center; position: fixed; top: 0; left: 0;
+            z-index: 1000; text-transform: uppercase; font-weight: 900; letter-spacing: 2px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.8);
         }
 
-        #serverIP {
-            color: var(--neon-lava);
-            cursor: pointer;
-            transition: 0.2s;
-            padding: 5px 10px;
-            border: 1px solid transparent;
-        }
+        #serverIP { color: var(--neon-lava); cursor: pointer; transition: 0.2s; padding: 5px 10px; }
         #serverIP:hover { border: 1px solid var(--neon-lava); border-radius: 5px; }
 
         .wrapper { max-width: 950px; margin: 140px auto 50px; padding: 0 20px; }
 
         h1 { 
-            font-size: 60px; font-weight: 900; text-align: center; 
-            text-shadow: 5px 5px 0px var(--neon-lava); 
-            margin-bottom: 20px; text-transform: uppercase;
+            font-size: clamp(40px, 8vw, 60px); font-weight: 900; text-align: center; 
+            text-shadow: 5px 5px 0px var(--neon-lava); margin-bottom: 20px; text-transform: uppercase;
         }
 
-        /* ===== ZOEKBALK ===== */
         .search-container { margin-bottom: 40px; }
         .search-input {
-            width: 100%; padding: 18px 25px;
-            background: var(--dark-panel);
-            border: 2px solid var(--border-glow);
-            border-radius: 15px; color: white;
-            font-size: 18px; outline: none; transition: 0.3s;
-            box-sizing: border-box;
+            width: 100%; padding: 18px 25px; background: var(--dark-panel);
+            border: 2px solid var(--border-glow); border-radius: 15px; color: white;
+            font-size: 18px; outline: none; transition: 0.3s; box-sizing: border-box;
         }
         .search-input:focus { border-color: var(--neon-lava); box-shadow: 0 0 20px rgba(255, 69, 0, 0.4); }
 
-        /* ===== REGELS ===== */
         .rules-container { display: flex; flex-direction: column; gap: 15px; }
-        .rule-item {
-            background: var(--dark-panel);
-            border: 2px solid var(--border-glow);
-            border-radius: 15px; overflow: hidden;
-            transition: 0.3s;
-        }
+        .rule-item { background: var(--dark-panel); border: 2px solid var(--border-glow); border-radius: 15px; overflow: hidden; transition: 0.3s; }
         .rule-item.hidden { display: none; }
         .rule-header {
             width: 100%; padding: 22px; background: none; border: none;
@@ -85,47 +59,25 @@
             text-align: left; cursor: pointer; display: flex;
             justify-content: space-between; align-items: center;
         }
-        .rule-content {
-            max-height: 0; overflow: hidden;
-            transition: max-height 0.5s ease;
-            background: var(--content-bg);
-        }
+        .rule-content { max-height: 0; overflow: hidden; transition: max-height 0.5s ease; background: var(--content-bg); }
         .content-inner { padding: 25px; border-top: 2px solid var(--neon-lava); }
         .rule-point { margin-bottom: 20px; }
         .rule-point strong { color: var(--neon-lava); display: block; font-size: 18px; text-transform: uppercase; }
         .rule-point p { margin: 5px 0 0; color: #ccc; line-height: 1.6; }
 
-        /* ===== SANCTIE SECTIE ===== */
-        .sanctie-wrapper {
-            margin-top: 100px; padding: 40px;
-            background: rgba(0,0,0,0.8);
-            border-radius: 20px; border: 2px solid var(--neon-lava);
-        }
-        .sanctie-titel { font-size: 45px; text-align: center; margin-bottom: 10px; text-transform: uppercase; }
-        .stack-alert {
-            text-align: center; color: #ffcc00; font-weight: bold;
-            margin-bottom: 40px; background: rgba(255, 204, 0, 0.1);
-            padding: 15px; border-radius: 10px; border: 1px dashed #ffcc00;
-        }
+        .sanctie-wrapper { margin-top: 80px; padding: 40px; background: rgba(0,0,0,0.85); border-radius: 20px; border: 2px solid var(--neon-lava); }
+        .sanctie-titel { font-size: 40px; text-align: center; margin-bottom: 10px; text-transform: uppercase; }
+        .stack-alert { text-align: center; color: #ffcc00; font-weight: bold; margin-bottom: 40px; background: rgba(255, 204, 0, 0.1); padding: 15px; border-radius: 10px; border: 1px dashed #ffcc00; }
         .sanctie-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
-        .sanctie-card {
-            background: #0a0a0c; border-radius: 15px; padding: 25px;
-            border-top: 6px solid white; transition: 0.3s;
-        }
-        .cat-1 { border-color: var(--cat-1); }
-        .cat-2 { border-color: var(--cat-2); }
-        .cat-3 { border-color: var(--cat-3); }
-        .cat-header { font-size: 30px; font-weight: 900; margin-bottom: 5px; }
-        .cat-straf {
-            font-size: 13px; font-weight: bold; background: rgba(255,255,255,0.1);
-            padding: 6px 12px; display: inline-block; border-radius: 5px; margin-bottom: 20px;
-        }
+        .sanctie-card { background: #0a0a0c; border-radius: 15px; padding: 25px; border-top: 6px solid white; }
+        .cat-1 { border-color: var(--cat-1); } .cat-2 { border-color: var(--cat-2); } .cat-3 { border-color: var(--cat-3); }
+        .cat-header { font-size: 28px; font-weight: 900; margin-bottom: 5px; }
+        .cat-straf { font-size: 13px; font-weight: bold; background: rgba(255,255,255,0.1); padding: 6px 12px; display: inline-block; border-radius: 5px; margin-bottom: 15px; }
         .sanctie-card ul { list-style: none; padding: 0; }
-        .sanctie-card li { padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.05); color: #bbb; }
+        .sanctie-card li { padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.05); color: #bbb; font-size: 14px; }
         .sanctie-card li::before { content: "» "; color: var(--neon-lava); }
 
-        footer { text-align: center; padding: 80px; opacity: 0.3; letter-spacing: 2px; }
-
+        footer { text-align: center; padding: 60px; opacity: 0.3; }
         .icon { width: 30px; height: 30px; background: var(--neon-lava); border-radius: 5px; display: flex; align-items: center; justify-content: center; transition: 0.3s; }
         .rule-item.active .icon { transform: rotate(45deg); background: white; color: black; }
     </style>
@@ -137,10 +89,14 @@
     </div>
 
     <div class="wrapper">
+        <div style="text-align: center; margin-bottom: 20px;">
+            <a href="index.html" style="color: white; text-decoration: none; font-weight: bold; border: 2px solid white; padding: 10px 20px; border-radius: 10px;">⬅ TERUG</a>
+        </div>
+        
         <h1>Reglement</h1>
 
         <div class="search-container">
-            <input type="text" id="ruleSearch" class="search-input" placeholder="Zoek een regel of sanctie...">
+            <input type="text" id="ruleSearch" class="search-input" placeholder="Zoek een regel (bijv. 'Vulkaan', 'Mace', 'Ban')...">
         </div>
 
         <div class="rules-container" id="rulesList"></div>
@@ -148,39 +104,21 @@
         <div class="sanctie-wrapper">
             <h2 class="sanctie-titel">Sanctie Systeem</h2>
             <p class="stack-alert">⚠ REPETITIE REGEL: 2x Categorie I = Categorie II straf. Wees gewaarschuwd!</p>
-            
             <div class="sanctie-grid">
                 <div class="sanctie-card cat-1">
                     <div class="cat-header" style="color: var(--cat-1)">CAT I</div>
                     <div class="cat-straf">Warn / Mute / Kick</div>
-                    <ul>
-                        <li>Spammen / Caps in chat</li>
-                        <li>Lichte beledigingen</li>
-                        <li>Niet luisteren naar staff</li>
-                        <li>Kleine farm overtredingen</li>
-                    </ul>
+                    <ul><li>Spammen / Caps</li><li>Lichte beledigingen</li><li>Niet luisteren naar staff</li><li>Kleine farm overtreding</li></ul>
                 </div>
-
                 <div class="sanctie-card cat-2">
                     <div class="cat-header" style="color: var(--cat-2)">CAT II</div>
-                    <div class="cat-straf">24u-7d Ban / Inventory Wipe</div>
-                    <ul>
-                        <li>Metagaming / Streamsnipen</li>
-                        <li>Combat Logging</li>
-                        <li>Griefen van bases</li>
-                        <li>RDM (Random Killing)</li>
-                    </ul>
+                    <div class="cat-straf">3u - 24u Ban / Inv Wipe</div>
+                    <ul><li>Metagaming / Streamsnipen</li><li>Combat Logging</li><li>Griefen van bases</li><li>RDM (Random Killing)</li></ul>
                 </div>
-
                 <div class="sanctie-card cat-3">
                     <div class="cat-header" style="color: var(--cat-3)">CAT III</div>
                     <div class="cat-straf">Permanente Ban / Blacklist</div>
-                    <ul>
-                        <li>Hacken of Cheaten</li>
-                        <li>Doxxing (Privacy schenden)</li>
-                        <li>Items dupliceren (Duping)</li>
-                        <li>Ernstige toxiciteit / Haat</li>
-                    </ul>
+                    <ul><li>Hacken of Cheaten</li><li>Doxxing (Privacy)</li><li>Items dupliceren (Duping)</li><li>Ernstige toxiciteit</li></ul>
                 </div>
             </div>
         </div>
@@ -190,27 +128,35 @@
 
     <script>
         const rulesData = [
-            ["📌 1. Algemene Regels", [["Respect", "Behandel iedereen met respect."], ["Geen Spam", "Geen chatvervuiling of earrape."], ["Staff", "Aanwijzingen van staff zijn bindend."]]],
-            ["📌 2. Gameplay & Fair Play", [["Cheats", "Hacks en externe voordelen zijn verboden."], ["Bugs", "Misbruik van glitches wordt gestraft."], ["Piechart", "F3-Piechart gebruik is verboden."]]],
-            ["📌 3. Metagaming", [["Meta", "In-game handelen op info van buitenaf mag niet."], ["Streamsniping", "Livestreams gebruiken voor locaties is verboden."]]],
-            ["📌 4. PvP & Combat", [["Combat Log", "Uitloggen in gevecht = dood + wipe."], ["Maces", "Er zijn slechts 4 Maces in de hele wereld."], ["Safezones", "Vluchten naar safezones in combat mag niet."]]],
-            ["📌 5. Bases & Claims", [["Bescherming", "Zet een bordje 'Base - [Naam]' voor claim."], ["Griefen", "Verboden bij geclaimde bases."]]],
-            ["📌 6. Farms & Lag", [["Raid Farms", "Streng verboden."], ["Lagmachines", "Alles wat de server vertraagt wordt gesloopt."]]]
+            ["📌 1. Algemene Regels", [["Respectvol Gedrag", "Behandel alle spelers en staff met respect. Beledigingen, toxiciteit, racisme of discriminatie leiden tot directe sancties."], ["Geen Spam", "Houd de chat en voice clean. Earrape, soundboards, herhaald pingen of commando-misbruik wordt niet getolereerd."], ["Gezond Verstand", "Gedraag je volwassen en sportief. Twijfel je over een actie? Vraag het eerst aan de staff."], ["Staff Aanwijzingen", "Beslissingen van staff zijn bindend."], ["Geen Impersonatie", "Doe je niet voor als staff of andere spelers."], ["Privacy & Doxxing", "Het delen van persoonlijke info resulteert in een permanente verbanning."]]],
+            ["📌 2. Gameplay Regels", [["Eerlijk Spel", "Hacks, cheats of scripts zijn strikt verboden."], ["Bug Misbruik", "Meld glitches direct. Bewust misbruik wordt zwaar bestraft."], ["Piechart Verbod", "Het gebruik van de Piechart (F3 tools) om bases op te sporen is verboden."], ["AFK-Beperking", "Passief voordeel via AFK-pools is niet toegestaan."], ["Economie & Alts", "Duplicatie of alt-accounts voor eigen gewin is verboden."], ["Trolling & Griefing", "Het doelbewust verpesten van de gameplay van anderen is niet toegestaan."]]],
+            ["📌 3. Modpack & Fair Play", [["Toegestane Mods", "Gebruik uitsluitend de officiële modpack."], ["Minimap", "Cave-mode en Entity-radar moeten UIT."], ["Visueel", "Texturepacks die blocks doorzichtig maken zijn verboden."], ["Bewijslast", "Je bent verplicht mee te werken aan schermdeling controles."], ["Automatisering", "Auto-clickers en macro's zijn verboden."]]],
+            ["📌 4. Metagaming", [["Info-Scheiding", "Informatie van streams of Discord mag je personage in-game niet weten."], ["Streamsnipen", "Verboden livestreams te gebruiken voor locaties."], ["OOC Info", "Out-of-Character info mag geen invloed hebben op in-game keuzes."]]],
+            ["📌 5. Bouw Regels", [["Geen Litematica", "Automatisch bouwen of blauwdrukken zijn verboden."], ["Online Trappen", "Base trappen mag alleen als de eigenaar online is."], ["TNT Limiet", "Traps mogen maximaal 3 TNT minecarts bevatten."], ["Insta-kills", "Traps moeten een ontsnappingsmogelijkheid bieden."]]],
+            ["📌 6. Vulkaan", [["PvP Zone", "De Vulkaan is een actieve PvP-zone. PvP staat hier ALTIJD aan."], ["Gevarenzone", "Betreden is op eigen risico; staff vergoedt geen items."], ["Geen Safe-logging", "Uitloggen om aan PvP in de Vulkaan te ontsnappen is verboden."]]],
+            ["📌 7. The Lost Shores", [["Laatste Kans", "Na dood in de Hardcore wereld word je verbannen naar de Shores."], ["Overleving", "In dit gebied zijn grondstoffen schaarser."], ["Terugkeer", "Alleen mogelijk via Lore-events."]]],
+            ["📌 8. Item Caps & Verboden Items", [["Verboden", "End Crystals, Elytra, Respawn Anchors en Tridents zijn verboden."], ["Totem Cap", "Maximaal 1 Totem in je inventory."], ["Gapple Limiet", "Max 32 Golden Apples en 4 Enchanted Golden Apples."], ["Ender Pearls", "Maximaal 3 stacks per persoon."]]],
+            ["📌 9. PvP-Gameplay", [["PvP-Stijl", "Diamond SMP gericht met kleine aanpassingen."], ["Speciale Items", "Slechts 4 Maces in totaal, verdeeld over Noord, Oost, Zuid en West."]]],
+            ["📌 10. Bases & Griefing", [["Claim", "Base is beschermd met bordje 'Base - [Naam]'."], ["Grief Verbod", "Bij beschermde bases is slopen of stelen verboden."], ["Vrij Spel", "Geen bordje = mag gegriefd worden."]]],
+            ["📌 11. Combat Logging", [["PvP Disconnect", "Uitloggen in gevecht = inventory-wipe en dood."], ["Crash", "Meld technische crashes direct via Discord."], ["Combat Timer", "Wacht tot de timer voorbij is voor je uitlogt."]]],
+            ["📌 12. Lore & Roleplay", [["Geen RDM", "Elk gevecht moet een roleplay-reden hebben."], ["In-Character", "Blijf zoveel mogelijk in je rol."], ["Kwaliteit", "Goede RP wordt beloond door de staff."]]],
+            ["📌 13. Farms & Redstone", [["Raid Farms", "Streng verboden."], ["Lagmachines", "Verboden; staff mag deze zonder pardon slopen."], ["AFK Farms", "Niet toegestaan."], ["Duping", "Permanente ban bij elke vorm van duplicatie."]]],
+            ["📌 Slotregel", [["Laatste Woord", "De staff heeft altijd het laatste woord."], ["Mazen", "Zoeken naar mazen in de wet wordt bestraft."]]]
         ];
 
-        function renderRules() {
-            const list = document.getElementById('rulesList');
+        const list = document.getElementById('rulesList');
+        function render() {
+            list.innerHTML = '';
             rulesData.forEach((rule, i) => {
                 const div = document.createElement('div');
                 div.className = 'rule-item';
-                let points = rule[1].map(p => `<div class="rule-point"><strong>${p[0]}</strong><p>${p[1]}</p></div>`).join('');
-                div.innerHTML = `<button class="rule-header">${rule[0]} <span class="icon">+</span></button><div class="rule-content"><div class="content-inner">${points}</div></div>`;
+                let pts = rule[1].map(p => `<div class="rule-point"><strong>${p[0]}</strong><p>${p[1]}</p></div>`).join('');
+                div.innerHTML = `<button class="rule-header">${rule[0]} <span class="icon">+</span></button><div class="rule-content"><div class="content-inner">${pts}</div></div>`;
                 list.appendChild(div);
             });
         }
-        renderRules();
+        render();
 
-        // Zoekfunctie
         document.getElementById('ruleSearch').addEventListener('input', (e) => {
             const term = e.target.value.toLowerCase();
             document.querySelectorAll('.rule-item').forEach((item, i) => {
@@ -219,32 +165,27 @@
             });
         });
 
-        // Click Accordion
         document.addEventListener('click', (e) => {
-            const header = e.target.closest('.rule-header');
-            if (!header) return;
-            const item = header.parentElement;
+            const h = e.target.closest('.rule-header');
+            if(!h) return;
+            const item = h.parentElement;
             const content = item.querySelector('.rule-content');
             const active = item.classList.contains('active');
-            
             document.querySelectorAll('.rule-item').forEach(el => {
                 el.classList.remove('active');
                 el.querySelector('.rule-content').style.maxHeight = null;
             });
-
-            if (!active) {
+            if(!active) {
                 item.classList.add('active');
                 content.style.maxHeight = content.scrollHeight + "px";
             }
         });
 
-        // Copy IP Functie
         function copyIP() {
-            const ip = "play.ncsmp.nl";
-            navigator.clipboard.writeText(ip);
-            const span = document.getElementById('serverIP');
-            span.innerText = "IP GEKOPIEERD!";
-            setTimeout(() => { span.innerText = "PLAY.NCSMP.NL"; }, 2000);
+            navigator.clipboard.writeText("play.ncsmp.nl");
+            const s = document.getElementById('serverIP');
+            s.innerText = "IP GEKOPIEERD!";
+            setTimeout(() => { s.innerText = "PLAY.NCSMP.NL"; }, 2000);
         }
     </script>
 </body>
