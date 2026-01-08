@@ -7,10 +7,11 @@
     <style>
         :root {
             --neon-lava: #ff4500;
-            --dark-panel: rgba(15, 15, 20, 0.95);
-            --content-bg: rgba(0, 0, 0, 0.4);
+            --dark-panel: rgba(10, 10, 12, 0.9);
+            --content-bg: rgba(0, 0, 0, 0.5);
             --text-main: #ffffff;
-            --text-dim: #b0b0b0;
+            --text-dim: #cfcfcf;
+            --transition-speed: 0.4s;
         }
 
         body {
@@ -20,54 +21,56 @@
             background-size: cover;
             color: var(--text-main);
             overflow-x: hidden;
+            backdrop-filter: brightness(0.8);
         }
 
-        .wrapper { max-width: 900px; margin: 0 auto; padding: 40px 20px; }
+        .wrapper { max-width: 850px; margin: 0 auto; padding: 60px 20px; }
 
-        /* ===== INLAAAD ANIMATIE ===== */
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        /* ===== ANIMATIES ===== */
+        @keyframes slideIn {
+            0% { opacity: 0; transform: translateX(-30px); filter: blur(10px); }
+            100% { opacity: 1; transform: translateX(0); filter: blur(0); }
         }
 
-        header, .back-container, h1 {
-            animation: fadeInUp 0.8s ease forwards;
-        }
+        header, .back-container, h1 { animation: slideIn 0.8s ease-out forwards; }
 
-        /* ===== TERUG KNOP ===== */
+        /* ===== NAVIGATIE ===== */
+        .back-container { margin-bottom: 40px; }
         .btn-3d {
-            background: #ffffff; border: 3px solid #000000; padding: 10px 22px;
+            background: #ffffff; border: 3px solid #000000; padding: 12px 25px;
             text-decoration: none; color: #000000; font-weight: 900;
             border-radius: 14px; box-shadow: 0 6px 0 #000000;
-            transition: 0.2s; text-transform: uppercase; display: inline-flex;
-            align-items: center; gap: 8px; cursor: pointer;
+            transition: 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+            text-transform: uppercase; display: inline-flex;
+            align-items: center; gap: 10px; cursor: pointer;
         }
-        .btn-3d:hover { transform: translateY(2px); box-shadow: 0 4px 0 #000000; }
+        .btn-3d:hover { transform: translateY(-2px); box-shadow: 0 8px 0 #000000; }
+        .btn-3d:active { transform: translateY(4px); box-shadow: 0 2px 0 #000000; }
 
-        /* ===== ACCORDION LOOK (Screenshot Style) ===== */
-        .rules-container { margin-top: 30px; }
+        /* ===== REGEL ITEMS ===== */
+        .rules-container { display: flex; flex-direction: column; gap: 15px; }
 
         .rule-item {
-            margin-bottom: 12px;
-            border-radius: 15px;
+            border-radius: 12px;
             overflow: hidden;
-            border: 1px solid var(--neon-lava); /* Oranje border zoals screenshot */
+            border: 1px solid rgba(255, 69, 0, 0.4);
             background: var(--dark-panel);
-            opacity: 0; /* Voor de inlaad animatie */
-            animation: fadeInUp 0.5s ease forwards;
-            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(10px);
+            opacity: 0;
+            animation: slideIn 0.6s ease-out forwards;
+            transition: all 0.3s ease;
         }
 
-        /* Staggered inladen: elke regel komt iets later */
-        .rule-item:nth-child(1) { animation-delay: 0.1s; }
-        .rule-item:nth-child(2) { animation-delay: 0.15s; }
-        .rule-item:nth-child(3) { animation-delay: 0.2s; }
-        /* ... dit loopt door voor alle items via JS ... */
+        .rule-item:hover {
+            border-color: var(--neon-lava);
+            box-shadow: 0 0 20px rgba(255, 69, 0, 0.15);
+            transform: scale(1.005);
+        }
 
         .rule-header {
-            width: 100%; padding: 18px 25px; background: none;
+            width: 100%; padding: 22px 28px; background: none;
             color: white; text-align: left; border: none; outline: none;
-            cursor: pointer; font-size: 19px; font-weight: 800;
+            cursor: pointer; font-size: 20px; font-weight: 800;
             display: flex; justify-content: space-between; align-items: center;
         }
 
@@ -75,99 +78,110 @@
             max-height: 0;
             overflow: hidden;
             background: var(--content-bg);
-            transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: max-height 0.6s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .content-inner {
-            padding: 20px 25px;
+            padding: 25px 30px;
             color: var(--text-dim);
-            font-size: 16px;
-            border-top: 1px solid rgba(255, 69, 0, 0.2);
+            font-size: 17px;
+            line-height: 1.8;
+            border-top: 1px solid rgba(255, 69, 0, 0.15);
         }
 
-        /* OPEN STATE */
+        /* ===== ACTIVE STATE ===== */
         .rule-item.active {
-            transform: scale(1.02); /* Subtiele pop-out */
-            z-index: 10;
+            border-color: var(--neon-lava);
+            background: rgba(20, 20, 25, 0.98);
+            transform: scale(1.01);
         }
+
+        .rule-item.active .rule-content { max-height: 600px; }
 
         .icon { 
-            transition: 0.4s; color: var(--neon-lava); font-size: 18px; 
+            width: 24px; height: 24px; display: flex; align-items: center; justify-content: center;
+            transition: transform 0.4s ease;
         }
 
         /* De X uit je screenshot */
-        .rule-item.active .icon::after { content: '✖'; }
-        .rule-item:not(.active) .icon::after { content: ' '; } /* Optioneel: pijltje of leeg */
+        .rule-item.active .icon::after { 
+            content: '✖'; color: var(--neon-lava); font-size: 18px; font-weight: bold; 
+        }
 
-        h1 { font-size: 50px; font-weight: 900; text-shadow: 4px 4px 0px var(--neon-lava); text-align: center; margin: 20px 0; }
+        h1 { font-size: 55px; font-weight: 900; text-shadow: 4px 4px 0px var(--neon-lava); text-align: center; margin-bottom: 40px; }
+
+        /* Custom Scrollbar voor de content */
+        .content-inner strong { color: var(--neon-lava); }
     </style>
 </head>
 <body>
 
     <div class="wrapper">
         <header style="text-align:center;">
-            <img src="logo.png" alt="Logo" style="max-width:300px; width:80%;">
+            <img src="logo.png" alt="Logo" style="max-width:350px; width:80%; filter: drop-shadow(0 0 20px rgba(0,0,0,0.5));">
         </header>
 
         <div class="back-container">
-            <a href="index.html" class="btn-3d">⬅ Menu</a>
+            <a href="index.html" class="btn-3d"><span>⬅</span> Terug naar Menu</a>
         </div>
 
         <h1>REGELS</h1>
 
         <div class="rules-container" id="rulesList">
-            <div class="rule-item">
-                <button class="rule-header">📌 Slotregel – Interpretatie <span class="icon"></span></button>
-                <div class="rule-content">
-                    <div class="content-inner">De staff heeft altijd het laatste woord. Bij twijfel: vraag het aan een admin voordat je iets doet.</div>
-                </div>
             </div>
 
-            </div>
+        <footer style="text-align: center; padding: 60px; color: rgba(255,255,255,0.3); font-weight: bold;">
+            NOOTJES SMP &copy; 2026 • HARDCORE SEIZOEN 2
+        </footer>
     </div>
 
     <script>
-        // Voeg de rest van de regels dynamisch toe of plak ze handmatig in de HTML
-        const rulesData = [
-            ["📌 1. Algemene Regels", "Wees respectvol..."],
-            ["📌 2. Gameplay Regels", "Geen cheats..."],
-            ["📌 3. Modpack & Fair Play", "Gebruik de officiële pack..."],
-            ["📌 4. Metagaming", "Geen stream sniping..."],
-            ["📌 5. Bouw Regels", "Geen griefing..."],
-            ["📌 6. Vulkaan", "Betreden op eigen risico..."],
-            ["📌 7. The Lost Shores", "Respecteer de doden..."],
-            ["📌 8. Item Caps", "Bepaalde items zijn gelimiteerd..."],
-            ["📌 9. Bases & Griefing", "Laat bordjes achter..."],
-            ["📌 10. Combat Logging", "Niet uitloggen in gevecht..."],
-            ["📌 11. Lore & RP", "RDM is verboden..."],
-            ["📌 12. Farms & Redstone", "Geen lag machines..."]
+        const rules = [
+            ["📌 1. Algemene Regels", "Wees respectvol naar alle spelers. Geen haatzaaien, racisme, of pestgedrag. Gezelligheid staat voorop in onze community."],
+            ["📌 2. Gameplay Regels", "Hacks, cheats, X-ray en duping zijn ten strengste verboden. We houden de game eerlijk voor iedereen."],
+            ["📌 3. Modpack & Fair Play", "Gebruik alleen de goedgekeurde mods. Client-side mods die een oneerlijk voordeel geven zijn niet toegestaan."],
+            ["📌 4. Metagaming", "Gebruik geen informatie van streams of Discord om in-game keuzes te maken. Houd RP en real-life gescheiden."],
+            ["📌 5. Bouw Regels", "Bouw met zorg. Geen ongepaste bouwwerken of 1x1 torens. Houd de wereld mooi."],
+            ["📌 6. Vulkaan", "De Vulkaan is een <strong>gevarenzone</strong>. Hier gelden speciale regels en PvP kan elk moment uitbreken."],
+            ["📌 7. The Lost Shores", "Zodra je sterft, word je verbannen naar de Shores. Dit is een unieke plek voor je laatste kans."],
+            ["📌 8. Item Caps & Verboden Items", "Sommige items (zoals bepaalde totems of potions) kunnen gelimiteerd zijn per speler of base."],
+            ["📌 9. Bases, Bordjes & Griefing", "Griefen is verboden. Bij een overval laat je altijd een bordje achter met een duidelijke reden."],
+            ["📌 10. Combat Logging", "Niet uitloggen tijdens een gevecht. Dit wordt gezien als valsspelen en kan resulteren in een ban."],
+            ["📌 11. Lore, Roleplay & Random Kills", "Zorg altijd voor een goede reden voordat je iemand aanvalt. Random Deathmatch (RDM) wordt niet getolereerd."],
+            ["📌 12. Farms & Redstone", "Houd je farms efficiënt. Lag-machines zijn verboden en worden zonder waarschuwing verwijderd."],
+            ["📌 Slotregel – Interpretatie", "De staff heeft altijd het laatste woord. Bij twijfel over een regel: vraag het eerst aan een admin!"]
         ];
 
-        const container = document.getElementById('rulesList');
-        
-        // Genereer items met vertraging voor inlaad-effect
-        rulesData.forEach((rule, index) => {
-            const item = document.createElement('div');
-            item.className = 'rule-item';
-            item.style.animationDelay = `${(index + 1) * 0.1}s`;
-            item.innerHTML = `
+        const list = document.getElementById('rulesList');
+
+        rules.forEach((rule, i) => {
+            const div = document.createElement('div');
+            div.className = 'rule-item';
+            div.style.animationDelay = `${i * 0.08}s`;
+            div.innerHTML = `
                 <button class="rule-header">${rule[0]} <span class="icon"></span></button>
                 <div class="rule-content"><div class="content-inner">${rule[1]}</div></div>
             `;
-            container.prepend(item); // Voeg toe boven de slotregel
+            list.appendChild(div);
         });
 
-        // Click logic
         document.addEventListener('click', (e) => {
-            if (e.target.classList.contains('rule-header')) {
-                const item = e.target.parentElement;
-                const wasActive = item.classList.contains('active');
-                
-                // Sluit alle anderen
-                document.querySelectorAll('.rule-item').forEach(el => el.classList.remove('active'));
-                
-                // Toggle huidige
-                if (!wasActive) item.classList.add('active');
+            const header = e.target.closest('.rule-header');
+            if (!header) return;
+
+            const item = header.parentElement;
+            const isActive = item.classList.contains('active');
+
+            // Sluit alle openstaande items
+            document.querySelectorAll('.rule-item').forEach(el => el.classList.remove('active'));
+
+            // Open het geklikte item als het nog niet open was
+            if (!isActive) {
+                item.classList.add('active');
+                // Scroll zachtjes naar het geopende item
+                setTimeout(() => {
+                    item.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }, 300);
             }
         });
     </script>
