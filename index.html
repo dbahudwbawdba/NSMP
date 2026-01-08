@@ -7,42 +7,28 @@
 
     <style>
         :root {
-            --cherry-pink: #f4b2ba;
-            --cherry-dark: #d46a76;
-            --oak-brown: #7a5a3a;
-            --terracotta: #e2725b;
-            --cream-bg: #fdf5e6;
-            --text-color: #4a332d;
+            --oak-brown: #5d4037;
+            --terracotta: #d84315;
+            --overlay: rgba(255, 255, 255, 0.85); /* Maakt de tekst leesbaar over de foto */
         }
 
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-            100% { transform: translateY(0px); }
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
+        /* ===== ACHTERGROND INSTELLINGEN ===== */
         body {
             margin: 0;
             padding: 0;
             font-family: 'Trebuchet MS', sans-serif;
-            background-color: var(--cream-bg);
-            /* Subtiel patroon op de achtergrond */
-            background-image: radial-gradient(var(--cherry-pink) 0.5px, transparent 0.5px);
-            background-size: 30px 30px;
-            color: var(--text-color);
-            overflow-x: hidden;
+            /* VERVANG HIERONDER 'background.jpg' DOOR JOUW BESTANDSNAAM */
+            background-image: url('achtergrond.png'); 
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed; /* Zorgt dat de foto blijft staan tijdens scrollen */
+            color: #2e1a12;
         }
 
         .wrapper {
             max-width: 900px;
             margin: 0 auto;
             padding: 40px 20px;
-            animation: fadeIn 0.8s ease-out;
         }
 
         /* ===== SIDEBARS (IP & DISCORD) ===== */
@@ -50,48 +36,38 @@
             position: fixed;
             top: 50%;
             transform: translateY(-50%);
-            background: white;
+            background: var(--overlay);
             padding: 15px;
             border-radius: 12px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
             border: 3px solid var(--oak-brown);
             z-index: 100;
-            display: none; /* Verbergen op kleine schermen */
-        }
-
-        @media (min-width: 1200px) {
-            .sidebar { display: block; }
         }
 
         .sidebar-left { left: 20px; }
         .sidebar-right { right: 20px; }
-
-        .sidebar h4 { margin: 0 0 5px 0; font-size: 12px; color: var(--oak-brown); text-transform: uppercase; }
+        .sidebar h4 { margin: 0 0 5px 0; font-size: 12px; color: var(--terracotta); text-transform: uppercase; }
         .sidebar p { margin: 0; font-weight: bold; font-size: 14px; }
 
-        /* ===== HEADER ===== */
-        header { padding: 20px 0; }
+        @media (max-width: 1200px) { .sidebar { display: none; } }
+
+        /* ===== LOGO ANIMATIE ===== */
+        header { text-align: center; padding: 20px 0; }
         .logo {
             max-width: 400px;
             width: 80%;
+            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.3));
             animation: float 4s ease-in-out infinite;
-            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.1));
         }
 
-        .season-badge {
-            background: var(--cherry-dark);
-            color: white;
-            display: inline-block;
-            padding: 5px 20px;
-            border-radius: 50px;
-            font-weight: bold;
-            margin-top: 15px;
-            box-shadow: 0 4px 0 #a04e57;
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
         }
 
-        /* ===== NAVIGATIE ===== */
+        /* ===== NAVIGATION ===== */
         .nav-container {
-            margin: 40px 0;
+            margin: 30px 0;
             display: flex;
             justify-content: center;
             gap: 15px;
@@ -99,72 +75,38 @@
         }
 
         .btn {
-            background: white;
+            background: #fff;
             border: 3px solid var(--oak-brown);
             color: var(--oak-brown);
             padding: 12px 25px;
             text-decoration: none;
             border-radius: 8px;
             font-weight: bold;
-            transition: all 0.2s;
             box-shadow: 0 5px 0 var(--oak-brown);
+            transition: all 0.2s;
         }
 
         .btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 7px 0 var(--oak-brown);
-            background: var(--cherry-pink);
-            color: white;
-            border-color: var(--cherry-dark);
+            background: #fdf5e6;
         }
 
-        .btn:active {
-            transform: translateY(3px);
-            box-shadow: 0 2px 0 var(--oak-brown);
-        }
-
-        /* ===== CARDS ===== */
+        /* ===== CONTENT CARDS ===== */
         .card {
-            background: white;
-            border-radius: 20px;
-            padding: 35px;
+            background: var(--overlay);
+            backdrop-filter: blur(5px); /* Maakt de achtergrond achter het kaartje wazig */
+            border-radius: 15px;
+            padding: 30px;
             margin-bottom: 30px;
-            border: 4px solid #f0e0d0;
-            text-align: left;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.05);
-            transition: transform 0.3s;
+            border: 2px solid var(--oak-brown);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
         }
 
-        .card:hover { transform: scale(1.01); }
+        .card h2 { color: var(--terracotta); margin-top: 0; }
+        .card p { line-height: 1.6; font-size: 17px; }
 
-        .card h2 {
-            margin-top: 0;
-            color: var(--terracotta);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .card p { line-height: 1.7; font-size: 17px; }
-
-        /* Lost Shores specifiek */
-        .shores {
-            background: #eef9ff;
-            border-color: #c9e7f4;
-        }
-        .shores h2 { color: #4da6c9; }
-
-        footer {
-            margin-top: 50px;
-            padding-bottom: 40px;
-            opacity: 0.6;
-            font-size: 14px;
-        }
-
-        /* Mobile Adjustments */
-        @media (max-width: 600px) {
-            .btn { width: 100%; }
-        }
+        footer { text-align: center; padding: 40px; font-weight: bold; color: white; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
     </style>
 </head>
 <body>
@@ -182,8 +124,7 @@
     <div class="wrapper">
         <header>
             <img src="logo.png" alt="Nootjes SMP" class="logo">
-            <br>
-            <div class="season-badge">🌸 SEASON 2: CHERRY BLOSSOM</div>
+            <h1 style="color: white; text-shadow: 2px 2px 10px rgba(0,0,0,0.8);">SEIZOEN 2</h1>
         </header>
 
         <nav class="nav-container">
@@ -195,26 +136,18 @@
 
         <main>
             <div class="card">
-                <h2>🛡️ Over de SMP</h2>
-                <p>
-                    Welkom bij een nieuw hoofdstuk! <strong>Season 2</strong> brengt een frisse wind door de Nootjes SMP. 
-                    Verken de prachtige kersenbloesem-biomen en bouw samen met je vrienden aan een legendarisch rijk. 
-                    Maar pas op: de Hardcore regels zijn nog steeds van kracht. Eén leven, één kans.
-                </p>
+                <h2>🛡️ De Hardcore Survival</h2>
+                <p>Welkom bij <strong>Nootjes SMP Seizoen 2</strong>. De wereld is nieuw, de gevaren zijn groter, maar de regels blijven hetzelfde: dood is dood. Werk samen, bouw dorpen en overleef in deze prachtige Minecraft wereld.</p>
             </div>
 
-            <div class="card shores">
-                <h2>🌊 De Lost Shores</h2>
-                <p>
-                    Ben je gevallen in de strijd? Geen paniek. Je ziel spoelt aan bij de <strong>Lost Shores</strong>. 
-                    Dit vagevuur biedt een unieke speelervaring voor degenen die hun eerste leven verloren hebben. 
-                    Bereid je voor, want in de grote finale kun je je weg terug vechten naar de levenden! 👻
-                </p>
+            <div class="card">
+                <h2>🌊 Lost Shores: De Tweede Kans</h2>
+                <p>Niet getreurd als je sterft! Je reis gaat verder op de <strong>Lost Shores</strong>. Hier kun je laten zien dat je een plekje in de finale verdient om terug te keren naar de levenden. 👻</p>
             </div>
         </main>
 
         <footer>
-            © 2026 Nootjes SMP • Gebouwd met Cherry Wood & Liefde 🍒
+            © 2026 Nootjes SMP Hardcore • Gebouwd voor de community ⛏️
         </footer>
     </div>
 
