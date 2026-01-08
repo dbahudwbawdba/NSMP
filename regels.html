@@ -42,6 +42,18 @@
 
         .wrapper { max-width: 900px; margin: 140px auto 50px; padding: 0 20px; }
 
+        /* ===== ZOEKBALK ===== */
+        .search-container { margin-bottom: 30px; }
+        .search-input {
+            width: 100%; padding: 15px 20px;
+            background: var(--dark-panel);
+            border: 2px solid var(--border-glow);
+            border-radius: 12px; color: white;
+            font-size: 18px; outline: none; transition: 0.3s;
+            box-sizing: border-box;
+        }
+        .search-input:focus { border-color: var(--neon-lava); box-shadow: 0 0 15px rgba(255, 69, 0, 0.3); }
+
         /* ===== TERUG KNOP ===== */
         .btn-3d {
             background: #ffffff; border: 4px solid #000000; padding: 12px 25px;
@@ -50,16 +62,14 @@
             transition: 0.1s; text-transform: uppercase; display: inline-flex;
             align-items: center; gap: 10px; cursor: pointer; margin-bottom: 30px;
         }
-        .btn-3d:hover { transform: translateY(2px); box-shadow: 0 4px 0 #000000; }
-        .btn-3d:active { transform: translateY(6px); box-shadow: 0 0px 0 #000000; }
+        .btn-3d:active { transform: translateY(4px); box-shadow: 0 2px 0 #000; }
 
         h1 { 
             font-size: 60px; font-weight: 900; text-align: center; 
             text-shadow: 5px 5px 0px var(--neon-lava); 
-            margin-bottom: 40px; text-transform: uppercase;
+            margin-bottom: 20px; text-transform: uppercase;
         }
 
-        /* ===== REGEL ITEMS ===== */
         .rules-container { display: flex; flex-direction: column; gap: 20px; }
 
         .rule-item {
@@ -67,14 +77,13 @@
             border: 2px solid var(--border-glow);
             border-radius: 15px;
             overflow: hidden;
-            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: 0.4s;
             opacity: 0; transform: translateY(30px);
             animation: slideUp 0.6s forwards;
         }
+        .rule-item.hidden { display: none; }
 
         @keyframes slideUp { to { opacity: 1; transform: translateY(0); } }
-
-        .rule-item:hover { border-color: var(--neon-lava); box-shadow: 0 0 25px rgba(255, 69, 0, 0.2); }
 
         .rule-header {
             width: 100%; padding: 25px; background: none; border: none;
@@ -91,22 +100,14 @@
 
         .content-inner { padding: 30px; border-top: 2px solid var(--neon-lava); }
 
-        /* DE REGEL PUNTEN */
-        .rule-point { margin-bottom: 25px; display: block; }
-        .rule-point:last-child { margin-bottom: 0; }
-        .rule-point strong { 
-            color: var(--neon-lava); display: block; 
-            font-size: 19px; text-transform: uppercase; margin-bottom: 8px;
-            letter-spacing: 1px;
-        }
+        .rule-point { margin-bottom: 25px; }
+        .rule-point strong { color: var(--neon-lava); display: block; font-size: 19px; text-transform: uppercase; margin-bottom: 8px; }
         .rule-point p { margin: 0; color: #ddd; line-height: 1.7; font-size: 16px; }
 
-        /* ICON ANIMATIE */
         .icon { 
             width: 35px; height: 35px; background: var(--neon-lava); 
             border-radius: 8px; display: flex; align-items: center; 
-            justify-content: center; font-weight: bold; transition: 0.4s;
-            font-size: 20px;
+            justify-content: center; font-weight: bold; transition: 0.4s; font-size: 20px;
         }
         .rule-item.active .icon { transform: rotate(45deg); background: white; color: black; }
         .rule-item.active { border-color: var(--neon-lava); }
@@ -124,6 +125,10 @@
         </div>
 
         <h1>Regels</h1>
+
+        <div class="search-container">
+            <input type="text" id="ruleSearch" class="search-input" placeholder="Zoek een regel (bijv. 'PvP', 'Mace', 'Griefing')...">
+        </div>
 
         <div class="rules-container" id="rulesList"></div>
 
@@ -191,10 +196,11 @@
                 ["Ender Pearls", "De limiet voor Ender Pearls is vastgesteld op maximaal 3 stacks per persoon."],
                 ["Opslag Fraude", "Het spreiden van items over shulkers om caps te omzeilen leidt tot inname."],
                 ["Handhaving", "Staff voert regelmatig inventory-checks uit om de balans te waarborgen."]
-             ]].
-            ["📌 9. PvP-Gameplay, [
-                ["PvP-Gameplay", "Het PvP in de server zal voornamelijk Diamond SMP gericht zijn. Met hier an daar wat kleine aanpassing, om het PvP aspect wat leuker te maken."],
-                ["Speciale Items", "In dit Seizoen, zijn er maar 4 Maces, verdeeld over de 4 Regio's, Noord, Oost, Zuid en West. Maar slechts 4 personen krijgen er een tot hun bezitting."],
+            ]],
+            ["📌 9. PvP-Gameplay", [
+                ["PvP-Stijl", "De PvP op de server is Diamond SMP gericht, met aanpassingen voor meer speelplezier."],
+                ["Speciale Items", "Dit seizoen zijn er slechts 4 Maces, verdeeld over Noord, Oost, Zuid en West. Maximaal 4 spelers kunnen een Mace bezitten."],
+                ["Balans", "Staff behoudt het recht om items aan te passen als deze de gameplay negatief beïnvloeden."]
             ]],
             ["📌 10. Bases & Griefing", [
                 ["Claim Systeem", "Een base is beschermd zodra er een bordje staat met 'Base - [Naam]'."],
@@ -237,26 +243,52 @@
         ];
 
         const list = document.getElementById('rulesList');
+        const searchInput = document.getElementById('ruleSearch');
 
-        rules.forEach((rule, i) => {
-            const div = document.createElement('div');
-            div.className = 'rule-item';
-            div.style.animationDelay = `${i * 0.08}s`;
+        function renderRules() {
+            list.innerHTML = '';
+            rules.forEach((rule, i) => {
+                const div = document.createElement('div');
+                div.className = 'rule-item';
+                div.style.animationDelay = `${i * 0.05}s`;
 
-            let pointsHTML = rule[1].map(p => `
-                <div class="rule-point">
-                    <strong>${p[0]}</strong>
-                    <p>${p[1]}</p>
-                </div>
-            `).join('');
+                let pointsHTML = rule[1].map(p => `
+                    <div class="rule-point">
+                        <strong>${p[0]}</strong>
+                        <p>${p[1]}</p>
+                    </div>
+                `).join('');
 
-            div.innerHTML = `
-                <button class="rule-header">${rule[0]} <span class="icon">+</span></button>
-                <div class="rule-content">
-                    <div class="content-inner">${pointsHTML}</div>
-                </div>
-            `;
-            list.appendChild(div);
+                div.innerHTML = `
+                    <button class="rule-header">${rule[0]} <span class="icon">+</span></button>
+                    <div class="rule-content">
+                        <div class="content-inner">${pointsHTML}</div>
+                    </div>
+                `;
+                list.appendChild(div);
+            });
+        }
+
+        renderRules();
+
+        // ZOEK LOGICA
+        searchInput.addEventListener('input', (e) => {
+            const term = e.target.value.toLowerCase();
+            const items = document.querySelectorAll('.rule-item');
+
+            items.forEach((item, index) => {
+                const title = rules[index][0].toLowerCase();
+                const content = JSON.stringify(rules[index][1]).toLowerCase();
+                
+                if (title.includes(term) || content.includes(term)) {
+                    item.classList.remove('hidden');
+                    item.style.animation = 'none';
+                    item.style.opacity = '1';
+                    item.style.transform = 'none';
+                } else {
+                    item.classList.add('hidden');
+                }
+            });
         });
 
         document.addEventListener('click', (e) => {
@@ -275,7 +307,6 @@
             if (!isActive) {
                 item.classList.add('active');
                 content.style.maxHeight = content.scrollHeight + "px";
-                
                 setTimeout(() => {
                     item.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
                 }, 300);
