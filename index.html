@@ -7,26 +7,25 @@
 
     <style>
         :root {
-            --oak-brown: #5d4037;
-            --grass-green: #4e9a06;
-            --terracotta-red: #d84315;
-            --ocean-blue: #0077be;
-            --discord-blurple: #5865f2;
-            --gold-border: #c9a24d;
-            --glass-white: rgba(255, 255, 255, 0.92);
+            --oak: #7a5a3a;
+            --grass: #55aa00;
+            --lava: #ff4400;
+            --water: #00aaff;
+            --gold: #ffcc00;
+            --discord: #5865f2;
+            --bg-glass: rgba(255, 255, 255, 0.95);
         }
 
-        /* ===== BASIS & ACHTERGROND ===== */
+        /* ===== BASIS ===== */
         body {
             margin: 0;
             padding: 0;
-            font-family: 'Trebuchet MS', sans-serif;
-            background-image: url('achtergrond.png'); 
+            font-family: 'Arial Black', 'Trebuchet MS', sans-serif; /* Dikker font voor de vibes */
+            background-image: url('achtergrond.png'); /* Gebruik makend van achtergrond.png */
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
             color: #2e1a12;
-            overflow-x: hidden;
         }
 
         .wrapper {
@@ -35,189 +34,171 @@
             padding: 40px 20px;
         }
 
-        /* ===== ANIMATIES ===== */
+        /* ===== ANIMATIE VOOR BLOKKEN ===== */
         .reveal {
             opacity: 0;
-            transform: scale(0.95) translateY(30px);
-            transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transform: scale(0.9) translateY(40px);
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
         .reveal.active {
             opacity: 1;
             transform: scale(1) translateY(0);
         }
 
-        /* ===== SPEELSE 3D SIDEBARS ===== */
+        /* ===== EXTRA DIKKE 3D SIDEBARS ===== */
         .sidebar {
             position: fixed;
             top: 50%;
             transform: translateY(-50%);
             padding: 20px;
             border-radius: 15px;
-            border: 4px solid var(--oak-brown);
-            box-shadow: 0 8px 0 var(--oak-brown);
+            border: 5px solid #000;
             z-index: 100;
             cursor: pointer;
-            transition: all 0.15s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+            transition: 0.1s;
             text-align: center;
-            min-width: 150px;
+            min-width: 160px;
         }
 
-        .sidebar:hover { transform: translateY(-55%) scale(1.05); box-shadow: 0 12px 0 var(--oak-brown); }
-        .sidebar:active { transform: translateY(-45%); box-shadow: 0 2px 0 var(--oak-brown); }
-
-        .sidebar-left { background: #fff; color: var(--terracotta-red); border-color: var(--terracotta-red); box-shadow: 0 8px 0 var(--terracotta-red); }
+        .sidebar-left { 
+            left: 20px; 
+            background: #fff; 
+            box-shadow: 0 10px 0 var(--lava); 
+            color: var(--lava);
+        }
         .sidebar-right { 
-            right: 25px; 
-            background: var(--discord-blurple); 
-            color: white; 
-            border-color: #3b448b; 
-            box-shadow: 0 8px 0 #3b448b;
+            right: 20px; 
+            background: var(--discord); 
+            box-shadow: 0 10px 0 #3b448b; 
+            color: white;
             text-decoration: none;
         }
 
-        .sidebar h4 { margin: 0 0 5px 0; font-size: 12px; font-weight: 900; text-transform: uppercase; }
-        .sidebar p { margin: 0; font-weight: 900; font-size: 17px; }
-
-        @media (max-width: 1250px) { .sidebar { display: none; } }
+        .sidebar:hover { transform: translateY(-55%); }
+        .sidebar:active { transform: translateY(-45%); box-shadow: 0 2px 0 #000; }
 
         /* ===== HEADER ===== */
-        header { text-align: center; padding: 20px 0; }
+        header { text-align: center; margin-bottom: 50px; }
         .logo {
             max-width: 450px;
             width: 90%;
-            filter: drop-shadow(0 15px 20px rgba(0,0,0,0.4));
-            animation: float 4s ease-in-out infinite;
+            filter: drop-shadow(0 15px 0px rgba(0,0,0,0.2));
+            animation: float 3s ease-in-out infinite;
         }
-        @keyframes float { 0%, 100% { transform: translateY(0px) rotate(-1deg); } 50% { transform: translateY(-20px) rotate(1deg); } }
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
 
-        /* ===== NAVIGATIE ===== */
-        .nav-container { margin: 40px 0; display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
+        /* ===== DIKKE BUTTONS ===== */
+        .nav-container { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-bottom: 50px; }
         .btn {
             background: #fff;
-            border: 4px solid var(--oak-brown);
-            color: var(--oak-brown);
-            padding: 16px 32px;
+            border: 5px solid #000;
+            padding: 15px 30px;
             text-decoration: none;
-            border-radius: 12px;
+            color: #000;
             font-weight: 900;
-            font-size: 18px;
-            box-shadow: 0 8px 0 var(--oak-brown);
-            transition: all 0.1s;
+            border-radius: 12px;
+            box-shadow: 0 8px 0 #000;
+            transition: 0.1s;
         }
-        .btn:hover { transform: translateY(2px); box-shadow: 0 6px 0 var(--oak-brown); background: #fdf5e6; }
-        .btn:active { transform: translateY(8px); box-shadow: 0 0px 0 var(--oak-brown); }
+        .btn:hover { transform: translateY(2px); box-shadow: 0 6px 0 #000; }
+        .btn:active { transform: translateY(8px); box-shadow: 0 0 0 #000; }
 
-        /* ===== GEKLEURDE 3D CARDS ===== */
-        .card, .general-info {
-            background: var(--glass-white);
-            border-radius: 20px;
-            padding: 40px;
-            margin-bottom: 35px;
-            border: 5px solid var(--oak-brown);
-            box-shadow: 0 12px 0 var(--oak-brown);
-        }
-
-        /* Verschillende kleuren per sectie */
-        .general-info { border-color: var(--grass-green); box-shadow: 0 12px 0 var(--grass-green); }
-        .general-info h2 { color: var(--grass-green); font-size: 32px; font-weight: 900; }
-
-        .card-smp { border-color: var(--terracotta-red); box-shadow: 0 12px 0 var(--terracotta-red); }
-        .card-smp h2 { color: var(--terracotta-red); font-size: 28px; font-weight: 900; }
-
-        .card-shores { border-color: var(--ocean-blue); box-shadow: 0 12px 0 var(--ocean-blue); }
-        .card-shores h2 { color: var(--ocean-blue); font-size: 28px; font-weight: 900; }
-
-        .card p, .general-info p { line-height: 1.8; font-size: 18px; font-weight: 600; }
-
-        /* ===== JOIN BOX ===== */
-        .join-box {
-            background: rgba(30, 30, 50, 0.95);
+        /* ===== SPEELSE 3D KAARTEN ===== */
+        .card {
+            background: var(--bg-glass);
+            border: 6px solid #000;
             border-radius: 25px;
-            padding: 50px;
-            margin: 80px 0;
-            text-align: center;
-            border: 6px solid var(--gold-border);
-            box-shadow: 0 15px 0 #8a6d2d;
-            color: white;
+            padding: 40px;
+            margin-bottom: 40px;
+            text-align: left;
         }
-        .join-box h2 { font-size: 36px; font-weight: 900; color: var(--gold-border); margin-top: 0; }
 
-        footer { text-align: center; padding: 50px; color: white; text-shadow: 3px 3px 6px #000; font-weight: 900; font-size: 18px; }
+        .info-card { box-shadow: 0 15px 0 var(--grass); }
+        .smp-card { box-shadow: 0 15px 0 var(--lava); }
+        .shores-card { box-shadow: 0 15px 0 var(--water); }
+
+        h2 { font-size: 32px; margin-top: 0; text-transform: uppercase; }
+        .info-card h2 { color: var(--grass); }
+        .smp-card h2 { color: var(--lava); }
+        .shores-card h2 { color: var(--water); }
+
+        p { font-size: 19px; line-height: 1.6; font-weight: bold; }
+
+        /* ===== JOIN BOX (GEBASEERD OP VOORBEELD) ===== */
+        .join-box {
+            background: #1a1a1a;
+            border: 6px solid var(--gold);
+            border-radius: 30px;
+            padding: 50px;
+            color: #fff;
+            text-align: center;
+            box-shadow: 0 15px 0 #b38f00;
+        }
+        .join-box h2 { color: var(--gold); font-size: 40px; }
+
+        footer { text-align: center; padding: 40px; color: #fff; text-shadow: 3px 3px 0 #000; font-size: 20px; }
+
+        @media (max-width: 1200px) { .sidebar { display: none; } }
     </style>
 </head>
 <body>
 
     <div class="sidebar sidebar-left" onclick="copyIP()">
-        <h4>Klik om te kopiëren! 📋</h4>
+        <h4>COPY IP! 📋</h4>
         <p id="ip-text">Play.ncsmp.nl</p>
     </div>
 
     <a href="https://discord.gg/XS2xAqbNxA" target="_blank" class="sidebar sidebar-right">
-        <h4>Join de Club! 💬</h4>
-        <p>Discord Server</p>
+        <h4>JOIN US! 💬</h4>
+        <p>Discord</p>
     </a>
 
     <div class="wrapper">
         <header>
-            <img src="logo.png" alt="Nootjes SMP" class="logo">
-            <h1 style="color: #fff; text-shadow: 5px 5px 0px var(--terracotta-red); font-size: 50px; font-weight: 900; margin-top: 20px;">SEIZOEN 2</h1>
+            <img src="logo.png" alt="Logo" class="logo">
+            <h1 style="color: #fff; text-shadow: 6px 6px 0 var(--lava); font-size: 60px; margin-top: 10px;">SEIZOEN 2</h1>
         </header>
 
         <nav class="nav-container">
-            <a href="eilanden.html" class="btn">🗺️ Eilanden</a>
-            <a href="regels.html" class="btn">📜 Regels</a>
-            <a href="deaths.html" class="btn">💀 Deaths</a>
-            <a href="lost-shores.html" class="btn">🌊 Lost Shores</a>
+            <a href="eilanden.html" class="btn">🗺️ EILANDEN</a>
+            <a href="regels.html" class="btn">📜 REGELS</a>
+            <a href="deaths.html" class="btn">💀 DEATHS</a>
+            <a href="lost-shores.html" class="btn">🌊 SHORES</a>
         </nav>
 
-        <section class="general-info reveal">
+        <section class="card info-card reveal">
             <h2>Algemene Informatie</h2>
-            <p>Nootjes SMP is een super gezellige community van Minecraft-spelers die houden van een vette uitdaging! Samen bouwen we aan een wereld vol avontuur, waar elke blokje dat je plaatst ertoe doet.</p>
-            <p>Onze Hardcore-ervaring zorgt voor een spannende vibe waarin je echt moet samenwerken met je vrienden. Eén foutje en je ligt eruit, dus speel slim en word de koning van de server!</p>
+            <p>Nootjes SMP is een keiharde Hardcore community waar gezelligheid en gevaar hand in hand gaan! Samen bouwen we aan een legendarische wereld.</p>
         </section>
 
-        <main>
-            <div class="card card-smp reveal">
-                <h2>🛡️ De Hardcore Survival</h2>
-                <p>Zet je schrap voor Seizoen 2! De wereld is gloednieuw en de gevaren loeren om elke hoek. Bouw de allermooiste bases, handel met andere spelers en zorg dat je die eerste nacht overleeft.</p>
-                <p><strong>Onthoud goed:</strong> Als je hier sterft, is je reis in de bovenwereld officieel voorbij!</p>
-            </div>
+        <section class="card smp-card reveal">
+            <h2>🛡️ De Survival</h2>
+            <p>Seizoen 2 is hier! Verken een gloednieuwe wereld, bouw gigantische bases en overleef de nacht. Maar pas op: één foutje en het is "game over" in de bovenwereld!</p>
+        </section>
 
-            <div class="card card-shores reveal">
-                <h2>🌊 De Lost Shores</h2>
-                <p>Ben je helaas gesneuveld? Geen zorgen, de legende stopt hier niet! Je spoelt aan op de mysterieuze Lost Shores. Dit is de plek waar dwalende zielen zich voorbereiden op hun comeback.</p>
-                <p>Train hard en wees klaar voor de grote finale beproeving. Alleen de allerbeste spelers verdienen hun plekje terug op de SMP! 👻</p>
-            </div>
-        </main>
+        <section class="card shores-card reveal">
+            <h2>🌊 Lost Shores</h2>
+            <p>Ben je dood? Geen paniek! De Lost Shores wachten op je. Train hard en vecht jezelf terug naar de levenden in de grote finale beproeving! 👻</p>
+        </section>
 
         <section class="join-box reveal">
-            <h2>Wil jij meedoen?!</h2>
-            <p>Onze Discord is dé plek voor alle gezelligheid, updates en om nieuwe vrienden te maken.</p>
-            <div style="margin-top:30px;">
-                <a href="https://discord.gg/XS2xAqbNxA" class="btn" style="background:var(--discord-blurple); color:white; border-color:#3b448b; box-shadow: 0 10px 0 #3b448b;">🔥 Join de Discord!</a>
-            </div>
+            <h2>MEEDOEN?</h2>
+            <p>De Discord is dé plek voor alle actie, updates en gezelligheid!</p>
+            <br>
+            <a href="https://discord.gg/XS2xAqbNxA" class="btn" style="background: var(--discord); color: #fff; border-color: #000; box-shadow: 0 8px 0 #3b448b;">🔥 JOIN DISCORD!</a>
         </section>
 
-        <footer>© 2026 Nootjes SMP Hardcore • Maak er een legendarisch seizoen van! ⛏️</footer>
+        <footer>© 2026 Nootjes SMP • HAKKEN EN BOUWEN! ⛏️</footer>
     </div>
 
     <script>
         function copyIP() {
             const ip = "Play.ncsmp.nl";
             navigator.clipboard.writeText(ip).then(() => {
-                const textElement = document.getElementById("ip-text");
-                const originalText = textElement.innerText;
-                textElement.innerText = "IP GEKOPIEERD! ✅";
-                textElement.parentElement.style.background = "#4e9a06";
-                textElement.parentElement.style.borderColor = "#346604";
-                textElement.style.color = "white";
-                
-                setTimeout(() => {
-                    textElement.innerText = originalText;
-                    textElement.parentElement.style.background = "#fff";
-                    textElement.parentElement.style.borderColor = "var(--terracotta-red)";
-                    textElement.style.color = "var(--terracotta-red)";
-                }, 2000);
+                const el = document.getElementById("ip-text");
+                const old = el.innerText;
+                el.innerText = "GEKOPIEERD! ✅";
+                setTimeout(() => { el.innerText = old; }, 2000);
             });
         }
 
@@ -226,9 +207,7 @@
             for (var i = 0; i < reveals.length; i++) {
                 var windowHeight = window.innerHeight;
                 var elementTop = reveals[i].getBoundingClientRect().top;
-                if (elementTop < windowHeight - 50) {
-                    reveals[i].classList.add("active");
-                }
+                if (elementTop < windowHeight - 50) { reveals[i].classList.add("active"); }
             }
         }
         window.addEventListener("scroll", reveal);
