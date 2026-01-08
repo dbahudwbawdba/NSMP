@@ -3,55 +3,93 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nootjes SMP | Hardcore</title>
+    <title>Nootjes SMP | Season 2</title>
 
     <style>
         :root {
-            --primary-red: #d43a2f;
-            --accent-gold: #c9a24d;
-            --ghost-blue: #4da6c9; /* Kleur voor Lost Shores */
-            --dark-bg: #0a0a0a;
-            --card-bg: rgba(20, 10, 10, 0.8);
+            --cherry-pink: #f4b2ba;
+            --cherry-dark: #d46a76;
+            --oak-brown: #7a5a3a;
+            --terracotta: #e2725b;
+            --cream-bg: #fdf5e6;
+            --text-color: #4a332d;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         body {
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--dark-bg);
-            background-image: 
-                radial-gradient(circle at 50% -20%, #4a0000 0%, transparent 50%),
-                radial-gradient(circle at 0% 100%, #081a24 0%, transparent 30%); /* Blauwe gloed linksonder */
-            background-attachment: fixed;
-            color: #f0f0f0;
-            text-align: center;
+            font-family: 'Trebuchet MS', sans-serif;
+            background-color: var(--cream-bg);
+            /* Subtiel patroon op de achtergrond */
+            background-image: radial-gradient(var(--cherry-pink) 0.5px, transparent 0.5px);
+            background-size: 30px 30px;
+            color: var(--text-color);
+            overflow-x: hidden;
         }
 
         .wrapper {
-            max-width: 1000px;
+            max-width: 900px;
             margin: 0 auto;
             padding: 40px 20px;
+            animation: fadeIn 0.8s ease-out;
         }
+
+        /* ===== SIDEBARS (IP & DISCORD) ===== */
+        .sidebar {
+            position: fixed;
+            top: 50%;
+            transform: translateY(-50%);
+            background: white;
+            padding: 15px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            border: 3px solid var(--oak-brown);
+            z-index: 100;
+            display: none; /* Verbergen op kleine schermen */
+        }
+
+        @media (min-width: 1200px) {
+            .sidebar { display: block; }
+        }
+
+        .sidebar-left { left: 20px; }
+        .sidebar-right { right: 20px; }
+
+        .sidebar h4 { margin: 0 0 5px 0; font-size: 12px; color: var(--oak-brown); text-transform: uppercase; }
+        .sidebar p { margin: 0; font-weight: bold; font-size: 14px; }
 
         /* ===== HEADER ===== */
-        header { padding: 40px 0; }
+        header { padding: 20px 0; }
         .logo {
-            max-width: 450px;
-            width: 85%;
-            filter: drop-shadow(0 0 20px rgba(212, 58, 47, 0.2));
-            transition: transform 0.3s ease;
-        }
-        .logo:hover { transform: scale(1.02); }
-        .subtitle {
-            color: var(--accent-gold);
-            font-weight: bold;
-            letter-spacing: 5px;
-            font-size: 14px;
-            text-transform: uppercase;
-            margin-top: 20px;
+            max-width: 400px;
+            width: 80%;
+            animation: float 4s ease-in-out infinite;
+            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.1));
         }
 
-        /* ===== NAVIGATION ===== */
+        .season-badge {
+            background: var(--cherry-dark);
+            color: white;
+            display: inline-block;
+            padding: 5px 20px;
+            border-radius: 50px;
+            font-weight: bold;
+            margin-top: 15px;
+            box-shadow: 0 4px 0 #a04e57;
+        }
+
+        /* ===== NAVIGATIE ===== */
         .nav-container {
             margin: 40px 0;
             display: flex;
@@ -59,124 +97,124 @@
             gap: 15px;
             flex-wrap: wrap;
         }
+
         .btn {
-            background: linear-gradient(135deg, #1a1a1a 0%, #000 100%);
-            border: 1px solid rgba(255,255,255,0.1);
-            color: #fff;
-            padding: 15px 30px;
+            background: white;
+            border: 3px solid var(--oak-brown);
+            color: var(--oak-brown);
+            padding: 12px 25px;
             text-decoration: none;
             border-radius: 8px;
-            font-size: 16px;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            transition: all 0.3s ease;
-        }
-        .btn:hover {
-            background: var(--primary-red);
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(212, 58, 47, 0.4);
-        }
-
-        /* ===== CONTENT CARDS ===== */
-        .content-card {
-            background: var(--card-bg);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(212, 58, 47, 0.15);
-            border-radius: 20px;
-            padding: 40px;
-            margin-top: 30px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.6);
-            text-align: left;
-        }
-
-        /* Speciale stijl voor Lost Shores kaart */
-        .lost-shores-card {
-            border: 1px solid rgba(77, 166, 201, 0.3);
-            background: rgba(10, 15, 20, 0.85);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .lost-shores-card::after {
-            content: "👻";
-            position: absolute;
-            right: -20px;
-            bottom: -20px;
-            font-size: 150px;
-            opacity: 0.05;
-            transform: rotate(-15deg);
-        }
-
-        h2 {
-            font-size: 24px;
-            margin-top: 0;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .red-title { color: var(--primary-red); }
-        .blue-title { color: var(--ghost-blue); }
-
-        p { line-height: 1.8; color: #ccc; font-size: 17px; }
-
-        .status-badge {
-            display: inline-block;
-            padding: 5px 15px;
-            border-radius: 50px;
-            font-size: 13px;
             font-weight: bold;
-            margin-top: 20px;
+            transition: all 0.2s;
+            box-shadow: 0 5px 0 var(--oak-brown);
         }
-        .badge-red { border: 1px solid var(--primary-red); color: var(--primary-red); background: rgba(212, 58, 47, 0.1); }
-        .badge-blue { border: 1px solid var(--ghost-blue); color: var(--ghost-blue); background: rgba(77, 166, 201, 0.1); }
 
-        footer { margin-top: 60px; padding-bottom: 40px; font-size: 13px; color: #555; }
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 7px 0 var(--oak-brown);
+            background: var(--cherry-pink);
+            color: white;
+            border-color: var(--cherry-dark);
+        }
 
+        .btn:active {
+            transform: translateY(3px);
+            box-shadow: 0 2px 0 var(--oak-brown);
+        }
+
+        /* ===== CARDS ===== */
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 35px;
+            margin-bottom: 30px;
+            border: 4px solid #f0e0d0;
+            text-align: left;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+
+        .card:hover { transform: scale(1.01); }
+
+        .card h2 {
+            margin-top: 0;
+            color: var(--terracotta);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card p { line-height: 1.7; font-size: 17px; }
+
+        /* Lost Shores specifiek */
+        .shores {
+            background: #eef9ff;
+            border-color: #c9e7f4;
+        }
+        .shores h2 { color: #4da6c9; }
+
+        footer {
+            margin-top: 50px;
+            padding-bottom: 40px;
+            opacity: 0.6;
+            font-size: 14px;
+        }
+
+        /* Mobile Adjustments */
         @media (max-width: 600px) {
-            .btn { width: 100%; justify-content: center; }
+            .btn { width: 100%; }
         }
     </style>
 </head>
 <body>
 
+    <div class="sidebar sidebar-left">
+        <h4>Server IP 🌐</h4>
+        <p>Play.ncsmp.nl</p>
+    </div>
+
+    <div class="sidebar sidebar-right">
+        <h4>Discord 💬</h4>
+        <p>discord.gg/ncsmp</p>
+    </div>
+
     <div class="wrapper">
         <header>
             <img src="logo.png" alt="Nootjes SMP" class="logo">
-            <div class="subtitle">✨ Hardcore Seizoen 2 ✨</div>
+            <br>
+            <div class="season-badge">🌸 SEASON 2: CHERRY BLOSSOM</div>
         </header>
 
         <nav class="nav-container">
             <a href="eilanden.html" class="btn">🗺️ Eilanden</a>
             <a href="regels.html" class="btn">📜 Regels</a>
-            <a href="deaths.html" class="btn">💀 Deathmatch</a>
+            <a href="deaths.html" class="btn">💀 Deaths</a>
             <a href="lost-shores.html" class="btn">🌊 Lost Shores</a>
         </nav>
 
         <main>
-            <div class="content-card">
-                <h2 class="red-title">🛡️ De Hardcore Wereld</h2>
+            <div class="card">
+                <h2>🛡️ Over de SMP</h2>
                 <p>
-                    In <strong>Nootjes SMP Hardcore</strong> is elke actie definitief. Bouw je basis, vorm bondgenootschappen en overleef de gevaren van de wereld. Maar onthoud: één fout kan het einde betekenen van jouw reis in de bovenwereld.
+                    Welkom bij een nieuw hoofdstuk! <strong>Season 2</strong> brengt een frisse wind door de Nootjes SMP. 
+                    Verken de prachtige kersenbloesem-biomen en bouw samen met je vrienden aan een legendarisch rijk. 
+                    Maar pas op: de Hardcore regels zijn nog steeds van kracht. Eén leven, één kans.
                 </p>
-                <div class="status-badge badge-red">🔴 STATUS: LIVE</div>
             </div>
 
-            <div class="content-card lost-shores-card">
-                <h2 class="blue-title">🌊 De Lost Shores</h2>
+            <div class="card shores">
+                <h2>🌊 De Lost Shores</h2>
                 <p>
-                    Dood is niet het absolute einde... maar het begin van een nieuwe strijd. Spelers die sterven op de SMP verbannen we naar de <strong>Lost Shores</strong>. Dit is een mysterieuze plek waar de 'gevallen' spelers verder leven.
+                    Ben je gevallen in de strijd? Geen paniek. Je ziel spoelt aan bij de <strong>Lost Shores</strong>. 
+                    Dit vagevuur biedt een unieke speelervaring voor degenen die hun eerste leven verloren hebben. 
+                    Bereid je voor, want in de grote finale kun je je weg terug vechten naar de levenden! 👻
                 </p>
-                <p>
-                    Tijdens de grote <strong>Finale</strong> krijgen de overlevers van de Lost Shores één kans om hun eer te herstellen. Win de beproevingen en keer terug naar de levenden om je wraak te nemen of de SMP alsnog te domineren.
-                </p>
-                <div class="status-badge badge-blue">👻 TWEEDE KANS MOGELIJK</div>
             </div>
         </main>
 
         <footer>
-            © 2026 Nootjes SMP Hardcore • De strijd stopt nooit ⛏️
+            © 2026 Nootjes SMP • Gebouwd met Cherry Wood & Liefde 🍒
         </footer>
     </div>
 
