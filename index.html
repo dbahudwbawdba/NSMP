@@ -17,7 +17,7 @@
 
         body {
             margin: 0; padding: 0;
-            font-family: 'Segoe UI', sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: url('achtergrond.png') no-repeat center center fixed; 
             background-size: cover;
             color: var(--text-main);
@@ -36,18 +36,45 @@
         .sidebar-left { left: 30px; border-bottom: 4px solid var(--neon-lava); }
         .sidebar-right { right: 30px; background: var(--discord); border-bottom: 4px solid #3b448b; text-decoration: none; color: white; }
         .sidebar:hover { transform: translateY(-55%); border-color: rgba(255,255,255,0.3); }
+        
         @media (max-width: 1300px) { .sidebar { display: none; } }
 
-        /* ===== NAV BUTTONS (3D behouden) ===== */
-        .nav-container { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; margin-bottom: 50px; }
-        .btn-3d {
-            background: #fff; border: 3px solid #000; padding: 12px 28px;
-            text-decoration: none; color: #000; font-weight: 900;
-            border-radius: 12px; box-shadow: 0 6px 0 #000; transition: 0.1s;
-            text-transform: uppercase; font-size: 14px;
+        /* ===== NAV BUTTONS (Verbeterde Witte 3D Stijl) ===== */
+        .nav-container { 
+            display: flex; 
+            justify-content: center; 
+            gap: 15px; 
+            flex-wrap: wrap; 
+            margin-bottom: 50px; 
         }
-        .btn-3d:hover { transform: translateY(2px); box-shadow: 0 4px 0 #000; }
-        .btn-3d:active { transform: translateY(6px); box-shadow: 0 0 0 #000; }
+
+        .btn-3d {
+            background: #ffffff;          /* Puur wit, niet doorschijnend */
+            border: 3px solid #000000;    /* Dikke zwarte rand */
+            padding: 12px 28px;
+            text-decoration: none;
+            color: #000000;
+            font-weight: 900;
+            border-radius: 14px;          /* Iets ronder */
+            box-shadow: 0 6px 0 #000000;  /* De 'dikke' onderkant */
+            transition: all 0.1s ease;
+            text-transform: uppercase;
+            font-size: 15px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-3d:hover {
+            transform: translateY(2px);
+            box-shadow: 0 4px 0 #000000;
+            background: #f0f0f0;
+        }
+
+        .btn-3d:active {
+            transform: translateY(6px);
+            box-shadow: 0 0 0 #000000;
+        }
 
         /* ===== GRID & CARDS ===== */
         .modern-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; }
@@ -81,7 +108,7 @@
         .events { display: flex; justify-content: space-between; position: relative; }
         .event { font-size: 13px; font-weight: 800; color: #fff; }
 
-        /* ===== JOIN BOX (UPGRADED) ===== */
+        /* ===== JOIN BOX ===== */
         .join-section {
             background: linear-gradient(135deg, #2c2f33 0%, #23272a 100%);
             border-radius: 25px; padding: 60px; text-align: center;
@@ -117,14 +144,14 @@
     <div class="wrapper">
         <header style="text-align:center; margin-bottom:40px;">
             <img src="logo.png" alt="Logo" style="max-width:400px; width:90%; filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5));">
-            <h1 style="font-size:60px; font-weight:900; text-shadow: 4px 4px 0px var(--neon-lava);">SEIZOEN 2</h1>
+            <h1 style="font-size:60px; font-weight:900; text-shadow: 4px 4px 0px var(--neon-lava); margin-top: 10px;">SEIZOEN 2</h1>
         </header>
 
         <nav class="nav-container">
-            <a href="eilanden.html" class="btn-3d">🗺️ Eilanden</a>
-            <a href="regels.html" class="btn-3d">📜 Regels</a>
-            <a href="deaths.html" class="btn-3d">💀 Deaths</a>
-            <a href="lost-shores.html" class="btn-3d">🌊 Shores</a>
+            <a href="eilanden.html" class="btn-3d"><span>🗺️</span> Eilanden</a>
+            <a href="regels.html" class="btn-3d"><span>📜</span> Regels</a>
+            <a href="deaths.html" class="btn-3d"><span>💀</span> Deaths</a>
+            <a href="lost-shores.html" class="btn-3d"><span>🌊</span> Shores</a>
         </nav>
 
         <div class="modern-grid">
@@ -173,12 +200,15 @@
                 setTimeout(() => { el.innerText = "Play.ncsmp.nl"; }, 2000);
             });
         }
+
         function reveal() {
             var reveals = document.querySelectorAll(".reveal");
             for (var i = 0; i < reveals.length; i++) {
                 var windowHeight = window.innerHeight;
                 var elementTop = reveals[i].getBoundingClientRect().top;
-                if (elementTop < windowHeight - 50) { reveals[i].classList.add("active"); }
+                if (elementTop < windowHeight - 50) { 
+                    reveals[i].classList.add("active"); 
+                }
             }
         }
         window.addEventListener("scroll", reveal);
