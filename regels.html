@@ -1,230 +1,154 @@
-<!DOCTYPE html>
-<html lang="nl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Regels | Nootjes SMP</title>
-    <style>
-        :root {
-            --neon-lava: #ff4500;
-            --dark-panel: rgba(10, 10, 12, 0.95);
-            --content-bg: rgba(0, 0, 0, 0.7);
-            --text-main: #ffffff;
-            --text-dim: #cfcfcf;
-        }
+const rules = [
+    [
+        "📌 1. Algemene Regels", 
+        "<strong>• Respectvol gedrag</strong><br>Behandel alle spelers en staff met respect. Beledigingen, toxiciteit, racisme of discriminatie in chat, voice of builds leiden tot directe sancties.<br><br>" +
+        "<strong>• Geen spam of storend gedrag</strong><br>Houd de chat en voice clean. Earrape, soundboards, herhaaldelijk pingen of commando-misbruik wordt niet getolereerd.<br><br>" +
+        "<strong>• Gebruik gezond verstand</strong><br>Gedraag je volwassen en sportief. Als je twijfelt of iets mag, ben je verplicht dit eerst aan de staff te vragen.<br><br>" +
+        "<strong>• Volg aanwijzingen van staff</strong><br>Staff heeft altijd het laatste woord. Publiekelijk in discussie gaan over besluiten is niet toegestaan; gebruik hiervoor een privéticket.<br><br>" +
+        "<strong>• Geen impersonatie</strong><br>Doe je niet voor als staff, creators of andere spelers. Misleidende namen of skins om verwarring te schoppen zijn verboden.<br><br>" +
+        "<strong>• Respecteer privacy & doxxing</strong><br>Het delen van privégegevens of opnames zonder toestemming is strikt verboden en kan leiden tot een permanente verbanning."
+    ],
+    [
+        "📌 2. Gameplay Regels", 
+        "<strong>• Eerlijk spel boven alles</strong><br>Cheaten, hacken of het gebruiken van externe hulpmiddelen die je een oneerlijk voordeel geven is streng verboden.<br><br>" +
+        "<strong>• Geen bug- of exploitmisbruik</strong><br>Dat iets technisch kan in Minecraft, betekent niet dat het mag. Meld glitches direct bij de staff in plaats van ze te gebruiken.<br><br>" +
+        "<strong>• Verbod op Piechart</strong><br>Het gebruik van de Piechart (F3 tools) om entiteiten of bases op te sporen is verboden en wordt zwaar bestraft.<br><br>" +
+        "<strong>• AFK-misbruik</strong><br>Het passief behalen van voordelen door middel van AFK-pools of macro's is niet toegestaan. Je moet actief spelen om voortgang te boeken.<br><br>" +
+        "<strong>• Geen economie-manipulatie</strong><br>Het dupliceren van items of het gebruiken van alt-accounts om systemen te omzeilen is verboden.<br><br>" +
+        "<strong>• Geen onnodig trollen</strong><br>Het doelbewust verpesten van de speelervaring van anderen (zoals spawnkillen of campen) is niet toegestaan."
+    ],
+    [
+        "📌 3. Modpack & Fair Play", 
+        "<strong>• Toegestane Mods</strong><br>Gebruik uitsluitend de mods die in de officiële NCSMP-pack zitten of expliciet door de staff zijn goedgekeurd.<br><br>" +
+        "<strong>• Minimap Beperkingen</strong><br>Het gebruik van Cave-mode (ondergronds kijken) of Entity/Radar-mode (spelers/mobs zien op de kaart) is strikt verboden.<br><br>" +
+        "<strong>• Verboden Visuele Hulpmiddelen</strong><br>Texturepacks of shaders die blocks doorzichtig maken (X-ray) of healthbars tonen die niet in de pack zitten, zijn verboden.<br><br>" +
+        "<strong>• Client Optimalisatie</strong><br>Mods zoals Optifine of Sodium zijn toegestaan, mits ze geen verborgen informatie tonen of voordelen geven in PvP.<br><br>" +
+        "<strong>• Bewijslast bij controle</strong><br>Op verzoek van de staff moet je een screenshot van je modlijst of F3-scherm kunnen tonen. Weigeren betekent schuld.<br><br>" +
+        "<strong>• Geen Automatisering</strong><br>Het gebruik van scripts of macro's die acties voor je uitvoeren (zoals auto-clickers) is niet toegestaan."
+    ],
+    [
+        "📌 4. Metagaming", 
+        "<strong>• Informatie-scheiding</strong><br>Informatie die je personage in-game niet weet, mag je niet gebruiken. Wat je op Discord of streams ziet, bestaat niet voor je personage.<br><br>" +
+        "<strong>• Verbod op Streamsnipen</strong><br>Het is verboden om livestreams te gebruiken om de locatie van spelers te achterhalen of hun plannen te dwarsbomen.<br><br>" +
+        "<strong>• Out-of-Character (OOC)</strong><br>OOC-chat mag niet gebruikt worden om tactische voordelen te behalen of in-game keuzes te beïnvloeden.<br><br>" +
+        "<strong>• Geen externe Voice-voordelen</strong><br>Tactische communicatie via Discord tijdens een in-game gevecht met spelers die niet in-game bij je zijn, wordt gezien als metagaming.<br><br>" +
+        "<strong>• Indirecte Metagaming</strong><br>Het doorspelen van informatie die je via streams hebt verkregen naar andere spelers is eveneens strafbaar.<br><br>" +
+        "<strong>• Staff Beoordeling</strong><br>Staff beoordeelt situaties op basis van logica. Als je plotseling een verborgen base vindt zonder reden, wordt dit onderzocht."
+    ],
+    [
+        "📌 5. Bouw Regels", 
+        "<strong>• Verbod op Litematica</strong><br>Het gebruik van Litematica of andere schematic-mods die bouwplannen tonen of blocks automatisch plaatsen is verboden.<br><br>" +
+        "<strong>• Trap Regels (Online)</strong><br>Je mag een base alleen trappen als de eigenaar online is en er een geldige RP-reden (zoals een conflict) aanwezig is.<br><br>" +
+        "<strong>• TNT Beperkingen</strong><br>Traps mogen maximaal 3 TNT (minecarts) bevatten. Grotere explosies worden gezien als onnodige griefing.<br><br>" +
+        "<strong>• Interaction Traps</strong><br>Alleen traps gebaseerd op interactie (deuren, kisten, pressure plates) zijn toegestaan. Sculk sensors zijn verboden voor traps.<br><br>" +
+        "<strong>• Geen Insta-kill Traps</strong><br>Traps moeten een realistische ontsnappingsmogelijkheid bieden. Spelers direct en zonder kans doden is verboden.<br><br>" +
+        "<strong>• Geen Entity Cramming</strong><br>Het gebruik van te veel entiteiten in een kleine ruimte om spelers te doden (entity cramming) is niet toegestaan."
+    ],
+    [
+        "📌 6. Vulkaan", 
+        "<em>Hier kun je je eigen tekst over de Vulkaan plaatsen.</em>"
+    ],
+    [
+        "📌 7. The Lost Shores", 
+        "<em>Hier kun je je eigen tekst over The Lost Shores plaatsen.</em>"
+    ],
+    [
+        "📌 8. Item Caps & Verboden Items", 
+        "<strong>• Ender Pearls & Gapples</strong><br>Maximaal 3 stacks Ender Pearls en 32 Golden Apples per persoon toegestaan.<br><br>" +
+        "<strong>• Totems & God Apples</strong><br>Je mag maximaal 1 Totem of Undying en 4 Enchanted Golden Apples in je bezit hebben.<br><br>" +
+        "<strong>• Verboden Items</strong><br>End Crystals, Elytra's, Respawn Anchors en Tridents zijn volledig verboden en worden direct verwijderd.<br><br>" +
+        "<strong>• Geen Omzeiling</strong><br>Het spreiden van items over shulkerboxen of verborgen kisten om de caps te omzeilen is strafbaar.<br><br>" +
+        "<strong>• Handhaving</strong><br>Staff controleert regelmatig inventories en kisten. Bij overtreding worden alle items van dat type geconfisqueerd.<br><br>" +
+        "<strong>• Balanswijzigingen</strong><br>Caps kunnen tijdens het seizoen worden aangepast om de balans te verbeteren. Houd de aankondigingen in de gaten."
+    ],
+    [
+        "📌 9. Bases, Bordjes & Griefing", 
+        "<strong>• Eigendomsrecht</strong><br>Een base is pas officieel beschermd als er een bordje staat met 'Base - [Naam]'.<br><br>" +
+        "<strong>• Bescherming tegen Griefing</strong><br>Bij een beschermde base is het slopen van blocks, stelen uit kisten of saboteren van de bouw strikt verboden.<br><br>" +
+        "<strong>• Onbeschermde Bases</strong><br>Bases zonder geldig bordje mogen volledig worden gegriefd en leeggeroofd zonder tussenkomst van staff.<br><br>" +
+        "<strong>• Zichtbaarheid van Bordjes</strong><br>Bordjes moeten op een logische plek (bij de ingang) staan. Verborgen bordjes maken de bescherming ongeldig.<br><br>" +
+        "<strong>• Definitie van Griefing</strong><br>Onder griefing valt ook het plaatsen van lava/water, het weghalen van armor stands of het aanpassen van de omgeving.<br><br>" +
+        "<strong>• Staff Bemiddeling</strong><br>Bij conflicten over wie ergens het eerst woonde of de geldigheid van een bordje, hakt de staff de knoop door."
+    ],
+    [
+        "📌 10. Combat Logging", 
+        "<strong>• Niet uitloggen tijdens gevechten</strong><br>Het verlaten van de server terwijl je in een PvP-situatie zit, is verboden.<br><br>" +
+        "<strong>• Straf op Combat Logging</strong><br>Bij uitloggen tijdens gevecht kan de staff beslissen je inventory te legen of je personage 'dood' te verklaren.<br><br>" +
+        "<strong>• Technische storingen</strong><br>Als je crash tijdens een gevecht, moet je dit direct melden met bewijs (logs) om sancties te voorkomen.<br><br>" +
+        "<strong>• Fair Play</strong><br>Wacht tot een gevecht volledig is afgerond en beide partijen afstand hebben genomen voordat je uitlogt.<br><br>" +
+        "<strong>• Geen vluchtgedrag</strong><br>Het betreden van een safezone of het gebruiken van teleportatie-glitches tijdens combat valt ook onder deze regel.<br><br>" +
+        "<strong>• Staff Toezicht</strong><br>Staff kan combat logs inzien om te controleren of een disconnect opzettelijk was."
+    ],
+    [
+        "📌 11. Lore, Roleplay & Random Kills", 
+        "<strong>• Geen Random Killing (RDM)</strong><br>Het zonder enige reden aanvallen of doden van spelers is verboden. Er moet altijd een RP-aanleiding zijn.<br><br>" +
+        "<strong>• Lore Verplichting</strong><br>Oorlogen, verraad en grote raids moeten voortkomen uit opgebouwde gesprekken of gebeurtenissen in de lore.<br><br>" +
+        "<strong>• In-Character blijven</strong><br>Gedraag je zoals je personage zou doen. Acties moeten logisch zijn binnen het verhaal van de server.<br><br>" +
+        "<strong>• PvP met betekenis</strong><br>Elk gevecht moet een doel hebben (territorium, wraak, diefstal). Zinloos moorden schaadt de sfeer van de SMP.<br><br>" +
+        "<strong>• De Uiteindelijke Winnaar</strong><br>Het seizoen kent een einde met één winnaar, maar dit pad wordt bepaald door lore-keuzes, niet door wie de beste klik-snelheid heeft.<br><br>" +
+        "<strong>• Staff als Regisseur</strong><br>Staff ziet toe op de rode draad van het verhaal en kan ingrijpen als acties de lore volledig breken."
+    ],
+    [
+        "📌 12. Farms & Redstone", 
+        "<strong>• Verbod op Raid Farms</strong><br>Alle vormen van automatische raid farms, omen-farms of pillager farms zijn verboden vanwege de balansverstoring.<br><br>" +
+        "<strong>• Lag-beperking</strong><br>Grote redstone-constructies moeten voorzien zijn van een aan/uit-schakelaar. Clocks die constant draaien zijn verboden.<br><br>" +
+        "<strong>• Geen AFK-farms</strong><br>Farms die werken terwijl de speler niet actief aanwezig is (zoals vis-farms of auto-killers) zijn niet toegestaan.<br><br>" +
+        "<strong>• Entity Limieten</strong><br>Houd het aantal dieren en mobs in één chunk laag. Overmatige entiteiten veroorzaken server-lag en worden verwijderd.<br><br>" +
+        "<strong>• Geen Glitch-farms</strong><br>Farms die gebruikmaken van bugs in Minecraft (zoals rail-dupers of carpet-dupers) zijn verboden.<br><br>" +
+        "<strong>• Verwijderingsrecht</strong><br>Staff mag elke farm die lag veroorzaakt of de balans schaadt zonder waarschuwing en zonder compensatie verwijderen."
+    ],
+    [
+        "📌 Slotregel – Interpretatie & Regelwijzigingen", 
+        "<strong>• Geest van de regels</strong><br>Het omzeilen van regels via 'loopholes' wordt even zwaar bestraft als het breken van de regels zelf.<br><br>" +
+        "<strong>• Intentie is doorslaggevend</strong><br>Staff kijkt naar de reden van je actie. Misbruik maken van een onduidelijkheid in de tekst wordt niet getolereerd.<br><br>" +
+        "<strong>• Zelfverantwoordelijkheid</strong><br>Je wordt geacht de regels te kennen. 'Ik wist het niet' is geen geldig excuus bij een overtreding.<br><br>" +
+        "<strong>• Wijzigingen</strong><br>De staff kan regels op elk moment aanpassen om de speelervaring te verbeteren. Dit wordt altijd gecommuniceerd via Discord.<br><br>" +
+        "<strong>• Onbesproken situaties</strong><br>In situaties waar de regels niet in voorzien, neemt de staff ter plekke een bindend besluit.<br><br>" +
+        "<strong>• Bindend advies</strong><br>De beslissing van een Admin of Moderator is definitief. Respecteer de tijd die zij steken in het draaiende houden van de server."
+    ]
+];
 
-        body {
-            margin: 0; padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: url('achtergrond.png') no-repeat center center fixed; 
-            background-size: cover;
-            color: var(--text-main);
-            overflow-x: hidden;
-            /* Geen blur op de achtergrond */
-        }
+const list = document.getElementById('rulesList');
 
-        /* ===== TOP BALK ===== */
-        .top-bar {
-            width: 100%;
-            background: rgba(0, 0, 0, 0.9);
-            border-bottom: 3px solid var(--neon-lava);
-            padding: 15px 0;
-            text-align: center;
-            position: fixed;
-            top: 0; left: 0;
-            z-index: 1000;
-            text-transform: uppercase;
-            font-weight: 900;
-            letter-spacing: 2px;
-            font-size: 18px;
-        }
-
-        .wrapper { max-width: 850px; margin: 100px auto 0 auto; padding: 20px; }
-
-        /* ===== SMOOTH INLADEN ===== */
-        @keyframes slideIn {
-            0% { opacity: 0; transform: translateY(20px); }
-            100% { opacity: 1; transform: translateY(0); }
-        }
-
-        header, .back-container, h1 { animation: slideIn 0.8s ease forwards; }
-
-        /* ===== TERUG KNOP (3D Look) ===== */
-        .back-container { margin-bottom: 40px; }
-        .btn-3d {
-            background: #ffffff; border: 3px solid #000000; padding: 12px 25px;
-            text-decoration: none; color: #000000; font-weight: 900;
-            border-radius: 14px; box-shadow: 0 6px 0 #000000;
-            transition: 0.1s; text-transform: uppercase; display: inline-flex;
-            align-items: center; gap: 10px; cursor: pointer;
-        }
-        .btn-3d:hover { transform: translateY(2px); box-shadow: 0 4px 0 #000000; }
-        .btn-3d:active { transform: translateY(6px); box-shadow: 0 0px 0 #000000; }
-
-        /* ===== REGEL ITEMS ===== */
-        .rules-container { display: flex; flex-direction: column; gap: 12px; }
-
-        .rule-item {
-            border-radius: 12px;
-            overflow: hidden;
-            border: 1px solid rgba(255, 69, 0, 0.4);
-            background: var(--dark-panel);
-            opacity: 0;
-            animation: slideIn 0.6s ease forwards;
-            transition: all 0.3s ease;
-        }
-
-        .rule-header {
-            width: 100%; padding: 20px 25px; background: none;
-            color: white; text-align: left; border: none; outline: none;
-            cursor: pointer; font-size: 19px; font-weight: 800;
-            display: flex; justify-content: space-between; align-items: center;
-        }
-
-        .rule-content {
-            max-height: 0;
-            overflow: hidden;
-            background: var(--content-bg);
-            transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .content-inner {
-            padding: 25px 30px;
-            color: var(--text-dim);
-            font-size: 16px;
-            line-height: 1.7;
-            border-top: 1px solid rgba(255, 69, 0, 0.2);
-        }
-
-        /* ACTIVE / OPEN STATE */
-        .rule-item.active { border-color: var(--neon-lava); transform: scale(1.01); }
-        .icon { transition: transform 0.4s ease; color: var(--neon-lava); font-weight: bold; }
-        .rule-item.active .icon::after { content: '✖'; }
-        .rule-item:not(.active) .icon::after { content: '＋'; }
-
-        h1 { font-size: 50px; font-weight: 900; text-shadow: 4px 4px 0px var(--neon-lava); text-align: center; margin-bottom: 30px; }
-    </style>
-</head>
-<body>
-
-    <div class="top-bar">NCSMP - Seizoen 2</div>
-
-    <div class="wrapper">
-        <header style="text-align:center;">
-            <img src="logo.png" alt="Logo" style="max-width:300px; width:80%;">
-        </header>
-
-        <div class="back-container">
-            <a href="index.html" class="btn-3d">⬅ Terug</a>
+// Regels genereren
+rules.forEach((rule, i) => {
+    const div = document.createElement('div');
+    div.className = 'rule-item';
+    div.style.animationDelay = `${i * 0.05}s`;
+    div.innerHTML = `
+        <button class="rule-header" type="button">
+            ${rule[0]} 
+            <span class="icon"></span>
+        </button>
+        <div class="rule-content">
+            <div class="content-inner">${rule[1]}</div>
         </div>
+    `;
+    list.appendChild(div);
+});
 
-        <h1>REGELS</h1>
+// Click event voor het openklappen
+document.addEventListener('click', (e) => {
+    const header = e.target.closest('.rule-header');
+    if (!header) return;
 
-        <div class="rules-container" id="rulesList">
-            </div>
+    const item = header.parentElement;
+    const content = item.querySelector('.rule-content');
+    const isActive = item.classList.contains('active');
 
-        <footer style="text-align: center; padding: 60px; color: rgba(255,255,255,0.3); font-weight: bold;">
-            NOOTJES SMP &copy; 2026
-        </footer>
-    </div>
+    // Alle andere sluiten
+    document.querySelectorAll('.rule-item').forEach(el => {
+        el.classList.remove('active');
+        el.querySelector('.rule-content').style.maxHeight = null;
+    });
 
-    <script>
-        const rules = [
-            ["📌 1. Algemene Regels"]
-             
-  [
-    "📌 1. Respectvol gedrag",
-    "Behandel alle spelers en staff met respect. Beledigingen, toxiciteit, racisme, discriminatie, haatdragende uitingen of het aanzetten tot haat zijn niet toegestaan. Dit geldt voor chat, voice, namen, skins, builds en elk ander middel."
-  ],
-  [
-    "📌 2. Geen spam of storend gedrag",
-    "Spam of storend gedrag is niet toegestaan. Dit omvat onder andere chatspam, advertentie-spam, earrape, soundboard-spam, herhaald pingen, microfoonmisbruik, het expres storen van gesprekken of gameplay en het misbruiken van commando’s."
-  ],
-  [
-    "📌 3. Gebruik gezond verstand",
-    "Gedraag je volwassen en sportief en draag bij aan een positieve speelervaring. Twijfel je of iets is toegestaan, vraag dit eerst aan staff voordat je handelt."
-  ],
-  [
-    "📌 4. Volg aanwijzingen van staff",
-    "Aanwijzingen en beslissingen van staff moeten altijd worden opgevolgd. Het negeren, tegenwerken of publiekelijk in discussie gaan met staffbeslissingen is niet toegestaan. Bezwaar kan rustig en privé met staff besproken worden."
-  ],
-  [
-    "📌 5. Geen cheats of exploits",
-    "Het misbruiken van bugs, glitches, exploits, hacks, macros of andere ongeoorloofde hulpmiddelen is verboden. Ontdekte bugs of exploits moeten direct bij staff gemeld worden."
-  ],
-  [
-    "📌 6. Geen impersonatie",
-    "Het is niet toegestaan je voor te doen als staff, content creators of andere spelers. Dit geldt ook voor misleidende namen, skins of gedrag."
-  ],
-  [
-    "📌 7. Passende communicatie",
-    "NSFW-inhoud, extreme taal, schokkende beelden of geluiden en expliciete discussies zijn niet toegestaan."
-  ],
-  [
-    "📌 8. Respecteer privacy",
-    "Het delen van persoonlijke informatie (doxxing), screenshots, privéberichten, DM’s of voice-opnames zonder toestemming is verboden."
-  ],
-  [
-    "📌 9. Geen provocatie of drama",
-    "Het uitlokken van ruzies, witch-hunts, het aanzetten tot massareports of het verspreiden van geruchten is niet toegestaan."
-  ],
-  [
-    "📌 10. Handhaving door staff",
-    "De regels zijn niet uitputtend. Staff behoudt het recht om op te treden tegen gedrag dat de sfeer, veiligheid of speelervaring schaadt, ook als dit niet expliciet in de regels staat."
-  ],
-  [
-    "📌 11. Sancties",
-    "Overtredingen van de regels kunnen leiden tot waarschuwingen, mutes, kicks, tijdelijke of permanente bans, afhankelijk van de ernst en herhaling van de overtreding."
-  ]
-]
-],
-            ["📌 2. Gameplay Regels", "Geen hacks, cheats of X-ray."],
-            ["📌 3. Modpack & Fair Play", "Gebruik alleen de officiële mods."],
-            ["📌 4. Metagaming", "Gebruik geen info van streams in-game."],
-            ["📌 5. Bouw Regels", "Bouw realistisch en in de stijl van je eiland."],
-            ["📌 6. Vulkaan", "Gevarenzone: PvP staat hier altijd aan."],
-            ["📌 7. The Lost Shores", "Na dood ga je hierheen voor je laatste kans."],
-            ["📌 8. Item Caps & Verboden Items", "Bepaalde items zijn gelimiteerd."],
-            ["📌 9. Bases, Bordjes & Griefing", "Laat altijd een bordje achter bij een overval."],
-            ["📌 10. Combat Logging", "Niet uitloggen tijdens gevechten."],
-            ["📌 11. Lore, Roleplay & Random Kills", "Zorg voor een geldige reden voor PvP."],
-            ["📌 12. Farms & Redstone", "Houd het lag-vrij."],
-            ["📌 Slotregel – Interpretatie", "Staff heeft het laatste woord."]
-        ];
-
-        const list = document.getElementById('rulesList');
-
-        rules.forEach((rule, i) => {
-            const div = document.createElement('div');
-            div.className = 'rule-item';
-            div.style.animationDelay = `${i * 0.08}s`;
-            div.innerHTML = `
-                <button class="rule-header">${rule[0]} <span class="icon"></span></button>
-                <div class="rule-content"><div class="content-inner">${rule[1]}</div></div>
-            `;
-            list.appendChild(div);
-        });
-
-        document.addEventListener('click', (e) => {
-            const header = e.target.closest('.rule-header');
-            if (!header) return;
-
-            const item = header.parentElement;
-            const content = item.querySelector('.rule-content');
-            const isActive = item.classList.contains('active');
-
-            // Sluit anderen
-            document.querySelectorAll('.rule-item').forEach(el => {
-                el.classList.remove('active');
-                el.querySelector('.rule-content').style.maxHeight = null;
-            });
-
-            // Open deze
-            if (!isActive) {
-                item.classList.add('active');
-                content.style.maxHeight = content.scrollHeight + "px";
-            }
-        });
-    </script>
-</body>
-</html>
+    // De geklikte openen
+    if (!isActive) {
+        item.classList.add('active');
+        content.style.maxHeight = content.scrollHeight + "px";
+        
+        setTimeout(() => {
+            item.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }, 300);
+    }
+});
