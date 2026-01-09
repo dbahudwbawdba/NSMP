@@ -19,9 +19,16 @@
             --support-blue: #00d9ff;
         }
 
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
+        /* ===== ANIMATIE STYLES ===== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         body {
@@ -129,23 +136,23 @@
     </div>
 
     <div class="wrapper">
-        <div style="text-align: center; margin-bottom: 30px;">
+        <div style="text-align: center; margin-bottom: 30px;" class="reveal">
             <a href="index.html" class="btn-main">Main Menu</a>
         </div>
         
-        <h1>Regels</h1>
+        <h1 class="reveal">Regels</h1>
 
-        <div class="search-container">
+        <div class="search-container reveal">
             <input type="text" id="ruleSearch" class="search-input" placeholder="Zoek een regel (bijv. 'Mace', 'Ban', 'Vulkaan')...">
         </div>
 
         <div class="rules-container" id="rulesList"></div>
 
-        <div class="sanctie-wrapper">
+        <div class="sanctie-wrapper reveal">
             <h2 class="sanctie-titel">Sanctie Systeem</h2>
             <p class="stack-alert">⚠ REPETITIE REGEL: 2x Categorie I = Categorie II straf. Wees gewaarschuwd!</p>
             <div class="sanctie-grid">
-                <div class="sanctie-card cat-1">
+                <div class="sanctie-card cat-1 reveal">
                     <div style="font-size:32px; font-weight:900; color:var(--cat-1)">CAT I</div>
                     <div style="font-size:13px; font-weight:800; opacity:0.6; margin-bottom:15px;">WARN / MUTE / KICK</div>
                     <ul style="list-style:none; padding:0; color:#ccc;">
@@ -155,7 +162,7 @@
                         <li>» Kleine farm overtreding</li>
                     </ul>
                 </div>
-                <div class="sanctie-card cat-2">
+                <div class="sanctie-card cat-2 reveal">
                     <div style="font-size:32px; font-weight:900; color:var(--cat-2)">CAT II</div>
                     <div style="font-size:13px; font-weight:800; opacity:0.6; margin-bottom:15px;">3U - 24U BAN / INV WIPE</div>
                     <ul style="list-style:none; padding:0; color:#ccc;">
@@ -165,7 +172,7 @@
                         <li>» RDM (Random Killing)</li>
                     </ul>
                 </div>
-                <div class="sanctie-card cat-3">
+                <div class="sanctie-card cat-3 reveal">
                     <div style="font-size:32px; font-weight:900; color:var(--cat-3)">CAT III</div>
                     <div style="font-size:13px; font-weight:800; opacity:0.6; margin-bottom:15px;">PERMANENTE BAN</div>
                     <ul style="list-style:none; padding:0; color:#ccc;">
@@ -175,7 +182,7 @@
                         <li>» Ernstige toxiciteit</li>
                     </ul>
                 </div>
-                <div class="sanctie-card cat-support">
+                <div class="sanctie-card cat-support reveal">
                     <div style="font-size:32px; font-weight:900; color:var(--support-blue)">TICKET</div>
                     <div style="font-size:13px; font-weight:800; opacity:0.6; margin-bottom:15px;">HULP NODIG?</div>
                     <ul style="list-style:none; padding:0; color:#ccc;">
@@ -186,7 +193,7 @@
             </div>
         </div>
 
-        <footer>NOOTJES SMP &copy; 2026</footer>
+        <footer class="reveal">NOOTJES SMP &copy; 2026</footer>
     </div>
 
     <script>
@@ -282,16 +289,33 @@
         ];
 
         const list = document.getElementById('rulesList');
+        
+        // Render functie met reveal class voor animatie
         function render() {
             list.innerHTML = '';
             rulesData.forEach((rule, i) => {
                 const div = document.createElement('div');
-                div.className = 'rule-item';
+                div.className = 'rule-item reveal'; // Reveal toegevoegd
                 let pts = rule[1].map(p => `<div class="rule-point"><strong>${p[0]}</strong><p>${p[1]}</p></div>`).join('');
                 div.innerHTML = `<div class="rule-inner"><button class="rule-header">${rule[0]} <span class="icon">+</span></button><div class="rule-content"><div class="content-inner">${pts}</div></div></div>`;
                 list.appendChild(div);
             });
+            initReveal(); // Start de scroll observer na het renderen
         }
+
+        // Scroll Reveal Systeem
+        function initReveal() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+        }
+
         render();
 
         document.getElementById('ruleSearch').addEventListener('input', (e) => {
@@ -307,14 +331,17 @@
             if(!h) return;
             const item = h.closest('.rule-item');
             const content = item.querySelector('.rule-content');
-            const active = item.classList.contains('active');
+            const active = item.classList.contains('active-rule');
             
+            // Sluit andere (optioneel, maar staat nu zo ingesteld)
+            document.querySelectorAll('.rule-item').forEach(el => {
+                el.classList.remove('active-rule');
+                el.querySelector('.rule-content').style.maxHeight = null;
+            });
+
             if(!active) {
-                item.classList.add('active');
+                item.classList.add('active-rule');
                 content.style.maxHeight = content.scrollHeight + "px";
-            } else {
-                item.classList.remove('active');
-                content.style.maxHeight = null;
             }
         });
 
