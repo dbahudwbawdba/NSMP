@@ -34,7 +34,7 @@
             overflow-x: hidden;
         }
 
-        /* ===== TOP INFO (Geen balk) ===== */
+        /* ===== TOP INFO (Balk weg, tekst behouden) ===== */
         .top-info {
             width: 100%; padding: 25px 0; text-align: center; 
             text-transform: uppercase; font-weight: 900; letter-spacing: 2px;
@@ -75,8 +75,8 @@
         
         .rule-item { 
             position: relative; background: var(--dark-panel); border-radius: 20px; 
-            overflow: hidden; transition: 0.3s; padding: 2px; /* Ruimte voor gradient border */
-            background: linear-gradient(135deg, rgba(142, 68, 173, 0.3), rgba(0, 217, 255, 0.3));
+            overflow: hidden; transition: 0.3s; padding: 2px;
+            background: linear-gradient(135deg, rgba(142, 68, 173, 0.4), rgba(0, 217, 255, 0.4));
         }
 
         .rule-inner { background: var(--dark-panel); border-radius: 18px; overflow: hidden; }
@@ -104,15 +104,16 @@
             border-radius: 10px; display: flex; align-items: center; justify-content: center; 
             transition: 0.4s; font-weight: 900; color: white;
         }
-        .rule-item.active .icon { transform: rotate(45deg); filter: hue-rotate(90deg); }
+        .rule-item.active .icon { transform: rotate(45deg); filter: hue-rotate(45deg); }
 
         /* ===== SANCTIE GRID ===== */
         .sanctie-wrapper { 
             margin-top: 80px; padding: 50px 40px; background: var(--dark-panel); 
             border-radius: 25px; border: 1px solid rgba(255,255,255,0.1);
         }
-        .sanctie-titel { font-size: 45px; text-align: center; margin-bottom: 30px; text-transform: uppercase; font-weight: 900; }
-        
+        .sanctie-titel { font-size: 45px; text-align: center; margin-bottom: 10px; text-transform: uppercase; font-weight: 900; }
+        .stack-alert { text-align: center; color: #ffcc00; font-weight: bold; margin-bottom: 40px; background: rgba(255, 204, 0, 0.1); padding: 15px; border-radius: 10px; border: 1px dashed #ffcc00; }
+
         .sanctie-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
         .sanctie-card { background: rgba(10, 10, 15, 0.5); border-radius: 20px; padding: 30px; border-top: 6px solid white; }
         .cat-1 { border-color: var(--cat-1); } 
@@ -120,6 +121,8 @@
         .cat-3 { border-color: var(--cat-3); }
         .cat-support { border-color: var(--support-blue); }
         
+        .sanctie-card li::before { content: "» "; color: var(--neon-lava); font-weight: bold; }
+
         footer { text-align: center; padding: 80px 20px; opacity: 0.4; font-weight: bold; }
     </style>
 </head>
@@ -137,13 +140,14 @@
         <h1>Regels</h1>
 
         <div class="search-container">
-            <input type="text" id="ruleSearch" class="search-input" placeholder="Zoek een regel...">
+            <input type="text" id="ruleSearch" class="search-input" placeholder="Zoek een regel (bijv. 'Mace', 'Ban', 'Vulkaan')...">
         </div>
 
         <div class="rules-container" id="rulesList"></div>
 
         <div class="sanctie-wrapper">
             <h2 class="sanctie-titel">Sanctie Systeem</h2>
+            <p class="stack-alert">⚠ REPETITIE REGEL: 2x Categorie I = Categorie II straf. Wees gewaarschuwd!</p>
             <div class="sanctie-grid">
                 <div class="sanctie-card cat-1">
                     <div style="font-size:32px; font-weight:900; color:var(--cat-1)">CAT I</div>
@@ -151,29 +155,36 @@
                     <ul style="list-style:none; padding:0; color:#ccc;">
                         <li>» Spammen / Caps</li>
                         <li>» Lichte beledigingen</li>
+                        <li>» Niet luisteren naar staff</li>
+                        <li>» Kleine farm overtreding</li>
                     </ul>
                 </div>
                 <div class="sanctie-card cat-2">
                     <div style="font-size:32px; font-weight:900; color:var(--cat-2)">CAT II</div>
-                    <div style="font-size:13px; font-weight:800; opacity:0.6; margin-bottom:15px;">3U - 24U BAN</div>
+                    <div style="font-size:13px; font-weight:800; opacity:0.6; margin-bottom:15px;">3U - 24U BAN / INV WIPE</div>
                     <ul style="list-style:none; padding:0; color:#ccc;">
-                        <li>» Metagaming</li>
-                        <li>» Griefen</li>
+                        <li>» Metagaming / Streamsnipen</li>
+                        <li>» Combat Logging</li>
+                        <li>» Griefen van bases</li>
+                        <li>» RDM (Random Killing)</li>
                     </ul>
                 </div>
                 <div class="sanctie-card cat-3">
                     <div style="font-size:32px; font-weight:900; color:var(--cat-3)">CAT III</div>
                     <div style="font-size:13px; font-weight:800; opacity:0.6; margin-bottom:15px;">PERMANENTE BAN</div>
                     <ul style="list-style:none; padding:0; color:#ccc;">
-                        <li>» Hacken / Cheaten</li>
-                        <li>» Doxxing</li>
+                        <li>» Hacken of Cheaten</li>
+                        <li>» Doxxing (Privacy)</li>
+                        <li>» Items dupliceren (Duping)</li>
+                        <li>» Ernstige toxiciteit</li>
                     </ul>
                 </div>
                 <div class="sanctie-card cat-support">
                     <div style="font-size:32px; font-weight:900; color:var(--support-blue)">TICKET</div>
                     <div style="font-size:13px; font-weight:800; opacity:0.6; margin-bottom:15px;">HULP NODIG?</div>
                     <ul style="list-style:none; padding:0; color:#ccc;">
-                        <li>» discord.gg/ncsmp</li>
+                        <li>» Reporten / Vragen</li>
+                        <li><a href="https://discord.gg/ncsmp" target="_blank" style="color:var(--support-blue); text-decoration:none;">discord.gg/ncsmp</a></li>
                     </ul>
                 </div>
             </div>
@@ -183,51 +194,114 @@
     </div>
 
     <script>
-        // Data blijft exact hetzelfde als jouw origineel
         const rulesData = [
             ["📌 1. Algemene Regels", [
                 ["Respectvol Gedrag", "Behandel alle spelers en staff met respect. Beledigingen, toxiciteit, racisme of discriminatie leiden tot directe sancties."],
-                ["Geen Spam", "Houd de chat en voice clean. Earrape, soundboards, herhaald pingen of commando-misbruik wordt niet getolereerd."]
+                ["Geen Spam", "Houd de chat en voice clean. Earrape, soundboards, herhaald pingen of commando-misbruik wordt niet getolereerd."],
+                ["Gezond Verstand", "Gedraag je volwassen en sportief. Twijfel je over een actie? Vraag het eerst aan de staff."],
+                ["Staff Aanwijzingen", "Beslissingen van staff zijn bindend. Publiekelijk in discussie gaan is verboden; gebruik hiervoor privétickets."],
+                ["Geen Impersonatie", "Doe je niet voor als staff, content creators of andere spelers via namen, skins of gedrag."],
+                ["Privacy & Doxxing", "Het delen van persoonlijke informatie zonder toestemming resulteert in een permanente verbanning."]
             ]],
             ["📌 2. Gameplay Regels", [
                 ["Eerlijk Spel", "Hacks, cheats of scripts die een oneerlijk voordeel geven zijn strikt verboden."],
-                ["Bug Misbruik", "Meld glitches direct. Het bewust gebruiken van bugs om voordeel te behalen wordt zwaar bestraft."]
+                ["Bug Misbruik", "Meld glitches direct. Het bewust gebruiken van bugs om voordeel te behalen wordt zwaar bestraft."],
+                ["Piechart Verbod", "Het gebruik van de Piechart (F3 tools) om bases of entiteiten op te sporen is verboden."],
+                ["AFK-Beperking", "Passief voordeel behalen via AFK-pools of automatisering is niet toegestaan."],
+                ["Economie & Alts", "Duplicatie van items of het gebruik van alt-accounts voor eigen gewin is verboden."],
+                ["Trolling & Griefing", "Het doelbewust verpesten van de gameplay van others (zoals spawnkillen) is niet toegestaan."]
             ]],
             ["📌 3. Modpack & Fair Play", [
-                ["Toegestane Mods", "Gebruik uitsluitend de officiële NCSMP-modpack of door staff goedgekeurde toevoegingen."]
+                ["Toegestane Mods", "Gebruik uitsluitend de officiële NCSMP-modpack of door staff goedgekeurde toevoegingen."],
+                ["Minimap Instellingen", "Cave-mode en Entity/Radar-mode moeten volledig uitgeschakeld blijven."],
+                ["Visuele Hulpmiddelen", "Texturepacks of shaders die blocks doorzichtig maken (X-ray) zijn verboden."],
+                ["Client Optimalisatie", "Mods zoals Sodium zijn toegestaan mits ze geen verborgen informatie of PvP-voordeel geven."],
+                ["Bewijslast", "Je bent verplicht mee te werken aan controles (zoals schermdeling) op verzoek van de staff."],
+                ["Automatisering", "Auto-clickers en macro's die acties voor je uitvoeren zijn niet toegestaan."]
             ]],
             ["📌 4. Metagaming", [
-                ["Info-Scheiding", "Informatie die je personage in-game niet weet mag je niet gebruiken."]
+                ["Info-Scheiding", "Informatie die je personage in-game niet weet (van streams/Discord), mag je niet gebruiken."],
+                ["Streamsnipen", "Het gebruiken van livestreams om locaties te achterhalen of plannen te dwarsbomen is verboden."],
+                ["OOC Informatie", "Out-of-Character informatie mag geen invloed hebben op jouw in-game beslissingen."],
+                ["Voice Misbruik", "Tactische info delen via externe voicechats tijdens gevechten wordt gezien als metagaming."],
+                ["Indirecte Meta", "Het doorspelen van informatie verkregen via externe bronnen naar andere spelers is strafbaar."],
+                ["Staff Controle", "Staff onderzoekt onlogische vondsten van bases op basis van logs en gedrag."]
             ]],
             ["📌 5. Bouw Regels", [
-                ["Geen Litematica", "Mods die bouwplannen tonen zijn verboden."]
+                ["Geen Litematica", "Mods die bouwplannen tonen of blocks automatisch plaatsen zijn volledig verboden."],
+                ["Online Trappen", "Je mag een base alleen trappen als de eigenaar online is én er een geldige RP-reden is."],
+                ["TNT Limiet", "Traps mogen maximaal 3 TNT (minecarts) bevatten om onnodige schade te voorkomen."],
+                ["Mechaniek Traps", "Alleen traps via deuren, kisten of plates zijn toegestaan. Sculk-sensors zijn verboden."],
+                ["Geen Insta-kills", "Traps moeten een realistische ontsnappingsmogelijkheid bieden; insta-kills zijn verboden."],
+                ["Entity Cramming", "Het doden van spelers door middel van entity-cramming constructies is niet toegestaan."]
             ]],
             ["📌 6. Vulkaan", [
-                ["PvP Zone", "De Vulkaan is een actieve PvP-zone. PvP staat hier ALTIJD aan."]
+                ["PvP Zone", "De Vulkaan is een actieve PvP-zone. PvP staat hier ALTIJD aan, ongeacht de lore status."],
+                ["Gevarenzone", "Betreden is op eigen risico; staff vergoedt geen items verloren in dit gebied."],
+                ["Geen Safe-logging", "Uitloggen om aan gevaar of PvP in de Vulkaan te ontsnappen is verboden."],
+                ["Unieke Loot", "De vulkaan bevat grondstoffen die nergens anders te vinden zijn, wat het risico rechtvaardigt."]
             ]],
             ["📌 7. The Lost Shores", [
-                ["Laatste Kans", "Na een dood word je verbannen naar de Shores."]
+                ["Laatste Kans", "Na een dood in de Hardcore wereld word je verbannen naar de Shores."],
+                ["Overleving", "In dit gebied gelden zwaardere regels voor grondstoffen; overleven is hier de prioriteit."],
+                ["Terugkeer", "Terugkeer naar de hoofdwereld is alleen mogelijk via specifieke, zeldzame Lore-events."],
+                ["Interactie", "Ook in de Shores gelden de algemene gedragsregels; toxiciteit wordt hier ook bestraft."]
             ]],
-            ["📌 8. Item Caps", [
-                ["Verboden Items", "End Crystals, Elytra, Respawn Anchors zijn verboden."]
+            ["📌 8. Item Caps & Verboden Items", [
+                ["Verboden Items", "End Crystals, Elytra, Respawn Anchors en Tridents zijn volledig verboden."],
+                ["Totem Cap", "Je mag maximaal 1 Totem of Undying in je inventory dragen."],
+                ["Gapple Limiet", "Maximaal 32 Golden Apples en 4 Enchanted Golden Apples per persoon toegestaan."],
+                ["Ender Pearls", "De limiet voor Ender Pearls is vastgesteld op maximaal 3 stacks per persoon."],
+                ["Opslag Fraude", "Het spreiden van items over shulkers om caps te omzeilen leidt tot inname."],
+                ["Handhaving", "Staff voert regelmatig inventory-checks uit om de balans te waarborgen."]
             ]],
             ["📌 9. PvP-Gameplay", [
-                ["PvP-Stijl", "Diamond SMP gericht, met aanpassingen."]
+                ["PvP-Stijl", "De PvP op de server is Diamond SMP gericht, met aanpassingen voor meer speelplezier."],
+                ["Speciale Items", "Dit seizoen zijn er slechts 4 Maces, verdeeld over Noord, Oost, Zuid en West. Maximaal 4 spelers kunnen een Mace bezitten."],
+                ["Balans", "Staff behoudt het recht om items aan te passen als deze de gameplay negatief beïnvloeden."]
             ]],
             ["📌 10. Bases & Griefing", [
-                ["Claim Systeem", "Een base is beschermd zodra er een bordje staat."]
+                ["Claim Systeem", "Een base is beschermd zodra er een bordje staat met 'Base - [Naam]'."],
+                ["Grief Verbod", "Bij beschermde bases is slopen, stelen of saboteren streng verboden."],
+                ["Vrij Spel", "Bases zonder geldig en zichtbaar bordje mogen volledig gegriefd worden."],
+                ["Zichtbaarheid", "Bordjes moeten duidelijk bij de hoofdingang staan; verborgen bordjes tellen niet."],
+                ["Sabotage", "Lava-griefing of het weghalen van decoraties bij beschermde bases is strafbaar."],
+                ["Staff Bemiddeling", "Bij ruzie over landgrenzen of eigendom neemt de staff een bindend besluit."]
             ]],
             ["📌 11. Combat Logging", [
-                ["PvP Disconnect", "Uitloggen tijdens gevecht = inventory wipe."]
+                ["PvP Disconnect", "Uitloggen tijdens een gevecht resulteert in een directe inventory-wipe en dood."],
+                ["Crash Melding", "Meld een technische crash direct via Discord met logs om sancties te voorkomen."],
+                ["Combat Timer", "Wacht tot de combat-timer volledig is afgelopen voordat je de server verlaat."],
+                ["Safezones", "Het vluchten naar een safezone of teleportatie tijdens combat is niet toegestaan."],
+                ["Toezicht", "Elke verdachte disconnect tijdens PvP wordt gecontroleerd via de serverlogs."],
+                ["Sportiviteit", "Geef je tegenstander de kans om het gevecht op een eerlijke manier af te ronden."]
             ]],
             ["📌 12. Lore & Roleplay", [
-                ["Geen RDM", "Random Killing zonder reden is verboden."]
+                ["Geen RDM", "Random Killing zonder roleplay-reden is verboden. Elk gevecht heeft een aanleiding."],
+                ["Verhaallijn", "Grote oorlogen en raids moeten voortkomen uit opgebouwde gesprekken of lore."],
+                ["In-Character", "Blijf zoveel mogelijk in je rol: acties moeten logisch zijn voor jouw personage."],
+                ["PvP Doelen", "PvP moet een doel dienen (territorium, wraak, diefstal) binnen het verhaal."],
+                ["RP Kwaliteit", "Staff waardeert creatieve roleplay en kan hiervoor in-game beloningen geven."],
+                ["🟠: Verraad", "Persoon A lekt geheime info van Persoon B door; Persoon B mag de verrader elimineren."],
+                ["🟠: Gast", "Persoon A negeert 3 waarschuwingen om te vertrekken uit een base; de eigenaar mag geweld gebruiken."],
+                ["🟠: Provocatie", "Persoon A blijft Persoon B irriteren na waarschuwingen; Persoon B mag aanvallen."],
+                ["🟠: Diefstal", "Persoon A wordt betrapt op het stelen van items; de eigenaar mag de dief direct doden."],
+                ["🟠: Chantage", "Persoon A probeert Persoon B te chanteren; Persoon B mag de dreiging elimineren."],
+                ["🟠: Team-Wraak", "Persoon A valt een teammate van Persoon B aan; Persoon B mag direct ingrijpen."]
             ]],
             ["📌 13. Farms & Redstone", [
-                ["Raid Farms", "Alle vormen van raid farms zijn verboden."]
+                ["Raid Farms", "Alle vormen van raid- of omen-farms zijn strikt verboden."],
+                ["Server Belasting", "Redstone-constructies moeten een uit-schakelaar hebben; lag-machines zijn verboden."],
+                ["Geen AFK Farms", "Farms die volledig automatisch werken terwijl je AFK bent zijn niet toegestaan."],
+                ["Entity Limiet", "Houd het aantal mobs en dieren per chunk laag om server-performance te behouden."],
+                ["Geen Duping", "Elke vorm van item-duplicatie (ook rails/carpets) leidt tot een permanente ban."],
+                ["Recht op Sloop", "Staff mag elke farm die lag veroorzaakt zonder compensatie verwijderen."]
             ]],
-            ["📌 Slotregel", [
-                ["Laatste Woord", "De staff heeft altijd het laatste woord."]
+            ["📌 Slotregel – Interpretatie", [
+                ["Laatste Woord", "De staff heeft altijd het laatste woord, ook in situaties waar de regels niet in voorzien."],
+                ["Geest van de Regels", "Het opzoeken van mazen in de wet wordt even zwaar bestraft als het breken van regels."],
+                ["Regelwijzigingen", "Regels kunnen op elk moment worden aangepast. Blijf zelf op de hoogte."],
+                ["Respect voor Staff", "Behandel het staffteam met respect; zij houden de server vrijwillig draaiende."]
             ]]
         ];
 
