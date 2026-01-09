@@ -6,13 +6,15 @@
     <title>Nootjes SMP | Seizoen 2</title>
     <style>
         :root {
-            --neon-grass: #7cfc00;
-            --neon-lava: #ff4500;
-            --neon-water: #00bfff;
+            /* Kleuren gebaseerd op de afbeelding */
+            --neon-grass: #00ff88;
+            --neon-lava: #ff8800;
+            --neon-water: #00d9ff;
+            --neon-purple: #a020f0;
             --discord: #5865f2;
-            --dark-panel: rgba(15, 15, 20, 0.95);
+            --dark-panel: rgba(20, 20, 25, 0.9);
             --text-main: #ffffff;
-            --text-dim: #b0b0b0;
+            --text-dim: #d1d1d1;
         }
 
         body {
@@ -21,25 +23,40 @@
             background: url('achtergrond2.png') no-repeat center center fixed; 
             background-size: cover;
             color: var(--text-main);
+            background-color: #0a0a0a; /* Fallback */
         }
 
         .wrapper { max-width: 1000px; margin: 0 auto; padding: 40px 20px; }
 
-        /* ===== SIDEBARS (Clean & Dark) ===== */
+        /* ===== SIDEBARS (Verbeterde Glow Stijl) ===== */
         .sidebar {
             position: fixed; top: 50%; transform: translateY(-50%);
             padding: 15px 25px; border-radius: 15px; z-index: 100;
             cursor: pointer; background: var(--dark-panel);
-            box-shadow: 0 10px 40px rgba(0,0,0,0.6); text-align: center;
-            border: 1px solid rgba(255,255,255,0.1); transition: 0.3s;
+            text-align: center;
+            border: 2px solid rgba(255,255,255,0.1); transition: 0.3s;
+            backdrop-filter: blur(10px);
         }
-        .sidebar-left { left: 30px; border-bottom: 4px solid var(--neon-lava); }
-        .sidebar-right { right: 30px; background: var(--discord); border-bottom: 4px solid #3b448b; text-decoration: none; color: white; }
-        .sidebar:hover { transform: translateY(-55%); border-color: rgba(255,255,255,0.3); }
+        
+        .sidebar-left { 
+            left: 30px; 
+            border-color: var(--neon-purple);
+            box-shadow: 0 0 20px rgba(160, 32, 240, 0.4);
+        }
+        
+        .sidebar-right { 
+            right: 30px; 
+            background: rgba(88, 101, 242, 0.2); 
+            border-color: var(--neon-water); 
+            text-decoration: none; color: white;
+            box-shadow: 0 0 20px rgba(0, 217, 255, 0.4);
+        }
+
+        .sidebar:hover { transform: translateY(-55%) scale(1.05); }
         
         @media (max-width: 1300px) { .sidebar { display: none; } }
 
-        /* ===== NAV BUTTONS (Verbeterde Witte 3D Stijl) ===== */
+        /* ===== NAV BUTTONS (Niet veranderd qua vorm/tekst) ===== */
         .nav-container { 
             display: flex; 
             justify-content: center; 
@@ -49,14 +66,14 @@
         }
 
         .btn-3d {
-            background: #ffffff;          /* Puur wit, niet doorschijnend */
-            border: 3px solid #000000;    /* Dikke zwarte rand */
+            background: #ffffff;
+            border: 3px solid #000000;
             padding: 12px 28px;
             text-decoration: none;
             color: #000000;
             font-weight: 900;
-            border-radius: 14px;          /* Iets ronder */
-            box-shadow: 0 6px 0 #000000;  /* De 'dikke' onderkant */
+            border-radius: 14px;
+            box-shadow: 0 6px 0 #000000;
             transition: all 0.1s ease;
             text-transform: uppercase;
             font-size: 15px;
@@ -76,55 +93,71 @@
             box-shadow: 0 0 0 #000000;
         }
 
-        /* ===== GRID & CARDS ===== */
+        /* ===== GRID & CARDS (Gradients & Smoothening) ===== */
         .modern-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; }
+        
         .card {
-            background: var(--dark-panel); border-radius: 20px; padding: 35px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.5); border-top: 6px solid transparent;
-            transition: 0.3s;
+            background: var(--dark-panel); 
+            border-radius: 20px; 
+            padding: 35px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5); 
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
-        .card:hover { transform: scale(1.01); }
+
+        /* Gradient top bars */
+        .card::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; height: 5px;
+        }
+
+        .card:hover { transform: translateY(-5px); border-color: rgba(255,255,255,0.2); }
         .full-width { grid-column: span 2; }
 
-        .info-card { border-top-color: var(--neon-grass); }
-        .smp-card { border-top-color: var(--neon-lava); }
-        .shores-card { border-top-color: var(--neon-water); }
+        .info-card::before { background: linear-gradient(90deg, var(--neon-grass), var(--neon-water)); }
+        .smp-card::before { background: linear-gradient(90deg, var(--neon-lava), #ff4500); }
+        .shores-card::before { background: linear-gradient(90deg, var(--neon-water), var(--neon-purple)); }
 
         h2 { margin-top: 0; font-size: 28px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; }
-        .info-card h2 { color: var(--neon-grass); }
-        .smp-card h2 { color: var(--neon-lava); }
-        .shores-card h2 { color: var(--neon-water); }
+        
+        /* Gradient teksten voor de koppen */
+        .info-card h2 { background: linear-gradient(to right, var(--neon-grass), var(--neon-water)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .smp-card h2 { background: linear-gradient(to right, var(--neon-lava), #ff4500); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .shores-card h2 { background: linear-gradient(to right, var(--neon-water), var(--neon-purple)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 
-        p { line-height: 1.7; font-size: 18px; font-weight: 600; color: var(--text-dim); }
-        strong { color: #fff; }
+        p { line-height: 1.7; font-size: 18px; font-weight: 500; color: var(--text-dim); }
+        strong { color: #fff; text-shadow: 0 0 10px rgba(255,255,255,0.2); }
 
         /* ===== ROADMAP (TIMELINE) ===== */
         .roadmap {
             background: var(--dark-panel); padding: 40px; border-radius: 25px;
             margin-top: 25px; text-align: center; border: 1px solid rgba(255,255,255,0.05);
         }
-        .timeline-bar { height: 12px; background: #333; border-radius: 10px; margin: 40px 0; position: relative; }
-        .progress { width: 45%; height: 100%; background: linear-gradient(90deg, #ffcc00, #ff8800); border-radius: 10px; box-shadow: 0 0 15px rgba(255,204,0,0.5); }
-        .events { display: flex; justify-content: space-between; position: relative; }
-        .event { font-size: 13px; font-weight: 800; color: #fff; }
+        .timeline-bar { height: 12px; background: #1a1a1a; border-radius: 10px; margin: 40px 0; position: relative; overflow: hidden; }
+        .progress { width: 45%; height: 100%; background: linear-gradient(90deg, var(--neon-lava), var(--neon-purple)); border-radius: 10px; box-shadow: 0 0 20px rgba(255,136,0,0.4); }
+        .event { font-size: 13px; font-weight: 800; color: #fff; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
 
         /* ===== JOIN BOX ===== */
         .join-section {
-            background: linear-gradient(135deg, #2c2f33 0%, #23272a 100%);
+            background: linear-gradient(135deg, rgba(44, 47, 51, 0.9) 0%, rgba(35, 39, 42, 0.9) 100%);
             border-radius: 25px; padding: 60px; text-align: center;
-            border: 2px solid rgba(88, 101, 242, 0.3); margin-top: 40px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+            border: 2px solid var(--neon-purple); margin-top: 40px;
+            box-shadow: 0 0 40px rgba(160, 32, 240, 0.2);
         }
-        .join-section h2 { font-size: 36px; margin-bottom: 15px; color: #fff; }
+        .join-section h2 { font-size: 36px; margin-bottom: 15px; color: #fff; background: none; -webkit-text-fill-color: initial; }
         .join-btn {
-            background: var(--discord); color: white; padding: 18px 45px;
+            background: linear-gradient(45deg, var(--discord), #7289da); color: white; padding: 18px 45px;
             border-radius: 50px; text-decoration: none; font-weight: 800;
             font-size: 20px; display: inline-block; transition: 0.3s;
             box-shadow: 0 10px 25px rgba(88, 101, 242, 0.4);
+            border: none;
         }
         .join-btn:hover { transform: scale(1.05); box-shadow: 0 15px 35px rgba(88, 101, 242, 0.6); }
 
-        footer { text-align: center; padding: 60px; color: var(--text-dim); font-weight: bold; }
+        footer { text-align: center; padding: 60px; color: var(--text-dim); font-weight: bold; opacity: 0.6; }
         .reveal { opacity: 0; transform: translateY(30px); transition: 0.8s ease-out; }
         .reveal.active { opacity: 1; transform: translateY(0); }
     </style>
@@ -132,19 +165,19 @@
 <body>
 
     <div class="sidebar sidebar-left" onclick="copyIP()">
-        <small style="color:var(--neon-lava); font-weight:900;">SERVER IP</small>
+        <small style="color:var(--neon-lava); font-weight:900; letter-spacing: 1px;">SERVER IP</small>
         <p id="ip-text" style="margin-top:5px; font-size:18px; font-weight:900;">Play.ncsmp.nl</p>
     </div>
 
     <a href="https://discord.gg/XS2xAqbNxA" target="_blank" class="sidebar sidebar-right">
-        <small style="font-weight:900;">JOIN DE CLUB</small>
+        <small style="color:var(--neon-water); font-weight:900; letter-spacing: 1px;">JOIN DE CLUB</small>
         <p style="margin-top:5px; font-size:18px; font-weight:900;">Discord</p>
     </a>
 
     <div class="wrapper">
         <header style="text-align:center; margin-bottom:40px;">
-            <img src="logo.png" alt="Logo" style="max-width:400px; width:90%; filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5));">
-            <h1 style="font-size:60px; font-weight:900; text-shadow: 4px 4px 0px var(--neon-lava); margin-top: 10px;">SEIZOEN 2</h1>
+            <img src="logo.png" alt="Logo" style="max-width:400px; width:90%; filter: drop-shadow(0 10px 25px rgba(0,0,0,0.8));">
+            <h1 style="font-size:60px; font-weight:900; text-shadow: 4px 4px 0px #000, 0 0 20px rgba(255,69,0,0.5); margin-top: 10px;">SEIZOEN 2</h1>
         </header>
 
         <nav class="nav-container">
