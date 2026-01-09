@@ -34,7 +34,6 @@
             overflow-x: hidden;
         }
 
-        /* ===== TOP INFO (Balk weg, tekst behouden) ===== */
         .top-info {
             width: 100%; padding: 25px 0; text-align: center; 
             text-transform: uppercase; font-weight: 900; letter-spacing: 2px;
@@ -46,7 +45,6 @@
 
         .wrapper { max-width: 950px; margin: 10px auto 50px; padding: 0 20px; }
 
-        /* ===== MAIN BUTTON ===== */
         .btn-main {
             display: inline-block; background: #ffffff; color: #000;
             text-decoration: none; font-weight: 900; padding: 12px 28px;
@@ -70,7 +68,6 @@
         }
         .search-input:focus { border-color: var(--neon-water); }
 
-        /* ===== RULES STYLING MET GRADIENT OUTLINES ===== */
         .rules-container { display: flex; flex-direction: column; gap: 15px; }
         
         .rule-item { 
@@ -78,6 +75,7 @@
             overflow: hidden; transition: 0.3s; padding: 2px;
             background: linear-gradient(135deg, rgba(142, 68, 173, 0.4), rgba(0, 217, 255, 0.4));
         }
+        .rule-item.hidden { display: none; }
 
         .rule-inner { background: var(--dark-panel); border-radius: 18px; overflow: hidden; }
         
@@ -97,7 +95,6 @@
         }
         .rule-point p { margin: 0 0 25px; color: #d1d1d1; line-height: 1.7; }
 
-        /* ===== GRADIENT PLUS ICON ===== */
         .icon { 
             width: 35px; height: 35px; 
             background: var(--main-gradient);
@@ -106,7 +103,6 @@
         }
         .rule-item.active .icon { transform: rotate(45deg); filter: hue-rotate(45deg); }
 
-        /* ===== SANCTIE GRID ===== */
         .sanctie-wrapper { 
             margin-top: 80px; padding: 50px 40px; background: var(--dark-panel); 
             border-radius: 25px; border: 1px solid rgba(255,255,255,0.1);
@@ -261,106 +257,26 @@
                 ["Balans", "Staff behoudt het recht om items aan te passen als deze de gameplay negatief beïnvloeden."]
             ]],
             ["📌 10. Geldige Killredenen (SMP)", [
-            ["📜 Geldige Killredenen (SMP)",
-                "• Herhaaldelijk bedreigen via chat of spraak<br>\
-                • Meerdere keren blijven slaan op een persoon<br>\
-                • Afluisteren van gesprekken<br>\
-                • Achtervolgen zonder directe intentie (geheimzinnig achtervolgen)<br>\
-                • Roddels verspreiden en de bron hiervan achterhalen<br>\
-                • Voorbereiding op een kill en het onderscheppen van de betreffende persoon<br>\
-                • Intimidatie<br>\
-                • Afpersing<br>\
-                • Verraad<br>\
-                • Onder druk gezet worden<br>\
-                • Poging tot ontvoering<br>\
-                • Insluiten of klemzetten van een speler<br>\
-                • Bewust blokkeren van ontsnappingsroutes<br>\
-                • Openlijke vijandigheid<br>\
-                • Herhaaldelijke provocatie<br>\
-                • Dreigen met geweld<br>\
-                • Sabotage van plannen, bases of eigendommen<br>\
-                • Stelen met kwaadaardige intentie<br>\
-                • Misbruik maken van vertrouwen<br>\
-                • Macht afdwingen door dreiging of geweld<br>\
-                • Bondgenoten verzamelen tegen een speler<br>\
-                • Verspreiden van valse informatie met schadelijke gevolgen<br>\
-                • Gedwongen deelname aan een conflict<br>\
-                • Achtervolging in groepsverband<br>\
-                • Onontkoombare PvP-situatie"
-                ],
-
-                ["✨ Geldige Totem-Pop Redenen (SMP)",
-                "• Duidelijke dreiging of kill-intentie<br>\
-                • Actieve PvP-situatie<br>\
-                • Opgejaagd of langdurig achtervolgd<br>\
-                • Onder constante druk gezet<br>\
-                • Ingesloten of klemgezet<br>\
-                • Zelfverdediging<br>\
-                • Bescherming van jezelf, groep of gebied<br>\
-                • Intimidatie die leidt tot geweld<br>\
-                • Poging tot moord"
-                ],
-
-                ["❌ Geen Geldige Kill- of Totem-Pop Redenen (SMP)",
-                "• Random kill / random totem pop (RDM)<br>\
-                • OOC ruzies gebruiken als IC reden<br>\
-                • Eén losse hit zonder vervolg<br>\
-                • Grapjes of lichte provocaties<br>\
-                • Misverstanden zonder escalatie<br>\
-                • Iemand volgen zonder dreigend gedrag<br>\
-                • Testen van wapens, crystals of skills<br>\
-                • AFK-spelers aanvallen<br>\
-                • Totem laten poppen “voor de lol”<br>\
-                • Geen lore- of RP-opbouw<br><br>\
-                <strong>@everyone</strong><br>\
-                De volgende regels zijn ingegaan en deze gelden vanaf 20:00 | 5/1/2026<br>\
-             Bij onduidelijkheid raadpleeg onze &lt;#1445794922840981605&gt;"
-                ]
+                ["📜 Geldige Killredenen", "Bedreigen, slaan, afluisteren, achtervolgen, roddels, intimidatie, afpersing, verraad, sabotage, stelen, etc."],
+                ["✨ Totem-Pop Redenen", "Duidelijke dreiging, actieve PvP, opgejaagd, ingesloten, zelfverdediging, moordpoging."],
+                ["❌ GEEN Redenen", "RDM, OOC ruzies, losse hit, grapjes, testen van wapens, AFK-spelers, poppen voor de lol."]
             ]],
-
-            ["📌 10. Bases & Griefing", [
+            ["📌 11. Bases & Griefing", [
                 ["Claim Systeem", "Een base is beschermd zodra er een bordje staat met 'Base - [Naam]'."],
                 ["Grief Verbod", "Bij beschermde bases is slopen, stelen of saboteren streng verboden."],
-                ["Vrij Spel", "Bases zonder geldig en zichtbaar bordje mogen volledig gegriefd worden."],
-                ["Zichtbaarheid", "Bordjes moeten duidelijk bij de hoofdingang staan; verborgen bordjes tellen niet."],
-                ["Sabotage", "Lava-griefing of het weghalen van decoraties bij beschermde bases is strafbaar."],
-                ["Staff Bemiddeling", "Bij ruzie over landgrenzen of eigendom neemt de staff een bindend besluit."]
+                ["Vrij Spel", "Bases zonder geldig en zichtbaar bordje mogen volledig gegriefd worden."]
             ]],
-            ["📌 11. Combat Logging", [
+            ["📌 12. Combat Logging", [
                 ["PvP Disconnect", "Uitloggen tijdens een gevecht resulteert in een directe inventory-wipe en dood."],
-                ["Crash Melding", "Meld een technische crash direct via Discord met logs om sancties te voorkomen."],
-                ["Combat Timer", "Wacht tot de combat-timer volledig is afgelopen voordat je de server verlaat."],
-                ["Safezones", "Het vluchten naar een safezone of teleportatie tijdens combat is niet toegestaan."],
-                ["Toezicht", "Elke verdachte disconnect tijdens PvP wordt gecontroleerd via de serverlogs."],
-                ["Sportiviteit", "Geef je tegenstander de kans om het gevecht op een eerlijke manier af te ronden."]
-            ]],
-            ["📌 12. Lore & Roleplay", [
-                ["Geen RDM", "Random Killing zonder roleplay-reden is verboden. Elk gevecht heeft een aanleiding."],
-                ["Verhaallijn", "Grote oorlogen en raids moeten voortkomen uit opgebouwde gesprekken of lore."],
-                ["In-Character", "Blijf zoveel mogelijk in je rol: acties moeten logisch zijn voor jouw personage."],
-                ["PvP Doelen", "PvP moet een doel dienen (territorium, wraak, diefstal) binnen het verhaal."],
-                ["RP Kwaliteit", "Staff waardeert creatieve roleplay en kan hiervoor in-game beloningen geven."],
-                ["🟠: Verraad", "Persoon A lekt geheime info van Persoon B door; Persoon B mag de verrader elimineren."],
-                ["🟠: Gast", "Persoon A negeert 3 waarschuwingen om te vertrekken uit een base; de eigenaar mag geweld gebruiken."],
-                ["🟠: Provocatie", "Persoon A blijft Persoon B irriteren na waarschuwingen; Persoon B mag aanvallen."],
-                ["🟠: Diefstal", "Persoon A wordt betrapt op het stelen van items; de eigenaar mag de dief direct doden."],
-                ["🟠: Chantage", "Persoon A probeert Persoon B te chanteren; Persoon B mag de dreiging elimineren."],
-                ["🟠: Team-Wraak", "Persoon A valt een teammate van Persoon B aan; Persoon B mag direct ingrijpen."]
+                ["Combat Timer", "Wacht tot de combat-timer volledig is afgelopen voordat je de server verlaat."]
             ]],
             ["📌 13. Farms & Redstone", [
                 ["Raid Farms", "Alle vormen van raid- of omen-farms zijn strikt verboden."],
-                ["Server Belasting", "Redstone-constructies moeten een uit-schakelaar hebben; lag-machines zijn verboden."],
                 ["Geen AFK Farms", "Farms die volledig automatisch werken terwijl je AFK bent zijn niet toegestaan."],
-                ["Entity Limiet", "Houd het aantal mobs en dieren per chunk laag om server-performance te behouden."],
-                ["Geen Duping", "Elke vorm van item-duplicatie (ook rails/carpets) leidt tot een permanente ban."],
-                ["Recht op Sloop", "Staff mag elke farm die lag veroorzaakt zonder compensatie verwijderen."]
-
-                ["Extra Informatie", "Bases looten van dode Spelers is Toegestaan. Alleen het slopen ervan Niet.","]   
+                ["Extra Informatie", "Bases looten van dode Spelers is Toegestaan. Alleen het slopen ervan Niet."]
             ]],
             ["📌 Slotregel – Interpretatie", [
                 ["Laatste Woord", "De staff heeft altijd het laatste woord, ook in situaties waar de regels niet in voorzien."],
-                ["Geest van de Regels", "Het opzoeken van mazen in de wet wordt even zwaar bestraft als het breken van regels."],
-                ["Regelwijzigingen", "Regels kunnen op elk moment worden aangepast. Blijf zelf op de hoogte."],
                 ["Respect voor Staff", "Behandel het staffteam met respect; zij houden de server vrijwillig draaiende."]
             ]]
         ];
@@ -392,13 +308,13 @@
             const item = h.closest('.rule-item');
             const content = item.querySelector('.rule-content');
             const active = item.classList.contains('active');
-            document.querySelectorAll('.rule-item').forEach(el => {
-                el.classList.remove('active');
-                el.querySelector('.rule-content').style.maxHeight = null;
-            });
+            
             if(!active) {
                 item.classList.add('active');
                 content.style.maxHeight = content.scrollHeight + "px";
+            } else {
+                item.classList.remove('active');
+                content.style.maxHeight = null;
             }
         });
 
