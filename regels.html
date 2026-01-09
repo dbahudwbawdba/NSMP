@@ -17,9 +17,9 @@
             --support-blue: #00aaff;
         }
 
-        /* Smooth inlaad animatie */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
+        /* De smooth inlaad animatie voor de elementen */
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(40px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
@@ -30,7 +30,6 @@
             background-size: cover;
             color: var(--text-main);
             overflow-x: hidden;
-            animation: fadeIn 0.8s ease-out;
         }
 
         .top-bar {
@@ -75,7 +74,11 @@
             border: 2px solid var(--border-glow); border-radius: 15px; color: white;
             font-size: 18px; outline: none; transition: 0.3s; box-sizing: border-box;
         }
-        .search-input:focus { border-color: var(--neon-lava); box-shadow: 0 0 20px rgba(255, 69, 0, 0.4); }
+
+        /* Alleen de containers animeren */
+        .rules-container, .sanctie-wrapper {
+            animation: slideUp 0.8s ease-out forwards;
+        }
 
         .rules-container { display: flex; flex-direction: column; gap: 15px; }
         .rule-item { background: var(--dark-panel); border: 2px solid var(--border-glow); border-radius: 15px; overflow: hidden; transition: 0.3s; }
