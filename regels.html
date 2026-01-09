@@ -37,9 +37,30 @@
 
         .wrapper { max-width: 950px; margin: 140px auto 50px; padding: 0 20px; }
 
+        /* De 3D-look Main Menu knop */
+        .btn-main {
+            display: inline-block;
+            color: white; 
+            text-decoration: none; 
+            font-weight: 900; 
+            background: var(--neon-lava);
+            padding: 12px 25px; 
+            border-radius: 8px;
+            text-transform: uppercase;
+            box-shadow: 0 5px 0px #b33000; /* De 3D rand */
+            transition: all 0.1s;
+            position: relative;
+            border: none;
+            cursor: pointer;
+        }
+        .btn-main:active {
+            transform: translateY(3px);
+            box-shadow: 0 2px 0px #b33000;
+        }
+
         h1 { 
             font-size: clamp(40px, 8vw, 60px); font-weight: 900; text-align: center; 
-            text-shadow: 5px 5px 0px var(--neon-lava); margin-bottom: 20px; text-transform: uppercase;
+            text-shadow: 5px 5px 0px var(--neon-lava); margin-top: 30px; margin-bottom: 20px; text-transform: uppercase;
         }
 
         .search-container { margin-bottom: 40px; }
@@ -89,11 +110,11 @@
     </div>
 
     <div class="wrapper">
-        <div style="text-align: center; margin-bottom: 20px;">
-            <a href="index.html" style="color: white; text-decoration: none; font-weight: bold; border: 2px solid white; padding: 10px 20px; border-radius: 10px;">⬅ TERUG</a>
+        <div style="text-align: center; margin-bottom: 40px;">
+            <a href="index.html" class="btn-main">Main Menu</a>
         </div>
         
-        <h1>Reglement</h1>
+        <h1>Regels</h1>
 
         <div class="search-container">
             <input type="text" id="ruleSearch" class="search-input" placeholder="Zoek een regel (bijv. 'Vulkaan', 'Mace', 'Ban')...">
@@ -184,7 +205,7 @@
                 ["Unieke Loot", "De vulkaan bevat grondstoffen die nergens anders te vinden zijn, wat het risico rechtvaardigt."]
             ]],
             ["📌 7. The Lost Shores", [
-                ["Laatste Kans", "Na een dood in de Hardcore world word je verbannen naar de Shores."],
+                ["Laatste Kans", "Na een dood in de Hardcore wereld word je verbannen naar de Shores."],
                 ["Overleving", "In dit gebied gelden zwaardere regels voor grondstoffen; overleven is hier de prioriteit."],
                 ["Terugkeer", "Terugkeer naar de hoofdwereld is alleen mogelijk via specifieke, zeldzame Lore-events."],
                 ["Interactie", "Ook in de Shores gelden de algemene gedragsregels; toxiciteit wordt hier ook bestraft."]
@@ -200,4 +221,94 @@
             ["📌 9. PvP-Gameplay", [
                 ["PvP-Stijl", "De PvP op de server is Diamond SMP gericht, met aanpassingen voor meer speelplezier."],
                 ["Speciale Items", "Dit seizoen zijn er slechts 4 Maces, verdeeld over Noord, Oost, Zuid en West. Maximaal 4 spelers kunnen een Mace bezitten."],
-                ["Bal
+                ["Balans", "Staff behoudt het recht om items aan te passen als deze de gameplay negatief beïnvloeden."]
+            ]],
+            ["📌 10. Bases & Griefing", [
+                ["Claim Systeem", "Een base is beschermd zodra er een bordje staat met 'Base - [Naam]'."],
+                ["Grief Verbod", "Bij beschermde bases is slopen, stelen of saboteren streng verboden."],
+                ["Vrij Spel", "Bases zonder geldig en zichtbaar bordje mogen volledig gegriefd worden."],
+                ["Zichtbaarheid", "Bordjes moeten duidelijk bij de hoofdingang staan; verborgen bordjes tellen niet."],
+                ["Sabotage", "Lava-griefing of het weghalen van decoraties bij beschermde bases is strafbaar."],
+                ["Staff Bemiddeling", "Bij ruzie over landgrenzen of eigendom neemt de staff een bindend besluit."]
+            ]],
+            ["📌 11. Combat Logging", [
+                ["PvP Disconnect", "Uitloggen tijdens een gevecht resulteert in een directe inventory-wipe en dood."],
+                ["Crash Melding", "Meld een technische crash direct via Discord met logs om sancties te voorkomen."],
+                ["Combat Timer", "Wacht tot de combat-timer volledig is afgelopen voordat je de server verlaat."],
+                ["Safezones", "Het vluchten naar een safezone of teleportatie tijdens combat is niet toegestaan."],
+                ["Toezicht", "Elke verdachte disconnect tijdens PvP wordt gecontroleerd via de serverlogs."],
+                ["Sportiviteit", "Geef je tegenstander de kans om het gevecht op een eerlijke manier af te ronden."]
+            ]],
+            ["📌 12. Lore & Roleplay", [
+                ["Geen RDM", "Random Killing zonder roleplay-reden is verboden. Elk gevecht heeft een aanleiding."],
+                ["Verhaallijn", "Grote oorlogen en raids moeten voortkomen uit opgebouwde gesprekken of lore."],
+                ["In-Character", "Blijf zoveel mogelijk in je rol: acties moeten logisch zijn voor jouw personage."],
+                ["1. VERRAAD", "Persoon A lekt geheime info van Persoon B naar rivalen; dit is een geldige reden voor liquidatie."],
+                ["2. ONGEWENSTE GAST", "Persoon A weigert na 3 waarschuwingen de base van Persoon B te verlaten."],
+                ["3. PROVOCATIE", "Persoon A blijft Persoon B opzettelijk irriteren (slaan/blokkeren) na verbale waarschuwingen."],
+                ["4. DIEFSTAL", "Persoon A wordt op heterdaad betrapt bij het stelen uit kisten of farms van Persoon B."],
+                ["5. CHANTAGE", "Persoon A bedreigt Persoon B met info of base-locaties in ruil voor items."],
+                ["6. TEAM-WRAAK", "Persoon A valt een teammate van Persoon B aan of bedreigt deze direct."]
+            ]],
+            ["📌 13. Farms & Redstone", [
+                ["Raid Farms", "Alle vormen van raid- of omen-farms zijn strikt verboden."],
+                ["Server Belasting", "Redstone-constructies moeten een uit-schakelaar hebben; lag-machines zijn verboden."],
+                ["Geen AFK Farms", "Farms die volledig automatisch werken terwijl je AFK bent zijn niet toegestaan."],
+                ["Entity Limiet", "Houd het aantal mobs en dieren per chunk laag om server-performance te behouden."],
+                ["Geen Duping", "Elke vorm van item-duplicatie (ook rails/carpets) leidt tot een permanente ban."],
+                ["Recht op Sloop", "Staff mag elke farm die lag veroorzaakt zonder compensatie verwijderen."]
+            ]],
+            ["📌 Slotregel – Interpretatie", [
+                ["Laatste Woord", "De staff heeft altijd het laatste woord, ook in situaties waar de regels niet in voorzien."],
+                ["Geest van de Regels", "Het opzoeken van mazen in de wet wordt even zwaar bestraft als het breken van regels."],
+                ["Regelwijzigingen", "Regels kunnen op elk moment worden aangepast. Blijf zelf op de hoogte."],
+                ["Respect voor Staff", "Behandel het staffteam met respect; zij houden de server vrijwillig draaiende."]
+            ]]
+        ];
+
+        const list = document.getElementById('rulesList');
+        function render() {
+            list.innerHTML = '';
+            rulesData.forEach((rule, i) => {
+                const div = document.createElement('div');
+                div.className = 'rule-item';
+                let pts = rule[1].map(p => `<div class="rule-point"><strong>${p[0]}</strong><p>${p[1]}</p></div>`).join('');
+                div.innerHTML = `<button class="rule-header">${rule[0]} <span class="icon">+</span></button><div class="rule-content"><div class="content-inner">${pts}</div></div>`;
+                list.appendChild(div);
+            });
+        }
+        render();
+
+        document.getElementById('ruleSearch').addEventListener('input', (e) => {
+            const term = e.target.value.toLowerCase();
+            document.querySelectorAll('.rule-item').forEach((item, i) => {
+                const text = JSON.stringify(rulesData[i]).toLowerCase();
+                item.classList.toggle('hidden', !text.includes(term));
+            });
+        });
+
+        document.addEventListener('click', (e) => {
+            const h = e.target.closest('.rule-header');
+            if(!h) return;
+            const item = h.parentElement;
+            const content = item.querySelector('.rule-content');
+            const active = item.classList.contains('active');
+            document.querySelectorAll('.rule-item').forEach(el => {
+                el.classList.remove('active');
+                el.querySelector('.rule-content').style.maxHeight = null;
+            });
+            if(!active) {
+                item.classList.add('active');
+                content.style.maxHeight = content.scrollHeight + "px";
+            }
+        });
+
+        function copyIP() {
+            navigator.clipboard.writeText("play.ncsmp.nl");
+            const s = document.getElementById('serverIP');
+            s.innerText = "IP GEKOPIEERD!";
+            setTimeout(() => { s.innerText = "PLAY.NCSMP.NL"; }, 2000);
+        }
+    </script>
+</body>
+</html>
